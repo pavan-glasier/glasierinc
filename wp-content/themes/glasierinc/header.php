@@ -19,6 +19,9 @@
 <link rel="profile" href="https://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php echo esc_url( get_bloginfo( 'pingback_url' ) ); ?>">
  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 <?php wp_head(); ?>
 
 </head>
@@ -28,8 +31,10 @@
     <!--Start Preloader -->
     <div class="onloadpage" id="page-load">
         <div class="loader-div">
-            <div class="on-img"><img src="<?php echo get_template_directory_uri(); ?>/img/loader.gif" alt="Logo" class="img-fluid" /><span>Loading Please
-                    Wait...</span></div>
+            <div class="on-img">
+                <img src="<?php echo get_template_directory_uri(); ?>/images/loader.gif" alt="Logo" class="img-fluid" />
+                <span>Loading Please Wait...</span>
+            </div>
         </div>
     </div>
     <!--End Preloader -->
@@ -64,7 +69,7 @@
                        ?>
                 </div>
                 <?php 
-                  $header_link_btn = get_field('link_button', 'option');
+                  $header_link_btn = get_field('header_link_button', 'option');
                   if( $header_link_btn ): 
                       $header_link_btn_url = $header_link_btn['url'];
                       $header_link_btn_title = $header_link_btn['title'];

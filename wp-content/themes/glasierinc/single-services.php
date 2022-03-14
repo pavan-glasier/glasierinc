@@ -19,30 +19,5 @@ get_header(); ?>
     </div>
 </section>
 
-<?php if( have_rows('mobile_app_sections') ): 
-require get_template_directory() . '/services/mobile_app_development.php'; ?>
-<?php endif;?>
-
-<?php if( have_rows('web_development_sections') ): 
-require get_template_directory() . '/services/web_development.php'; ?>
-<?php endif;?>
-
-<?php if( have_rows('customer_software_sections') ): 
-require get_template_directory() . '/services/customer_software.php'; ?>
-<?php endif;?>
-
-<?php if( have_rows('ui_ux_sections') ): 
-require get_template_directory() . '/services/ui_ux_development.php'; ?>
-<?php endif;?>
-
-
-<?php if( have_rows('team_augmentation_sections') ): 
-require get_template_directory() . '/services/team_augmentation.php'; ?>
-<?php endif;?>
-
-
-<?php if( have_rows('mvp_development_sections') ): 
-require get_template_directory() . '/services/mvp_development.php'; ?>
-<?php endif;?>
 
 <?php get_footer(); ?>

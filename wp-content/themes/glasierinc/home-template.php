@@ -5,899 +5,794 @@
 *
 */
 
-get_header();
+get_header();?>
+
+    <!--start Hero Section  -->
+    <section class="home-hero slide-hero">
+        <div class="hero-owl owl-carousel">
+
+         <?php
+           if( have_rows('slide', 'option') ):
+               while( have_rows('slide', 'option') ) : the_row(); ?>
+                  <?php $content_type = get_sub_field('content_type');?>
+                  <?php $slider_image = get_sub_field('image');?>
+           
+               <div class="slide owlbg11">
+                  <div class="container">
+                     <div class="row">
+                        <div class="col-md-6 col-sm-12 vcenter">
+                            <div class="hero-content-x">
+                                <p class="mb10 ree-tt"><?php echo $content_type['sub_title'];?></p>
+                                <h1 class="mb30" data-aos="fade-in" data-aos-delay="200">
+                                 <?php echo $content_type['title'];?>
+                                 </h1>
+                                <p data-aos="fade-in" data-aos-delay="500">
+                                 <?php echo $content_type['description'];?>
+                                </p>
+                                <?php 
+                                 $slider_link_btn = $content_type['link_button'];
+                                 if( $slider_link_btn ): 
+                                     $slider_link_btn_url = $slider_link_btn['url'];
+                                     $slider_link_btn_title = $slider_link_btn['title'];
+                                     $slider_link_btn_target = $slider_link_btn['target'] ? $slider_link_btn['target'] : '_self';
+                                     ?>
+                                <a href="<?php echo esc_url( $slider_link_btn_url ); ?>" class="ree-btn ree-btn-grdt1 mt40 mw-80" data-aos="fade-in" data-aos-delay="800" target="<?php echo esc_attr( $slider_link_btn_target ); ?>"><?php echo esc_html( $slider_link_btn_title ); ?><i class="fas fa-arrow-right fa-btn"></i></a>
+                                 <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 vcenter">
+                            <div class="sol-image m-mt30">
+                                <img src="<?php echo $slider_image;?>" alt="web development" class="img-fluid"
+                                    data-aos="fade-in" data-aos-delay="400">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endwhile;
+           endif; ?>
+
+        </div>
+    </section>
+    <!--hero Section End-->
+
+<?php while ( have_rows('sections') ) : the_row();?>
+  <?php if( get_row_layout() == 'about_us_section' ) :
+  $about_us_contents = get_sub_field('about_us_contents');
+  $about_us_boxes = get_sub_field('about_us_boxes');
+
 ?>
-
-
-
-<?php //$hBanner = new WP_Query( array( 'post_type' => 'banner' , 'order' => 'DESC', 'posts_per_page' => 1 ) );
-//while($hBanner->have_posts()) : $hBanner->the_post();?>
-   <!----------------------------------- Start Banner ============================================= -->
-<?php if( have_rows('sections') ): ?>
-   <?php while ( have_rows('sections') ) : the_row();?>
-   <?php  if( get_row_layout() == 'banner_section' ) :?>
-   <?php
-   $banner_title = get_sub_field('banner_title');
-   $banner_content = get_sub_field('banner_content');
-   $banner_image = get_sub_field('banner_image');
-
-   ?>
-   <div class="banner-area content-double box-nav background-move">
-      <div class="container">
-         <div class="row">
-            <div class="double-items">
-               <div class="col-md-6 left-info simple-video">
-                  <div class="content" data-animation="animated fadeInUpBig">
-
-
-                     <?php 
-                     ?>
-
-                   <?php if( $banner_title ): ?>
-                     <h1>
-                        <?php echo $banner_title; ?>
-                     </h1>
-                     <?php endif; ?>
-                     
-
-                     <?php if( $banner_content ): ?>
-                        <?php echo $banner_content; ?>
+    <!--start home-about  -->
+    <section class="home-about sec-pad r-bg-a">
+        <div class="container">
+            <div class="row">
+               <?php if($about_us_contents):?>
+                <div class="col-lg-6">
+                    <div class="about-content-home m-mb60 pera-block">
+                     <?php if(!empty($about_us_contents['tagline'])):?>
+                        <span class="sub-heading mb15"><?php echo $about_us_contents['tagline'];?></span>
                      <?php endif; ?>
 
-                     <a class="btn btn-theme border btn-md" href="#" data-toggle="modal"
-                        data-target=".bd-example-modal-md">Connect with us</a>
-                     </a>
+                     <?php if(!empty($about_us_contents['about_heading'])):?>
+                        <h2><?php echo $about_us_contents['about_heading'];?></h2>
+                     <?php endif; ?>
+
+                     <?php if(!empty($about_us_contents['about_description'])):?>
+                        <p><?php echo $about_us_contents['about_description'];?></p>
+                     <?php endif; ?>
+                        <!-- <div class="company-budges mt60 mb60">
+
+                            <div class="img-budges">
+                              <img src="images/badge-a.png" alt="Awards badges" class="img-fluid">
+                            </div>
+
+                            <div class="img-budges">
+                              <img src="images/badge-b.png" alt="Awards badges" class="img-fluid">
+                            </div>
+
+                            <div class="img-budges">
+                              <img src="images/badge-c.png" alt="Awards badges" class="img-fluid">
+                            </div>
+
+                        </div> -->
+                        <div class="btn-sets mt60">
+                           <?php 
+                           $about_link = $about_us_contents['about_link'];
+                           if( $about_link ): 
+                               $about_link_url = $about_link['url'];
+                               $about_link_title = $about_link['title'];
+                               $about_link_target = $about_link['target'] ? $about_link['target'] : '_self';
+                               ?>
+                           <a href="<?php echo esc_url( $about_link_url ); ?>" class="ree-btn ree-btn-grdt2 mr20" target="<?php echo esc_attr( $about_link_target ); ?>"> <?php echo esc_html( $about_link_title ); ?> <i class="fas fa-arrow-right fa-btn"></i></a> 
+                           <?php endif; ?>
+
+                            <div class="vid-btntitl">
+                                <a href="https://www.youtube.com/watch?v=7e90gBu4pas?autoplay=1&amp;rel=0"
+                                    class="ree-btn ree-btn-grdt1 ree-btn-round video-popup"><i
+                                        class="fas fa-play"></i></a>
+                                <div class="vide-btntitl vcenter">
+                                    <p>Watch Video</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               <?php endif; ?>
+
+               <?php if($about_us_contents):?>
+                <div class="col-lg-6">
+                    <div class="company-stats">
+                        <div class="row">
+                           <?php 
+                           $about_box_1 = $about_us_boxes['about_box_1'];
+                           $about_box_2 = $about_us_boxes['about_box_2'];
+                           $about_box_3 = $about_us_boxes['about_box_3'];
+                           $about_box_4 = $about_us_boxes['about_box_4'];
+                           
+                           ?>
+                            <div class="col-lg-6 col-6 m-pr7">
+                              <?php if($about_box_1):?>
+                                <div class="stats-box stat-bx-1" data-aos="fade-up" data-aos-delay="200">
+                                    <span class="sub-heading mb20"><?php echo $about_box_1['box_title'];?></span>
+                                    <h3><?php echo $about_box_1['counter_no'];?></h3>
+                                    <p class="mt20"> <?php echo $about_box_1['content'];?></p>
+                                </div>
+                                <?php endif; ?>
+                                <?php if($about_box_3):?>
+                                <div class="stats-box stat-bx-2 mt20" data-aos="fade-up" data-aos-delay="600">
+                                    <span class="sub-heading mb20"><?php echo $about_box_3['box_title'];?></span>
+                                    <h3><?php echo $about_box_3['counter_no'];?></h3>
+                                    <p class="mt20"><?php echo $about_box_3['content'];?></p>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-lg-6 col-6 m-pl7">
+                              <?php if($about_box_2):?>
+                                <div class="stats-box stat-bx-3 mt100" data-aos="fade-up" data-aos-delay="400">
+                                    <span class="sub-heading mb20"><?php echo $about_box_2['box_title'];?></span>
+                                    <h3><?php echo $about_box_2['counter_no'];?></h3>
+                                    <p class="mt20"><?php echo $about_box_2['content'];?></p>
+                                </div>
+                                <?php endif; ?>
+
+                                <?php if($about_box_4):?>
+                                <div class="stats-box stat-bx-4 mt20" data-aos="fade-up" data-aos-delay="800">
+                                    <span class="sub-heading mb20"><?php echo $about_box_4['box_title'];?></span>
+                                    <h3><?php echo $about_box_4['counter_no'];?></h3>
+                                    <p class="mt20"><?php echo $about_box_4['content'];?></p>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+    <!--home-about end-->
+<?php endif ?>
+<?php endwhile; ?>
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+  <?php if( get_row_layout() == 'services' ) :
+         $services_heading = get_sub_field('heading');
+         $services_sub_heading = get_sub_field('sub_heading');
+         $services_service = get_sub_field('service');
+         $hire_developer = get_sub_field('hire_developer');
+  ?>
+      <!--start services-->
+    <section class="r-bg-i sec-pad">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="sec-heading text-center pera-block">
+                     <?php if(!empty($services_heading)) : ?>
+                        <h2>
+                           <?php echo $services_heading;?>
+                        </h2>
+                     <?php endif; ?>
+
+                     <?php if(!empty($services_sub_heading)) : ?>
+                        <p><?php echo $services_sub_heading;?></p>
+                     <?php endif; ?>
+                        
+                    </div>
+                </div>
+            </div>
+            
+               <?php 
+                  $args = array(
+                      'post_type' => 'services',
+                      'order' => 'ASC',
+                      'tax_query' => array(
+                           array (
+                              'taxonomy' => 'service_category',
+                              'field' => 'id',
+                              'terms' => $services_service,
+                           )
+                        ),
+                     ); ?>
+                
+              <?php $ss_query = new WP_Query($args);
+               if ($ss_query->have_posts()) : ?>
+               <div class="row mt30"> 
+               <?php while ($ss_query->have_posts()) : $ss_query->the_post(); ?>
+              
+                  <div class="col-lg-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                     <div class="ree-card r-bg-c mt60">
+                        <div class="ree-card-img shadows">
+                           <?php 
+                           if ( has_post_thumbnail() ) { ?>
+                              <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>"  alt="<?php echo get_the_title(); ?>" />
+                           <?php }
+                           else { ?>
+                              <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/03/no-image-icon-4.png" alt="<?php echo get_the_title(); ?>" />
+                           <?php }
+                           ?>
+                        </div>
+                        <div class="ree-card-content mt40">
+                           <h3 class="mb15">
+                              <a href="<?php the_permalink();?>"><?php the_title();?></a>
+                           </h3>
+                           <?php 
+                           $content = get_the_content();
+                           $trim_content = wp_trim_words($content, 15, ".")
+                           ?>
+                           <p>
+                              <?php echo $trim_content;?>
+                           </p>
+                        </div>
+                        <div class="ree-card-content-link">
+                           <a href="<?php the_permalink();?>" class="ree-card-link mt40">Read More 
+                              <i class="fas fa-arrow-right fa-btn"></i> </a>
+                        </div>
+                     </div>
+                  </div>
+             
+             <?php endwhile; ?>
+               </div>
+            <?php wp_reset_postdata(); ?>
+         <?php endif; ?>
+
+            <?php if($hire_developer): ?>
+            <div class="cta-block-wide mt100">
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-10 vcenter">
+                        <div class="cta-heading-wide-bt">
+                           <h3><?php echo $hire_developer['content'];?></h3>
+                           <?php $hire_button = $hire_developer['hire_button'];
+                           if($hire_button):
+                              $hire_button_target = $hire_button['target'] ? $hire_button['target'] : '_self';
+                           ?>
+                           <a href="<?php echo $hire_button['url'];?>" class="ree-btn ree-btn-grdt1 mw-80" target="<?php echo $hire_button_target;?>"><?php echo $hire_button['title'];?>
+                              <i class="fas fa-arrow-right fa-btn"></i>
+                           </a>
+                           <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <!--services end-->
+<?php endif ?>
+<?php endwhile; ?>
+
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+  <?php if( get_row_layout() == 'our_work' ) :
+         $our_work_heading = get_sub_field('heading');
+         $our_work_tag_line = get_sub_field('tag_line');
+         $our_work_work = get_sub_field('work');
+         $view_all_work = get_sub_field('view_all_work');
+  ?>
+   <!--start work-->
+    <section class="r-bg-f sec-pad">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-sm-8 vcenter text-center">
+                    <div class="heading-hz-btn">
+                        <?php if(!empty($our_work_tag_line)) : ?>
+                        <span class="sub-heading mb15" style="color: #fff;"><?php echo $our_work_tag_line;?></span>
+                        <?php endif ?>
+
+                        <?php if(!empty($our_work_heading)) : ?>
+                        <h2 class="w-txt"><?php echo $our_work_heading;?></h2>
+                        <?php endif ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt60">
+                <div class="col-lg-12 vcenter">
+                  <?php 
+                     $work_args = array(
+                         'post_type' => 'portfolio',
+                         'order' => 'DESC',
+                         'tax_query' => array(
+                              array (
+                                 'taxonomy' => 'portfolio_category',
+                                 'field' => 'id',
+                                 'terms' => $our_work_work,
+                              )
+                           ),
+                        ); ?>
+                   
+                 <?php $ow_query = new WP_Query($work_args);
+                  if ($ow_query->have_posts()) : ?>
+                    <div id="full-work-app" class="full-work-app owl-nv owl-carousel">
+                     <?php while ($ow_query->have_posts()) : $ow_query->the_post(); ?>
+                        <div class="fwb-main-x fwb-a">
+                           <div class="work-thumbnails">
+                              <a href="<?php the_permalink();?>">
+                                 <?php 
+                                 if ( has_post_thumbnail() ) { ?>
+                                    <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>" class="img-fluid" alt="<?php echo get_the_title(); ?>" />
+                                 <?php }
+                                 else { ?>
+                                    <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/03/Image_not_available.png" alt="<?php echo get_the_title(); ?>" />
+                                 <?php }
+                                 ?>
+                              </a>
+                           </div>
+                           <div class="work-details">
+                              <p class="mb10">
+                                 <?php 
+                                 $term_obj_list = get_the_terms( $post->ID, 'portfolio_category' );
+                                 echo $terms_string = join(', ', wp_list_pluck($term_obj_list, 'name'));
+                                 ?>
+                              </p>
+                                <h4><a href="<?php the_permalink();?>"> <?php the_title();?></a> </h4>
+                           </div>
+                        </div>
+                    <?php endwhile; ?>
+                     </div>
+                  <?php wp_reset_postdata(); ?>
+               <?php endif; ?>
+                </div>
+            </div>
+            <?php if($view_all_work):?>
+            <div class="row justify-content-center text-center mt60">
+                <div class="col-lg-10">
+                    <div class="cta-heading-wide-bt">
+                        <h3 class="w-txt"><?php echo $view_all_work['text'];?></h3>
+                        <?php $view_all_button = $view_all_work['view_all_button'];
+                        if($view_all_button):
+                           $view_all_button_target = $view_all_button['target'] ? $view_all_button['target'] : '_self';
+                        ?>
+                        <a href="<?php echo $view_all_button['url'];?>" class="ree-btn ree-btn-grdt1 mw-80 no-shadows" target="<?php echo $view_all_button_target;?>" style="background-color: #fff; color: #005186;"><?php echo $view_all_button['title'];?>
+                           <i class="fas fa-arrow-right fa-btn"></i>
+                        </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+    <!--end work-->
+<?php endif ?>
+<?php endwhile; ?>
+
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+  <?php if( get_row_layout() == 'technologies_we_work' ) :
+         $technologies_heading = get_sub_field('heading');
+         $technologies_description = get_sub_field('description');
+  ?>
+   <!--start technologies-->
+      <section class="r-bg-x zup sec-pad">
+         <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="sec-heading text-center pera-block">
+                        <?php if(!empty($technologies_heading)) : ?>
+                        <h2><?php echo $technologies_heading;?></h2>
+                        <?php endif ?>
+
+                        <?php if(!empty($technologies_description)) : ?>
+                        <p><?php echo $technologies_description;?> </p>
+                        <?php endif ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-10 mt60">
+                    <div class="tab-17 tabs-layout">
                      <?php
-                     // if( $link ): 
-                     //  $link_url = $link['url'];
-                     //  $link_title = $link['title'];
-                     //  $link_target = $link['target'] ? $link['target'] : '_self';
-                      ?>
-                         <!-- <a class="button" href="<?php //echo esc_url( $link_url ); ?>" target="<?php //echo esc_attr( $link_target ); ?>"><?php //echo esc_html( $link_title ); ?></a> -->
-                     <?php //endif; ?>
-                  </div>
-               </div>
-               <div class="col-md-6 right-info">
-                  <?php if( $banner_image ): ?>
-                     <p></p>
-                  <div class="thumb animated">
-                     <img src="<?php echo $banner_image; ?>" >
-                  </div>
-                  <?php endif; ?>
-                  
-
-               </div>
+                     $a = 1;
+                     
+                     if( have_rows('technologies_tabs') ):  ?>
+                        <ul class="nav nav-tabs justify-content-center" id="myTab3" role="tablist">
+                     <?php while( have_rows('technologies_tabs') ) : the_row(); ?>
+                           <li class="nav-item">
+                              <a class="nav-link <?php echo $a == 1 ? 'active' : '' ?>"  data-toggle="tab" href="#tab<?php echo $a++;?>" role="tab" aria-selected="true"><?php echo get_sub_field('tab_name');?></a>
+                           </li>
+                     <?php  
+                           endwhile; ?>
+                        </ul>
+                     <?php endif; ?>
+                        
+                           <?php
+                           $b = 1;
+                           if( have_rows('technologies_tabs') ):  ?>
+                              <div class="tab-content" id="myTabContent3">
+                           <?php while( have_rows('technologies_tabs') ) : the_row(); ?>
+                                 
+                                 <div class="tab-pane fade <?php echo $b == 1 ? ' active show' : '' ?>" id="tab<?php echo $b++;?>" role="tabpanel" aria-labelledby="tab1a">
+                                      <div class="tab-data-cont">
+                                          <div class="row justify-content-center">
+                                             <?php
+                                                if( have_rows('images_box') ):
+                                                    while( have_rows('images_box') ) : the_row(); ?>
+                                                <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                                                   <div class="icon-with-title">
+                                                      <a href="javascript:void(0)">
+                                                         <div class="iwt-icon"> 
+                                                            <img src="<?php echo get_sub_field('icons');?>" alt="">
+                                                         </div>
+                                                         <div class="iwt-content">
+                                                            <p><?php echo get_sub_field('name');?></p>
+                                                         </div>
+                                                      </a>
+                                                   </div>
+                                                </div>
+                                              <?php endwhile;
+                                                endif; ?>
+                                          </div>
+                                      </div>
+                                 </div>
+                           <?php  
+                                 endwhile; ?>
+                              </div>
+                           <?php endif; ?>
+                            
+                    </div>
+                </div>
             </div>
          </div>
+      </section>
+    <!--end technologies-->
+<?php endif ?>
+<?php endwhile; ?>
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'client_testi_counter' ) : ?>
+
+    <!--start home review-->
+   <section class="reebgd sec-pad">
+      <div class="container">
+         <?php while ( have_rows('client_section') ) : the_row();?>
+         <?php if( get_row_layout() == 'clients' ) : ?>
+         <div class="row">
+             <div class="col-lg-12">
+                 <div class="heading-review text-center">
+                  <?php
+                     if( have_rows('logos') ): ?>
+                     <ul class="row justify-content-center text-center">
+                        <?php while( have_rows('logos') ) : the_row(); ?>
+                         <li class="col-lg-2 col-md-3 col-sm-4 col-4">
+                           <div class="brand-logo">
+                              <img src="<?php echo get_sub_field('logo');?>" alt="clients" class="img-fluid">
+                           </div>
+                         </li>
+                     <?php endwhile; ?>
+                     </ul>
+                     <?php endif; ?>
+                 </div>
+             </div>
+         </div>
+         <?php endif ?>
+
+         <?php if( get_row_layout() == 'testimonials' ) :
+            $testimonial_id = get_sub_field('testimonial');
+            ?>
+         <div class="row mt100">
+             <div class="col-lg-6 vcenter">
+                 <div class="quote-text">
+                     <h2><?php echo get_sub_field('heading');?></h2>
+                 </div>
+             </div>
+             <div class="col-lg-6 vcenter">
+               <?php 
+                  $testi_args = array(
+                      'post_type' => 'testimonial',
+                      'order' => 'DESC',
+                      'tax_query' => array(
+                           array (
+                              'taxonomy' => 'testi_category',
+                              'field' => 'id',
+                              'terms' => $testimonial_id,
+                           )
+                        ),
+                     ); ?>
+                
+              <?php $tm_query = new WP_Query($testi_args);
+               if ($tm_query->have_posts()) : ?>
+                  <div class="ree-card dark-deep no-shadows mt30 trust-review owl-carousel">
+                  <?php while ($tm_query->have_posts()) : $tm_query->the_post(); ?>
+                     <div class="items">
+                         <div class="review-text">
+                             <p style="color: #fff;"><?php echo get_the_content();?></p>
+                         </div>
+                         <div class="ree-row-set mt30">
+                             <div class="media vcenter">
+                                 <div class="ree-icon-set img-round80">
+                                    <?php 
+                                    if ( has_post_thumbnail() ) { ?>
+                                       <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>"  alt="<?php echo get_the_title(); ?>" class="img-fluid" />
+                                    <?php }
+                                    else { ?>
+                                       <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/03/avatar-1.png" alt="<?php echo get_the_title(); ?>" class="img-fluid" />
+                                    <?php }
+                                    ?>
+                                 </div>
+                                 <div class="ree-details-set user-info">
+                                     <h5 style="color: #fff;"><?php echo the_title();?></h5>
+                                     <p style="color: #fff;"><?php echo the_field('designation');?></p>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <?php endwhile; ?>
+                  </div>
+                  <?php wp_reset_postdata(); ?>
+               <?php endif; ?>
+             </div>
+         </div>
+         <?php endif ?>
+         
+         <?php if( get_row_layout() == 'counter_layout' ) : 
+            $counter_1 = get_sub_field('counter_1');
+            $counter_2 = get_sub_field('counter_2');
+            $counter_3 = get_sub_field('counter_3');
+            $counter_4 = get_sub_field('counter_4');
+            ?>
+         <div class="row mt100">
+            <?php if($counter_1) : ?>
+             <div class="col-lg-3 col-sm-6 col-6 mt30">
+                 <div class="counter-c-a">
+                     <h2><span class="counter"><?php echo $counter_1['number'];?></span>
+                        <span><?php echo $counter_1['affix'];?></span>
+                     </h2>
+                     <p><?php echo $counter_1['title'];?></p>
+                 </div>
+             </div>
+            <?php endif; ?>
+
+            <?php if($counter_2) : ?>
+             <div class="col-lg-3 col-sm-6 col-6 mt30">
+                 <div class="counter-c-a">
+                     <h2><span class="counter"><?php echo $counter_2['number'];?></span>
+                        <span><?php echo $counter_2['affix'];?></span>
+                     </h2>
+                     <p><?php echo $counter_2['title'];?></p>
+                 </div>
+             </div>
+            <?php endif; ?>
+
+            <?php if($counter_3) : ?>
+             <div class="col-lg-3 col-sm-6 col-6 mt30">
+                 <div class="counter-c-a">
+                     <h2><span class="counter"><?php echo $counter_3['number'];?></span>
+                        <span><?php echo $counter_3['affix'];?></span>
+                     </h2>
+                     <p><?php echo $counter_3['title'];?></p>
+                 </div>
+             </div>
+            <?php endif; ?>
+
+            <?php if($counter_4) : ?>
+             <div class="col-lg-3 col-sm-6 col-6 mt30">
+                 <div class="counter-c-a">
+                     <h2><span class="counter"><?php echo $counter_4['number'];?></span>
+                        <span><?php echo $counter_4['affix'];?></span>
+                     </h2>
+                     <p><?php echo $counter_4['title'];?></p>
+                 </div>
+             </div>
+            <?php endif; ?>
+             
+         </div>
+         <?php endif ?>
+         <?php endwhile; ?>
       </div>
-   </div>
-   <!-- End Banner -->
+   </section>
+    <!--end home review -->
    <?php endif ?>
 <?php endwhile; ?>
 
 
 
-
-   <!---------------------------------- Start About ============================================= -->
-   <div id="about" class="about-area border-top default-padding bg-gray">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-6 col-md-6 info">
-            <?php while ( have_rows('sections') ) : the_row();?>
-  
-            <?php if( get_row_layout() == 'about_section' ) :?>
-            <?php
-            $about_title = get_sub_field('about_title');
-            $about_content = get_sub_field('about_content');
-            ?>
-               <h2><?php echo $about_title;?></h2>
-               <?php echo $about_content;?>
-
-               <?php endif; ?>
-            <?php endwhile; ?>
-
-
-
-            <?php while ( have_rows('sections') ) : the_row();?>
-  
-            <?php if( get_row_layout() == 'counters' ) :?>
-            <?php
-            $counter_heading = get_sub_field('counter_heading');
-            $counter = get_sub_field('counter');
-            ?>
-               <div class="fun-facts">
-                  <h3><?php echo $counter_heading;?></h3>
-                  <div class="row">
-                  <?php 
-
-                  if( have_rows('counter') ):
-
-                   while( have_rows('counter') ) : the_row();
-
-                       $counter_no = get_sub_field('counter_no');
-                       $counter_text = get_sub_field('counter_text');
-                        ?>
-                     <div class="col-md-4 col-sm-4 item">
-                        <div class="fun-fact">
-                           <div class="timer" data-to="<?php echo $counter_no; ?>" data-speed="5000">0</div>
-                           <span class="medium"><?php echo $counter_text; ?></span>
-                        </div>
-                     </div>
-
-                   <?php 
-                     endwhile;
-                  else :
-                  endif;
-                     ?>
-                  </div>
-               </div>
-            <?php endif; ?>
-            <?php endwhile; ?>
-
-
-
-            <?php while ( have_rows('sections') ) : the_row();?>
-            <?php if( get_row_layout() == 'clients' ) :
-               $client_logo = get_sub_field('client_logo'); ?>
-
-               <div id="about" class="about-area companies-area text-center">
-                  <div class="fun-facts">
-                     <div class="row">
-                        <div class="col-md-12">
-                           <div class="clients-items owl-carousel owl-theme text-center">
-                              <?php 
-                              $size = 'full'; // (thumbnail, medium, large, full or custom size)
-                              if( $client_logo ): ?>
-                             <?php foreach( $client_logo as $image_arr ): ?>
-                                 
-                              <div class="single-item">
-                                 <a href="#"><img src="<?php echo esc_url($image_arr['url']); ?>" alt="Clients"></a>
-                              </div>
-                             <?php endforeach; ?>
-                              
-                              <?php endif; ?>
-                              
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-             <?php endif; ?>
-            <?php endwhile; ?>
-            </div>
-            <div class="col-lg-6 col-md-6 features">
-               <div class="row">
-         <?php while ( have_rows('sections') ) : the_row();?>
-            <?php if( get_row_layout() == 'features' ) :
-
-                  if( have_rows('feature') ):
-
-                   while( have_rows('feature') ) : the_row();
-
-                     $feature_icon = get_sub_field('feature_icon');
-                     $feature_title = get_sub_field('feature_title');
-                     $feature_content = get_sub_field('feature_content');
-                        ?>
-                  <div class="col-lg-6 col-md-6 col-sm-6 equal-height">
-                     <div class="item">
-                        <i class="<?php echo $feature_icon; ?>"></i>
-                        <h4 class="tagline"><?php echo $feature_title; ?></h4>
-
-                           <?php echo $feature_content; ?>
-                     </div>
-                  </div>
-
-                   <?php 
-                     endwhile;
-                  else :
-                  endif;
-                     ?>
-
-            <?php endif; ?>
-         <?php endwhile; ?>
-
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <!-- End About -->
-
-
-
-
-   <!-- Start Features Area ============================================= -->
-   <div id="features" class="features-area carousel-shadow default-padding">
-      <div class="container">
-         <?php while ( have_rows('sections') ) : the_row();?>
-            <?php if( get_row_layout() == 'how_it_works' ) :
-
-               $how_it_works_heading = get_sub_field('how_it_works_heading');
-               $how_it_image = get_sub_field('image');
-               ?>
-
-
-            
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $how_it_works_heading;?></h2>
-                 <!--  <p>
-                        Learning day desirous informed expenses material returned six the. She enabled invited
-                        
-                        exposed him another. Reasonably conviction solicitude me mr at discretion reasonable. Age
-                        
-                        out full gate bed day lose.
-                        
-                        </p> -->
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-12">
-               <img src="<?php echo $how_it_image;?>">
-            </div>
-         </div>
-         <?php endif; ?>
-      <?php endwhile; ?>
-      </div>
-   </div>
-   <!-- End Features Area -->
-
-   <!-- Start Work Process Area ============================================= -->
-   <div id="pricing" class="pricing-area default-padding bg-gray">
-      <div class="container">
-
-         <?php while ( have_rows('sections') ) : the_row();?>
-            <?php if( get_row_layout() == 'tab_section' ) :
-
-            $tab_section_heading = get_sub_field('tab_section_heading');
-            $how_it_image = get_sub_field('image');
-            ?>
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $tab_section_heading;?></h2>
-                  <!-- <p>
-                          Learning day desirous informed expenses material returned six the. She enabled invited exposed him another. Reasonably conviction solicitude me mr at discretion reasonable. Age out full gate bed day lose. 
-                      </p> -->
-               </div>
-            </div>
-         </div>
-
-         <div class="row">
-          
-
-            <div class="pricing-navs col-md-12">
-               <!-- Tab Nav -->
-               <ul class="nav nav-pills">
-
-                  <?php 
-                  
-                  if( have_rows('tabs') ):
-                     $i = 0;
-                   while( have_rows('tabs') ) : the_row();
-                     
-                     $tabs_name = get_sub_field('tabs_name');
-                     $tab_icon = $tabs_name['tab_icon'];
-                     $tab_name = $tabs_name['tab_name'];
-
-                     $tab_contents = get_sub_field('tab_contents');
-                     $content_title = $tab_contents['content_title'];
-                     $contents = $tab_contents['contents'];
-                     $tab_image = $tab_contents['tab_image'];
-                     
-
-                  ?>
-
-                  <li class="<?php if ($i==0) { ?>active<?php } ?>" >
-                     <a data-toggle="tab" href="#tabs<?php echo $i++;?>" aria-expanded="false">
-                        <i class="<?php echo $tab_icon;?>"></i> &nbsp; <?php echo $tab_name;?>
-                     </a>
-                  </li>
-
-                   <?php 
-                     endwhile;
-                  else :
-                  endif;
-                     ?>
-
-               </ul>
-               <!-- End Tab Nav -->
-            </div>
-
-            <div class="pricing-content col-md-12">
-               <div class="row">
-                  <!-- Start Tab Content -->
-                  <div class="tab-content">
-
-                     <?php 
-                  
-                     if( have_rows('tabs') ):
-                         $j = 0;
-                      while( have_rows('tabs') ) : the_row();
-                       
-                     $tabs_name = get_sub_field('tabs_name');
-                     $tab_icon = $tabs_name['tab_icon'];
-                     $tab_name = $tabs_name['tab_name'];
-                     $tab_link_button = $tabs_name['link_button'];
-
-                     $tab_contents = get_sub_field('tab_contents');
-                     $content_title = $tab_contents['content_title'];
-                     $contents = $tab_contents['contents'];
-                     $tab_image = $tab_contents['tab_image'];
-
-                           ?>
-                     
-                     <!-- Tab Single Item -->
-                     <div  class="tab-pane fade <?php if ($j==0) { ?>active in<?php } ?>" id="tabs<?php echo $j++;?>">
-                        <div class="container">
-                           <div class="row">
-                              <div class="col-md-6">
-                                 <h1> <?php echo $content_title;?> </h1>
-                                 <?php echo $contents;?>
-                                 <?php 
-                                 if ( !empty( $tab_link_button['url'] ) && !empty( $tab_link_button['title'] ) ) { ?>
-                                   <a class="btn btn-theme border btn-md" href="<?php echo $tab_link_button['url']?>" target="<?php echo $tab_link_button['target']?>" ><?php echo $tab_link_button['title']?></a>
-                                 <?php }
-                                 ?>
-                                    
-                                 
-                              </div>
-                              <div class="col-md-6">
-                                 <img src="<?php echo $tab_image;?>">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- End Tab Single Item -->
-
-                      <?php 
-                        endwhile;
-                     else :
-                     endif;
-                        ?>
-                  </div>
-                  <!-- End Tab Content -->
-               </div>
-            </div>
-         
-
-         </div>
-         <?php endif; ?>
-      <?php endwhile; ?>
-      </div>
-   </div>
-
-
-   <div id="mobiletab" class="work-process-area default-padding bg-gray">
-      <div class="container">
-         <?php while ( have_rows('sections') ) : the_row();?>
-            <?php if( get_row_layout() == 'tab_section' ) :
-
-            $tab_section_heading_mob = get_sub_field('tab_section_heading');
-            $how_it_image_mob = get_sub_field('image');
-            ?>
-
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $tab_section_heading_mob;?> </h2>
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <!--Start Mobile Accordiant-->
-            <div class="wrapper1 center-block">
-               <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-                  <?php 
-                  
-                  if( have_rows('tabs') ):
-                     $a = 0;
-                     $b = 0;
-                   while( have_rows('tabs') ) : the_row();
-                     
-                     $tabs_name = get_sub_field('tabs_name');
-                     $tab_icon = $tabs_name['tab_icon'];
-                     $tab_name = $tabs_name['tab_name'];
-
-                     $tab_contents = get_sub_field('tab_contents');
-                     $content_title = $tab_contents['content_title'];
-                     $mobile_contents = $tab_contents['mobile_contents'];
-                     $mob_tab_image = $tab_contents['tab_image'];
-                     
-
-                  ?>
-
-                  <div class="panel panel-default">
-                     <div class="panel-heading <?php if ($a==0) { ?>active<?php } ?>" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                           <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $a++;?>"
-                              aria-expanded="true" aria-controls="collapseOne">
-                              <?php echo $tab_name;?>
-                           </a>
-                        </h4>
-                     </div>
-                     <div class="panel-collapse collapse <?php if ($b==0) { ?>in<?php } ?>" role="tabpanel"
-                        aria-labelledby="headingOne" id="collapse<?php echo $b++;?>" >
-                        <div class="panel-body">
-                           <div class="row">
-                              <div class="col-md-6">
-                                 <h1><?php echo $content_title;?></h1>
-                                 <?php echo $mobile_contents;?>
-                                 <a class="btn btn-theme border btn-md" href="#" data-toggle="modal"
-                                    data-target=".bd-example-modal-md">Read More</a>
-                              </div>
-                              <div class="col-md-6">
-                                 <img src="<?php echo $mob_tab_image;?>">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
-                   <?php 
-                     endwhile;
-                  else :
-                  endif;
-                     ?>
-
-
-                  
-               </div>
-            </div>
-            <!--End Mobile Accordint-->
-         </div>
-
-         <?php endif; ?>
-      <?php endwhile; ?>
-      </div>
-   </div>
-   <!-- End Work Process Area -->
-
-
-
-   <!-------------------------------------------- Start Testimonials Area ============================================= -->
-   <?php while ( have_rows('sections') ) : the_row();?>
-   <?php if( get_row_layout() == 'testimonial_section' ) :
-
-   $testimonial_heading = get_sub_field('testimonial_heading');
-   $testimonial_sub_heading = get_sub_field('testimonial_sub_heading');
-
-   ?>
-   <div class="testimonials-area bg-gray default-padding testi-back">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $testimonial_heading;?></h2>
-                  <p class="testi"><?php echo $testimonial_sub_heading;?></p>
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-               <div class="testimonial-items testimonial-carousel owl-carousel owl-theme">
-
-                  <?php 
-                  
-                  if( have_rows('testimonial_slider') ):
-                     $i = 0;
-                   while( have_rows('testimonial_slider') ) : the_row();
-                     
-                     $testimonial_name = get_sub_field('testimonial_name');
-                     $testimonial_designation = get_sub_field('testimonial_designation');
-                     $testimonial_quotes = get_sub_field('testimonial_quotes');
-                     
-                  ?>
-                  <!-- Single Item -->
-                  <div class="item">
-                     <div class="info">
-                        <p>
-                           <?php echo $testimonial_quotes;?>
-                        </p>
-                        <h4><?php echo $testimonial_name;?></h4>
-                        <span><?php echo $testimonial_designation;?></span>
-                     </div>
-                  </div>
-                  <!-- End Single Item -->
-
-                   <?php 
-                     endwhile;
-                  else :
-                  endif;
-                     ?>
-                  
-
-
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-      <?php endif; ?>
-   <?php endwhile; ?>
-<!-- End Testimonials Area -->
-
-
-   <!----------------------------------- Start sucess story ============================================= -->
-   <?php while ( have_rows('sections') ) : the_row();?>
-   <?php if( get_row_layout() == 'success_stories_section' ) :
-
-   $success_stories_heading = get_sub_field('success_stories_heading');
-   $success_stories_sub_heading = get_sub_field('success_stories_sub_heading');
-   $success_stories_contents = get_sub_field('success_stories_contents');
-
-   $story_title = $success_stories_contents['story_title'];
-   $story_content = $success_stories_contents['story_content'];
-   $story_image = $success_stories_contents['story_image'];
-
-   ?>
-   <div id="process" class="work-process-area default-padding sucess-back">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $success_stories_heading;?></h2>
-                  <p>
-                     <?php echo $success_stories_sub_heading;?>
-                  </p>
-               </div>
-            </div>
-         </div>
-         <div class="row">
-            <div class="process-items">
-               <div class="col-md-6 info">
-                  <ul>
-                     <li>
-                        <div class="list">
-                           <h3><i class="fas fa-crosshairs"></i></h3>
-                        </div>
-                        <div class="content">
-                           <!-- <h3 class="sucess-tital">Pocket Filler</h3> -->
-                           <h3 class="sucess-tital"><?php echo $story_title;?></h3>
-                           <div class="text-justify">
-                              <?php echo $story_content;?>
-                           </div>
-                           <!-- <a class="btn btn-theme border btn-md sucess-buton" href="#">Read More ...</a> -->
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-               <div class="col-md-6 thumb">
-                  <img src="<?php echo $story_image;?>" >
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <?php endif; ?>
-   <?php endwhile; ?>
-   <!-- End sucess story -->
-
-
-
-   <?php while ( have_rows('sections') ) : the_row();?>
-   <?php if( get_row_layout() == 'technologies_section' ) :
-
-   $technologies_section_heading = get_sub_field('technologies_section_heading');
-   $technologies_section_sub_heading = get_sub_field('technologies_section_sub_heading');
-
-   ?>
-   <div id="process" class="work-process-area default-padding bg-gray">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $technologies_section_heading;?></h2>
-                  <p>
-                     <?php echo $technologies_section_sub_heading;?>
-                  </p>
-               </div>
-            </div>
-         </div>
-         <!------------------------------ Start Overview ============================================= -->
-         <div id="overview" class="overview-area text-light">
-            <div class="container">
-               <div class="row">
-                  <div class="col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-1 text-center overview-items">
-                     <!-- Tab Nav -->
-                     <div class="tab-navigation">
-                        <ul class="nav nav-pills">
-
-                           <?php 
-                           
-                           if( have_rows('technologies_tabs') ):
-                              $technoA = 0;
-                            while( have_rows('technologies_tabs') ) : the_row();
-                              
-                              $technologies_tab_name = get_sub_field('technologies_tab_name');
-                            ?>
-                           <li class="<?php if ($technoA==0) { ?>active<?php } ?>">
-                              <a data-toggle="tab" href="#tab<?php echo $technoA++;?>" aria-expanded="true">
-                                 <?php echo $technologies_tab_name;?>
-                              </a>
-                           </li>
-
-                           <?php 
-                              endwhile;
-                           else :
-                           endif;
-                              ?>
-
-                           
-
-
-                        </ul>
-                     </div>
-                     <!-- End Tab Nav -->
-                     <!-- Start Tab Content -->
-                     <div class="tab-content magnific-mix-gallery">
-
-                        <?php 
-                           
-                        if( have_rows('technologies_tabs') ):
-                           $technoB = 0;
-                           $row = 0;
-                         while( have_rows('technologies_tabs') ) : the_row();
-                           
-                           $technologies_tab_contents = get_sub_field('technologies_tab_contents');
-                         ?>
-                        
-                        <div class="tab-pane fade <?php if ($technoB==0) { ?>active in<?php } ?>" id="tab<?php echo $technoB++;?>" >
-
-                           <?php 
-                           if( have_rows('technologies_tab_contents') ):
-                              while( have_rows('technologies_tab_contents') ) : the_row(); 
-                                 $technologies_title = get_sub_field('technologies_title');
-                              ?>
-                                  
-                           <div class="row <?php if ($row!=0) { ?>mt-30<?php } ?>" count="<?php echo $row++;?>">
-                              <div class="col-md-12">
-                                 <h4 class="text-left mb-2"><?php echo $technologies_title;?></h4>
-                              </div>
-                           </div>
-
-
-                           <div class="row">
-                              <?php 
-                              $big_images = get_sub_field('big_images');
-                              $big_image_1 = $big_images['big_image_1'];
-                              $big_image_2 = $big_images['big_image_2'];
-
-                              ?>
-
-                              <div class="<?php if( !empty($big_image_1) || !empty($big_image_2) ){ ?> col-md-8 <?php }else {?>col-md-12 <?php }?>">
-                                 <div class="row d-flex flex-wrap">
-                              <?php 
-                                 while( have_rows('technologies_name') ) : the_row(); 
-                                    $techn_icon = get_sub_field('techn_icon');
-                                    $techn_label = get_sub_field('techn_label');
-                                 ?>
-                                     
-                                    <div class="<?php if( !empty($big_image_1) || !empty($big_image_2) ){ ?> col-md-4<?php }else {?>col-md-3 <?php }?>">
-                                       <div class="dis-flex">
-                                          <div class="img">
-                                             <img src="<?php echo $techn_icon;?>" >
-                                          </div>
-                                          <label><?php echo $techn_label;?></label>
-                                       </div>
-
-                                    </div>
-                                 
-                           
-                              <?php       
-                                 endwhile;
-                              ?>
-                                 </div>
-                              </div>
-                              <div class="<?php if( !empty($big_image_1) || !empty($big_image_2) ){ ?> col-md-4<?php }else {?> d-none <?php }?>">
-                                 <div class="dis-flex">
-                                    
-                                    <?php 
-                                    if ( !empty( $big_image_1 ) ) { ?>
-                                       <img width="30%" src="<?php echo $big_image_1; ?>">
-                                    <?php }
-                                    if ( !empty( $big_image_2 ) ) { ?>
-                                       <img width="30%" src="<?php echo $big_image_2; ?>" style="margin-left: 50px;">
-                                    <?php  }
-                                    ?>
-                                    
-                                    
-                                 </div>
-                                 
-                              </div>
-                           </div>
-
-                           <?php       
-                              endwhile;
-                           endif;
-                           ?>
-
-
-                        </div>
-
-                        <?php 
-                           endwhile;
-                        else :
-                        endif;
-                           ?>
-
-                        
-                     </div>
-                     <!-- End Tab Content -->
-                  </div>
-               </div>
-            </div>
-         </div>
-         
-      </div>
-   </div>
-   <?php endif; ?>
-   <?php endwhile; ?>
-
-
-
-
-   <?php while ( have_rows('sections') ) : the_row();?>
-   <?php if( get_row_layout() == 'founder_section' ) :
-
-   $founder_heading = get_sub_field('founder_heading');
-
-   ?>
-   <div id="team" class="team-area default-padding bottom-less">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $founder_heading; ?></h2>
-                  <!-- <p>
-                        Learning day desirous informed expenses material returned six the. She enabled invited
-                        exposed him another. Reasonably conviction solicitude me mr at discretion reasonable. Age
-                        out full gate bed day lose.
-                     </p> -->
-               </div>
-            </div>
-         </div>
-
-
-
-         
-
-
-         <?php 
-                  
-         if( have_rows('founder_details') ):
-            $i = 0;
-          while( have_rows('founder_details') ) : the_row();
-            
-            $founder_photo = get_sub_field('founder_photo');
-            $founder_name = get_sub_field('founder_name');
-            $founder_designation = get_sub_field('founder_designation');
-            $founder_content = get_sub_field('founder_content');
-            ?>
-         <div class="row">
-            <div class="team-items text-center">
-               <!-- Single Item -->
-               <div class="col-md-4 equal-height single-item col-md-offset-1" style="height: 494px;">
-                  <div class="item">
-                     <div class="thumb">
-                        <img src="<?php echo $founder_photo; ?>" >
-
-                     </div>
-                     <div class="info">
-                        <h4><?php echo $founder_name; ?></h4>
-                        <span><?php echo $founder_designation; ?> </span>
-                        <div class="bottom">
-                           <?php 
-                  
-                           if( have_rows('founder_social') ):
-                              $i = 0;
-                            while( have_rows('founder_social') ) : the_row();
-                              $social_link = get_sub_field('social_link');
-                              // echo $social_link;
-                              $link_url = $social_link['url'];
-                              $link_title = $social_link['title'];
-                              ?>
-
-                           <a href="<?php echo $link_url; ?>" target="_blank" class="linkdeen"><i
-                                 class="fa fa-<?php echo strtolower($link_title); ?> "></i></a>
-                           <?php 
-                              endwhile;
-                           else :
-                           endif; ?>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-5 col-md-offset-1 text-left team-content">
-                  <h1><?php echo $founder_name; ?></h1>
-                  <h6 class="mb-2"><?php echo $founder_designation; ?></h6>
-                  <?php echo $founder_content; ?>
-               </div>
-             
-            </div>
-         </div>
-
-
-         <?php 
-            endwhile;
-         else :
-         endif;
-            ?>
-
-
-
-
-      </div>
-   </div>
-   <?php endif; ?>
-   <?php endwhile; ?>
-   <!----------------------------------- Start Features Area ============================================= -->
-
-
-
-
-   <!-- End Features Area -->
 <?php while ( have_rows('sections') ) : the_row();?>
-   <?php if( get_row_layout() == 'experts_section' ) :
+   <?php if( get_row_layout() == 'blogs' ) : 
+      $blog_tagline = get_sub_field('blog_tagline');
+      $blog_heading = get_sub_field('blog_heading');
+      $blog_description = get_sub_field('blog_description');
+      $blog_id = get_sub_field('blog');
+      ?>
+<!--start blogs  -->
+    <section class="half-bg-ree sec-pad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="sec-heading text-center pera-block">
+                        <?php if(!empty($blog_tagline)): ?>
+                        <span class="sub-heading mb15" style="color: #fff;"><?php echo $blog_tagline;?></span>
+                        <?php endif; ?>
 
-   $experts_heading = get_sub_field('experts_heading');
-   $experts_image = get_sub_field('experts_image');
+                        <?php if(!empty($blog_heading)):?>
+                        <h2 style="color: #fff;"><?php echo $blog_heading;?></h2>
+                        <?php endif; ?>
 
-   $start_project_link = get_sub_field('start_project_link');
-      $start_project_link_url = $start_project_link['url'];
-      $start_project_link_title = $start_project_link['title'];
-
-   ?>
-
-   <div id="process" class="work-process-area default-padding">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2">
-               <div class="site-heading text-center">
-                  <h2><?php echo $experts_heading; ?> </h2>
-               </div>
+                        <?php if(!empty($blog_description)):?>
+                        <p style="color: #fff;"><?php echo $blog_description;?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
-         </div>
-         <div class="row">
-            <div class="process-items">
-               <div class="col-md-6 thumb">
-                  <img src="<?php echo $experts_image; ?>" >
-               </div>
-               <div class="col-md-6 info">
-                  <ul>
-
-
-                     <li>
-                        <div class="list">
-                           <h3><i class="fas fa-check"></i></h3>
+            <?php 
+               $posts = get_posts(array(
+                  'posts_per_page'    => 3,
+                  'post_type'         => 'post',
+                  'category__in'      => $blog_id
+               ));
+               if( $posts ):
+                  $x = 1;
+                  ?> 
+            <div class="row mt30">
+               <?php foreach( $posts as $post ):
+                  setup_postdata( $post ); ?>
+                <div class="col-lg-4 mt30" data-aos="fade-up" data-aos-delay="<?php echo $x == 1 ? '200' : '' ?><?php echo $x == 2 ? '500' : '' ?><?php echo $x == 3 ? '800' : '' ?>">
+                    <div class="half-blog-card">
+                        <div class="half-blog-img">
+                           <a href="<?php the_permalink();?>">
+                              <?php 
+                              if ( has_post_thumbnail() ) { ?>
+                                 <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>"  alt="<?php echo get_the_title(); ?>" class="img-fluid" />
+                              <?php }
+                              else { ?>
+                                 <img src="<?=site_url();?>/wp-content/uploads/2022/03/Image_not_available.png" alt="<?php echo get_the_title(); ?>" class="img-fluid" />
+                              <?php }
+                              ?>
+                           </a>
                         </div>
-                        <div class="content">
-                           <!-- <h3>Looking for Fintech development experts for your project</h3> -->
-                           <a class="btn btn-theme border btn-md" href="<?php echo $start_project_link_url; ?>"><?php echo $start_project_link_title; ?></a>
+                        <div class="half-blog-content">
+                           <div class="blog-quick-inf mb20">
+                              <span><i class="far fa-calendar-alt"></i> <?php echo get_the_date( ' d M, Y ', $post->ID ); ?> </span>
+                              <span><i class="fas fa-clock"></i> <?php echo get_the_date( ' g:i A ', $post->ID ); ?></span>
+                           </div>
+
+                           <h4 class="mb15">
+                              <a href="<?php the_permalink();?>"><?php the_title();?></a>
+                           </h4>
+                           <p>
+                              <?php $content = get_the_content();
+                              echo wp_trim_words($content, 15, '.');
+                              ?>
+                           </p>
                         </div>
-                     </li>
-                  </ul>
-               </div>
+                    </div>
+                </div>
+                 <?php $x++; endforeach; ?>
             </div>
-         </div>
-      </div>
-   </div>
-
-   <?php endif; ?>
-   <?php endwhile; ?>
-   
-<?php endif ?>
-
+            <?php wp_reset_postdata(); ?>
+         <?php endif; ?>
+        </div>
+    </section>
+    <!--end blogs-->
+   <?php endif ?>
+<?php endwhile; ?>
 
 
 
+<!--start contact block-->
+    <section class="home-contact pb120" data-background="images/others/office.jpg">
+        <div class="container">
+            <div class="row zup">
+                <div class="col-right-a">
+                    <div class="sec-heading fourc-up-a">
+                        <span class="sub-heading mb15">Inquiry</span>
+                        <h2>Let’s Get in <span class="ree-text rt40">Touch</span></h2>
+                    </div>
+                    <div class="home-contact-block">
+                        <div class="contact-infos">
+                            <div class="c-infot">
+                                <span>Sales Department</span> <a href="tel:+911234567890"><i
+                                        class="fas fa-phone-alt"></i> +91 123 4567 890</a>
+                            </div>
+                            <div class="c-infot">
+                                <span>HR Department</span> <a href="tel:+911234567890"><i class="fas fa-phone-alt"></i>
+                                    +91 123 4567 890</a>
+                            </div>
+                        </div>
+                        <div class="contact-infos mt35">
+                           <div class="c-infot">
+                              <span>Sales Department</span>
+                              <a href="mailto:">
+                                 <i class="fas fa-envelope"></i>
+                                 [email&#160;protected]
+                              </a>
+                           </div>
+                           <div class="c-infot">
+                                <span>Connect on Skype</span> <a href="skype:reevan.company"><i
+                                        class="fab fa-skype"></i> reevan.company</a>
+                           </div>
+                        </div>
+                        <!-- <div class="live-review- mt60">
+                            <span>Read Our Customers Feedback</span>
+                            <div class="livrve">
+                                <a href="#"><img src="images/google-logo.svg" alt="review"> </a>
+                                <a href="#"><img src="images/hubspot-logo.svg" alt="review"> </a>
+                                <a href="#"><img src="images/trustpilot-logo.svg" alt="review"> </a>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-right-b">
+                    <div class="form-contact-hom fourc-up-b">
+                        <div class="form-block">
+                            <div class="form-head">
+                                <h3>Please fill in the form below.</h3>
+                            </div>
+                            <div class="form-body">
+                                <!-- <form action="#" method="post" name="feedback-form">
+                                    <div class="fieldsets row">
+                                        <div class="col-md-6"><input type="text" placeholder="Full Name" name="name">
+                                        </div>
+                                        <div class="col-md-6"><input type="email" placeholder="Email Address"
+                                                name="email"></div>
+                                    </div>
+                                    <div class="fieldsets row">
+                                        <div class="col-md-6"><input type="number" placeholder="Contact Number"
+                                                name="phone"></div>
+                                        <div class="col-md-6"><input type="text" placeholder="Skype" name="skype"></div>
+                                    </div>
+                                    <div class="fieldsets row">
+                                        <div class="col-md-6"><input type="text" placeholder="Subject" name="subject">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select>
+                                                <option>interested in</option>
+                                                <option>Web Design</option>
+                                                <option>Graphic Design</option>
+                                                <option>App Development</option>
+                                                <option>E-commerce Development</option>
+                                                <option>Digital Marketing</option>
+                                                <option>Business Growth</option>
+                                                <option>Business Startup</option>
+                                                <option>Other...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="fieldsets"><textarea placeholder="Message" name="message"></textarea>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck"
+                                            name="example1" checked="checked">
+                                        <label class="custom-control-label label-f-form" for="customCheck">I agree to
+                                            the <a href="javascript:void(0)">Terms &amp; Conditions</a> of
+                                            Reevan.</label>
+                                    </div>
+                                    <div class="fieldsets mt20">
+                                       <button type="submit" name="submit" class="ree-btn  ree-btn-grdt1 w-100">Send your inquiry <i
+                                                class="fas fa-arrow-right fa-btn"></i></button> </div>
+                                    <p class="trm"><i class="fas fa-lock"></i>We hate spam, and we respect your privacy.
+                                    </p>
+                                </form> -->
+                                <?php echo do_shortcode('[contact-form-7 id="5" title="Contact form 1"]');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--end contact block-->
 
-
-<?php  
-
-get_footer();
-
-?>
+<?php get_footer(); ?>
