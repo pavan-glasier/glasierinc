@@ -11,17 +11,121 @@
 ?><!DOCTYPE html>
 
 <html <?php language_attributes(); ?>>
-
 <head>
+<!-- Meta Tag -->
 <meta charset="<?php bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+<meta name="Robots" content="all">
+<meta name="Googlebot" content="index, follow">
+<meta name="Yahoobot" content="index, follow">
+<meta name="MSNbot" content="index, follow">
+<meta name="robots" content="Index, Follow">
+<meta name="allow-search" content="yes">
+<meta name="rating" content="General">
+<meta name="document-distribution" content="Global">
+<meta name="language" content="EN">
+<meta name="author" content="Glasier Inc">
+<meta name="copyright" content="glasierinc.com">
+<meta name="reply-to" content="info@glasierinc.com">
+<meta name="geo.country" content="UK">
+<meta name="document-type" content="Public">
+<meta name="document-rating" content="Safe for Kids">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+
+
 <title><?php wp_title( '|', true, 'right' ); ?></title>
+
 <link rel="profile" href="https://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php echo esc_url( get_bloginfo( 'pingback_url' ) ); ?>">
- 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+
+
+<!-- OPen Grapgh -->
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="" />
+<meta property="og:description" content="" />
+<meta property="og:url" content="https://www.glasierinc.com/" />
+<meta property="og:site_name" content="Glasier Inc" />
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:title" content="" />
+<meta name="twitter:site" content="@GlasierInc" />
+<meta name="twitter:creator" content="@GlasierInc" />
+
+<!-- Canonical Tag -->
+<link rel="canonical" href="https://www.glasierinc.com/" />
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '245603730396550');
+fbq('track', 'PageView');
+</script>
+
+<!-- Schema Code -->
+<script type='application/ld+json'>
+    {
+    "@context": "http://schema.org/", 
+    "@type": "Organization", 
+    "legalName": "Glasier inc", 
+    "url": "https://www.glasierinc.com/", 
+    "contactPoint": { 
+    "@type": "ContactPoint", 
+    "telephone": "+91-9925028258", 
+    "contactType": "Local Business" 
+    }, 
+    "logo": "https://glasierinc.com/wp-content/uploads/2019/01/logo.png", 
+    "sameAs": ["https://www.facebook.com/GlasierInc/", "https://www.linkedin.com/company/glasierinc","https://twitter.com/GlasierInc","https://medium.com/@GlasierInc","https://www.behance.net/glasierinc"],
+    "address": { 
+    "@type": "PostalAddress", 
+    "streetAddress": "A/6, First Floor, Safal Profitaire, Corporate Rd, opp. Hotel Ramada, Prahlad Nagar, Ahmedabad, Gujarat, India 380015", 
+    "addressLocality": "Ahmedabad", 
+    "addressRegion": "Gujarat", 
+    "postalCode": "380015", 
+    "addressCountry": "India" 
+    } 
+    }, 
+"aggregateRating": {
+    "@type": "AggregateRating",
+    "bestRating": "5",
+    "ratingValue": "4.9",
+    "reviewCount": "68"
+    },
+    "review": {
+    "author": "Federico",
+    "reviewRating": {
+    "@type": "Rating",
+    "bestRating": "5",
+    "ratingValue": "5",
+    }
+    } 
+ { 
+    "@context": "http://schema.org/", 
+    "@type": "WebSite", 
+    "name": "Glasier Inc",
+    "alternateName": "glasierinc", 
+    "url": "https://www.glasierinc.com/"
+    }
+  </script>
+    <meta property="og:image" content="https://www.glasierinc.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2019/01/webs1-1.png.webp">
+<!-- //Schema Code Here -->
+
+
+
 <?php wp_head(); ?>
 
 </head>
@@ -92,7 +196,7 @@
                 <div class="mobile-menu2">
                     <ul class="mob-nav2">
                         <li>
-                           <a href="#" class="ree-btn2 ree-btn-grdt1">
+                           <a href="<?php echo $header_link_btn['url'];?>" class="ree-btn2 ree-btn-grdt1">
                               <i class="fas fa-envelope-open-text"></i>
                            </a>
                         </li>
@@ -119,11 +223,13 @@
                 <!-- mobile Nav -->
                 <nav id="main-nav">
                   <?php $main_menu = get_field('main_menu', 'option'); ?>
-                    <?php wp_nav_menu( array(
+                    <?php 
+                        wp_nav_menu( array(
                            'theme_location'    => $main_menu['value'],
                            'container'         => 'ul',
-                           'menu_class'        => '' )
-                       );
+                           'menu_class'        => ''
+                            )
+                        );
                        ?>
                     
                     <ul class="bottom-nav">

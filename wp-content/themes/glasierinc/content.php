@@ -15,16 +15,71 @@ $wplogoutTitle = urlencode(get_the_title());
 $wplogoutImage= urlencode(get_the_post_thumbnail_url(get_the_ID(), 'full'));
 ?>
 
-	<section class="inner-wrap">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12 inner-header">
-               <h1><?php echo single_tag_title( '', false );?></h1>
-            </div>
-         </div>
-      </div>
-   </section>
-   <div class="default-padding">
+<div class="r-bg-a pt85 pb120">		
+	<div class="container w-992">
+		<div class="row pt80">
+			<div class="col-lg-12">
+				<div class="page-headings text-center">
+					<!-- <ul class="breadcrus mb20">
+						<li class="bread-non"><a href="blog.html">All Blog Posts</a></li>
+						<li>&nbsp;/&nbsp;</li>
+						<li class="bread-active"><a href="#">Marketing</a></li>
+					</ul> -->
+					<h1><?php echo the_title();?></h1>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="r-bg-x pb120">		
+	<div class="container w-992">
+		<div class="blog-details">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="sol-img mt60">
+						<?php 
+               	if ( has_post_thumbnail() ) { ?>
+						   <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>" class="img-fluid" alt="Thumb" width="100%">
+						<?php }
+						else { ?>
+						    <img src="<?=site_url();?>/wp-content/uploads/2022/03/Image_not_available.png" alt="Thumb" width="100%">
+						<?php }
+               	?>
+					</div>
+					<div class="ree-blog-details">
+						<div class="info-bar">
+							
+							<?php
+								$posttags = get_the_tags();
+									if ($posttags) { ?>
+										<div class="info-b-left">
+									<?php	foreach($posttags as $tag) {?>
+										<a href="<?php echo esc_attr( get_tag_link( $tag->term_id ) );?>">#<?php echo $tag->name; ?></a>
+										<?php } ?>
+										</div>
+									<?php }
+								?>
+							<div class="info-b-right">By <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php the_author();?></a> • <span><?php echo meks_time_ago(); ?></span> </div>
+						</div>
+						
+						<?php the_content();?>
+						
+					</div>
+
+					<!-- <div class="center-btn">
+						<a href="blog.html" class="ree-btn  ree-btn-grdt2 mr20">Back to Blogs <i class="fas fa-arrow-left fa-btn"></i>
+						</a>
+					</div> -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+   <div class="default-padding" style="display: none;">
 
       <div class="container">
          <div class="row">
@@ -48,15 +103,15 @@ $wplogoutImage= urlencode(get_the_post_thumbnail_url(get_the_ID(), 'full'));
                            <div class="meta">
                               <ul>
                                  <li>
-								 	<?php
-										$get_author_id = get_the_author_meta('ID');
-										$get_author_gravatar = get_avatar_url($get_author_id, array('size' => 450));
-									?>
-									<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
-										<img src="<?php print get_avatar_url($get_author_id); ?>" alt="Author">
-										<span><?php the_author();?></span>
-										
-									</a>
+											 	<?php
+													$get_author_id = get_the_author_meta('ID');
+													$get_author_gravatar = get_avatar_url($get_author_id, array('size' => 450));
+												?>
+												<a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>">
+													<img src="<?php print get_avatar_url($get_author_id); ?>" alt="Author">
+													<span><?php the_author();?></span>
+													
+												</a>
                                  </li>
                                  <li>
                                     <a href="#comments">

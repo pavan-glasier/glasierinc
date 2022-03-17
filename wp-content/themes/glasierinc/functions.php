@@ -1035,17 +1035,17 @@ add_action('wpcf7_mail_sent', 'on_submitInq', 10, 1);
 
 
 
-function disable_create_newpost() {
-	if(current_user_can('editor')){
-   global $wp_post_types;
-    $wp_post_types['solutions']->cap->create_posts = 'do_not_allow';
-    $wp_post_types['services']->cap->create_posts = 'do_not_allow';
-    $wp_post_types['footer']->cap->create_posts = 'do_not_allow';
-    $wp_post_types['page']->cap->create_posts = 'do_not_allow';
-	}
+// function disable_create_newpost() {
+// 	if(current_user_can('editor')){
+//    global $wp_post_types;
+//     $wp_post_types['solutions']->cap->create_posts = 'do_not_allow';
+//     $wp_post_types['services']->cap->create_posts = 'do_not_allow';
+//     $wp_post_types['footer']->cap->create_posts = 'do_not_allow';
+//     $wp_post_types['page']->cap->create_posts = 'do_not_allow';
+// 	}
     
-}
-add_action('init','disable_create_newpost');
+// }
+// add_action('init','disable_create_newpost');
 
 
 
@@ -1058,15 +1058,19 @@ function glasierinc_pagination(){
 		'a' => [
 			'class' => [],
 			'href' => [],
-		]
+		],
+		'li' => []
 	];
 
 	$args = [
+		'type'=>'list',
 		'before_page_number' => '<span class="paginate-btn">',
 		'after_page_number' => '</span>',
-
+		'prev_text'    => __('Prev'),
+    'next_text'    => __('Next'),
+    'prev_next'    => __('Next'),
 	];
-	printf('<div class="pagination">%s</div>', wp_kses( paginate_links($args), $allowed_tags ) );
+	printf('<ul class="pagination shadows">%s</ul>', wp_kses( paginate_links($args), $allowed_tags ) );
 }
 
 
@@ -1104,3 +1108,9 @@ function fix_svg() {
         </style>';
 }
 add_action( 'admin_head', 'fix_svg' );
+
+
+/* Function which displays your post date in time ago format */
+function meks_time_ago() {
+	return human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ).' '.__( 'ago' );
+}

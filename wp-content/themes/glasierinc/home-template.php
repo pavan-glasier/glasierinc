@@ -517,7 +517,7 @@ get_header();?>
                   <div class="ree-card dark-deep no-shadows mt30 trust-review owl-carousel">
                   <?php while ($tm_query->have_posts()) : $tm_query->the_post(); ?>
                      <div class="items">
-                         <div class="review-text">
+                         <div class="review-text testimonal">
                              <p style="color: #fff;"><?php echo get_the_content();?></p>
                          </div>
                          <div class="ree-row-set mt30">
@@ -691,39 +691,69 @@ get_header();?>
 
 
 
-<!--start contact block-->
-    <section class="home-contact pb120" data-background="images/others/office.jpg">
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'contact_us' ) : 
+      $contact_tagline = get_sub_field('tagline');
+      $contact_heading = get_sub_field('contact_heading');
+      $contact_details = get_sub_field('contact_details');
+      $contact_form = get_sub_field('contact_form');
+      ?>
+   <!--start contact block-->
+   <section class="home-contact pb120" data-background="<?php echo get_template_directory_uri(); ?>/images/office-1.jpg">
         <div class="container">
             <div class="row zup">
                 <div class="col-right-a">
                     <div class="sec-heading fourc-up-a">
-                        <span class="sub-heading mb15">Inquiry</span>
-                        <h2>Let’s Get in <span class="ree-text rt40">Touch</span></h2>
+                        <?php if(!empty($contact_tagline)): ?>
+                        <span class="sub-heading mb15"><?php echo $contact_tagline; ?></span>
+                        <?php endif; ?>
+
+                        <?php if(!empty($contact_heading)): ?>
+                        <h2><?php echo $contact_heading; ?></h2>
+                        <?php endif; ?>
                     </div>
+                    <?php if($contact_details): ?>
                     <div class="home-contact-block">
                         <div class="contact-infos">
+                           <?php if(!empty($contact_details['phone'])): ?>
                             <div class="c-infot">
-                                <span>Sales Department</span> <a href="tel:+911234567890"><i
-                                        class="fas fa-phone-alt"></i> +91 123 4567 890</a>
+                              <span>Connect on Phone</span>
+                                <a href="tel:<?php echo $contact_details['phone'];?>"><i class="fas fa-phone-alt"></i> <?php echo $contact_details['phone'];?></a>
                             </div>
+                            <?php endif; ?>
+
+                            <?php if(!empty($contact_details['whatsapp'])): ?>
+                              <?php 
+                              $country_code = '91';
+                              $result = ltrim( preg_replace("/[^0-9]+/", "",$contact_details['whatsapp']) , $country_code);
+                              ?>
                             <div class="c-infot">
-                                <span>HR Department</span> <a href="tel:+911234567890"><i class="fas fa-phone-alt"></i>
-                                    +91 123 4567 890</a>
+                              <span>Connect on Whatsapp</span>
+                                <a href="https://wa.me/<?php echo $result;?>?text=hello%0A"><i class="fab fa-whatsapp"></i> <?php echo $contact_details['whatsapp'];?></a>
                             </div>
+                            <?php endif; ?>
                         </div>
                         <div class="contact-infos mt35">
+                           <?php if(!empty($contact_details['email'])): ?>
                            <div class="c-infot">
-                              <span>Sales Department</span>
-                              <a href="mailto:">
+                              <span>Connect on Email</span>
+                              <a href="mailto:<?php echo $contact_details['email'];?>">
                                  <i class="fas fa-envelope"></i>
-                                 [email&#160;protected]
+                                 <?php echo $contact_details['email'];?>
                               </a>
                            </div>
+                           <?php endif; ?>
+                           <?php $contact_skype = $contact_details['skype'];
+                           if ($contact_skype): ?>
                            <div class="c-infot">
-                                <span>Connect on Skype</span> <a href="skype:reevan.company"><i
-                                        class="fab fa-skype"></i> reevan.company</a>
+                                <span>Connect on Skype</span>
+                                <a href="skype:<?php echo $contact_skype['url'];?>"><i class="fab fa-skype"></i> <?php echo $contact_skype['title'];?></a>
                            </div>
+                           <?php endif; ?>
                         </div>
+                              
                         <!-- <div class="live-review- mt60">
                             <span>Read Our Customers Feedback</span>
                             <div class="livrve">
@@ -733,66 +763,93 @@ get_header();?>
                             </div>
                         </div> -->
                     </div>
+                    <?php endif; ?>
                 </div>
+                <?php if($contact_form): ?>
                 <div class="col-right-b">
                     <div class="form-contact-hom fourc-up-b">
                         <div class="form-block">
+                           <?php if(!empty($contact_form['form_heading'])): ?>
                             <div class="form-head">
-                                <h3>Please fill in the form below.</h3>
+                                <h3><?php echo $contact_form['form_heading'];?></h3>
                             </div>
+                            <?php endif; ?>
+
+                            <?php if(!empty($contact_form['form'])): ?>
                             <div class="form-body">
-                                <!-- <form action="#" method="post" name="feedback-form">
-                                    <div class="fieldsets row">
-                                        <div class="col-md-6"><input type="text" placeholder="Full Name" name="name">
-                                        </div>
-                                        <div class="col-md-6"><input type="email" placeholder="Email Address"
-                                                name="email"></div>
-                                    </div>
-                                    <div class="fieldsets row">
-                                        <div class="col-md-6"><input type="number" placeholder="Contact Number"
-                                                name="phone"></div>
-                                        <div class="col-md-6"><input type="text" placeholder="Skype" name="skype"></div>
-                                    </div>
-                                    <div class="fieldsets row">
-                                        <div class="col-md-6"><input type="text" placeholder="Subject" name="subject">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <select>
-                                                <option>interested in</option>
-                                                <option>Web Design</option>
-                                                <option>Graphic Design</option>
-                                                <option>App Development</option>
-                                                <option>E-commerce Development</option>
-                                                <option>Digital Marketing</option>
-                                                <option>Business Growth</option>
-                                                <option>Business Startup</option>
-                                                <option>Other...</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="fieldsets"><textarea placeholder="Message" name="message"></textarea>
-                                    </div>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck"
-                                            name="example1" checked="checked">
-                                        <label class="custom-control-label label-f-form" for="customCheck">I agree to
-                                            the <a href="javascript:void(0)">Terms &amp; Conditions</a> of
-                                            Reevan.</label>
-                                    </div>
-                                    <div class="fieldsets mt20">
-                                       <button type="submit" name="submit" class="ree-btn  ree-btn-grdt1 w-100">Send your inquiry <i
-                                                class="fas fa-arrow-right fa-btn"></i></button> </div>
-                                    <p class="trm"><i class="fas fa-lock"></i>We hate spam, and we respect your privacy.
-                                    </p>
-                                </form> -->
-                                <?php echo do_shortcode('[contact-form-7 id="5" title="Contact form 1"]');?>
+                                <?php echo do_shortcode('[contact-form-7 id="'.$contact_form['form'].'"]');?>
                             </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </section>
     <!--end contact block-->
+   <?php endif ?>
+<?php endwhile; ?>
+
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'locations' ) : 
+      $india_address = get_sub_field('india_address');
+      $uk_address = get_sub_field('uk_address');
+      ?>
+<!-- start locations -->
+    <div class="location-home sec-pad">
+        <div class="container">
+            <div class="row justify-content-center">
+               <?php if(!empty($india_address)): ?>
+                <div class="col-lg-4">
+                    <div class="location-block- mt60">
+                        <div class="loc-icon-nam">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/new-delhi.svg" alt="new-delhi">
+                            <p><span class="ree-text rt40">India</span></p>
+                        </div>
+                        <p class="pt20 pb20"><?php echo $india_address;?></p>
+                        <!-- <div class="loc-contct">
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Map Location"><i class="fas fa-map-marker-alt"></i></a>
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Phone Number"><i class="fas fa-phone-alt"></i></a>
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Email Address"><i class="fas fa-envelope"></i></a>
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Skype Id"><i class="fab fa-skype"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+               <?php endif; ?>
+
+               <?php if(!empty($uk_address)): ?>
+                <div class="col-lg-4">
+                    <div class="location-block- mt60">
+                        <div class="loc-icon-nam">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/big-ben.svg" alt="big-ben">
+                            <p><span class="ree-text rt40">UK</span></p>
+                        </div>
+                        <p class="pt20 pb20"><?php echo $uk_address;?></p>
+                        <!-- <div class="loc-contct">
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Map Location"><i class="fas fa-map-marker-alt"></i></a>
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Phone Number"><i class="fas fa-phone-alt"></i></a>
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Email Address"><i class="fas fa-envelope"></i></a>
+                            <a href="javascript:void(0)" target="blank" class="rount-btn"
+                                data-toggle="tooltip" title="Skype Id"><i class="fab fa-skype"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <!-- end locations -->
+   <?php endif ?>
+<?php endwhile; ?>
 
 <?php get_footer(); ?>

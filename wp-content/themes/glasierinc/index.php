@@ -16,59 +16,52 @@
 
 get_header(); ?>
 
-		<?php if ( have_posts() ) : ?>
-	<section class="inner-wrap">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12 inner-header">
-               <h1>All Blogs</h1>
-            </div>
-         </div>
-      </div>
-   </section>
-
-	<div class="default-padding">
-      	<div class="container">
-         	<div class="row">
-            	<div class="col-lg-8 col-md-12 col-sm-12">
-               		<div class="row ">
-                  		<div class="col-md-12">
-                     		<div class="slider-news blog-area bottom-less row">
-								<?php
-								// Start the Loop.
-								while ( have_posts() ) :
-									the_post();
-
-									/*
-									* Include the post format-specific template for the content. If you want
-									* to use this in a child theme then include a file called content-___.php
-									* (where ___ is the post format) and that will be used instead.
-									*/
-									//  get_template_part( 'content', get_post_format() );
-									include('blog/blog-grid.php');
-
-
-								endwhile;
-
-								//glasierinc_content_nav( 'nav-below' );
-
-								?>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<!-- <div class="pagination"> -->
-								<?php //previous_posts_link( '&larr; Prev ' ); ?>
-								<?php //next_posts_link( 'Next &rarr;' ); ?>
-								<?php glasierinc_pagination(); ?>
-							<!-- </div> -->
-						</div>
+<?php if ( have_posts() ) : ?>
+<!--blog-->
+	<div class="r-bg-a pt85 pb120">		
+		<div class="container">
+			<div class="row pt80">
+				<div class="col-lg-5">
+					<div class="page-headings">
+						<span class="sub-heading mb15"><i class="fas fa-book mr5"></i> Blogs & News</span>
+						<h1 class="mb15">Our <span class="ree-text rt40">Blog</span></h1>
+						<p>What would you love to learn how to do?</p>
 					</div>
 				</div>
-
-				<?php include('blog/side-bar.php');?>
+				<div class="col-lg-7">
+					<div class="ree-subs-from">
+						<h4>Subscribe to get the latest insights in your inbox.</h4>
+						<form class="mt20">
+							<input type="text" name="subs" id="subs-email" placeholder="Your email please"
+								class="subs-input">
+							<button class="ree-btn-grdt1 subs-btn"><i class="fas fa-arrow-right"></i></button>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+
+
+	<div class="blog-block sec-pad pt80">		
+		<div class="container">
+			<div class="blog-post">
+				<div class="row">
+					<?php
+					// Start the Loop.
+					while ( have_posts() ) : the_post();
+						include('blog/blog-grid.php');
+					endwhile; ?>
+					<div class="col-lg-12 col-sm-12 mt100">
+						<?php glasierinc_pagination(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php //include('blog/side-bar.php');?>
+	<!--blog end-->
+
 		<?php else : ?>
 
 			<?php

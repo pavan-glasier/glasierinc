@@ -273,7 +273,7 @@ while($footer->have_posts()) : $footer->the_post();?>
                               $skype_target = $skype['target'] ? $skype['target'] : '_self';
                             ?>
                             <li>
-                                <a href="skype:<?php echo esc_url( $skype_url ); ?>" target="<?php echo esc_attr( $skype_target ); ?>">
+                                <a href="skype:<?php echo $skype_url; ?>" target="<?php echo esc_attr( $skype_target ); ?>">
                                     <span><i class="fab fa-skype"></i></span>
                                     <?php echo esc_html( $skype_title ); ?>
                                 </a>
@@ -490,13 +490,13 @@ while($footer->have_posts()) : $footer->the_post();?>
    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "100%";
-    }
+function openNav() {
+    document.getElementById("mySidenav").style.width = "100%";
+}
 
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
