@@ -18,21 +18,21 @@
 }
 </style>
 
-<section class="inner-wrap" id="post-<?php the_ID(); ?>">
+<div class="r-bg-a pt85 pb120">     
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 inner-header">
-                <h1><?php the_title();?></h1>
+        <div class="row pt80">
+            <div class="col-lg-6">
+                <div class="page-headings">
+                    <h1 class="mb15"><?php the_title();?></h1>
+                </div>
             </div>
         </div>
     </div>
-</section>
-
-<div class="default-padding">
+</div>
+<div class="sec-pad">
     <div id="process" class="work-process-area ">
         <div class="container">
-            <div class="row pb-70">
-
+        <div class="row justify-content-center">
                 <div class="col-md-12 info">
                     <div class="content">
                         <?php the_content(); ?>

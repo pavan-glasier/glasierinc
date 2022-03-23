@@ -12,28 +12,31 @@
 
 
 
-<section class="inner-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 inner-header">
-                <h1><?php _e( 'Nothing Found', 'glasierinc' ); ?></h1>
-            </div>
-        </div>
-    </div>
-</section>
 
-<div class="default-padding">
-    <div id="process" class="work-process-area ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                	<div class="site-heading text-center">
-	                  <h2><?php _e( 'Nothing Found !', 'glasierinc' ); ?></h2>
-	                  <p><?php _e( 'Apologies, but no results were found. Perhaps searching will help find a related post.', 'glasierinc' ); ?></p>
-	               	</div>
-	               	<a class="btn btn-theme border btn-md" href="<?=site_url();?>">HOME</a>
+<div class="r-bg-a pt85 pb120">     
+    <div class="container">
+        <div class="row pt80">
+            <div class="col-lg-6">
+                <div class="page-headings">
+                    <h1 class="mb15"><?php _e( 'Nothing Found', 'glasierinc' ); ?></h1>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="sec-pad">   
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="page-headings text-center">
+                    <h2 class="mb15"><?php _e( 'Nothing Found !', 'glasierinc' ); ?></h2>
+                    <p> <?php _e( 'Apologies, but no results were found. Perhaps searching will help find a related post.', 'glasierinc' ); ?></p>
+                    <a class="ree-btn ree-btn0 ree-btn-grdt2 mt40" href="<?=site_url();?>">HOME</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

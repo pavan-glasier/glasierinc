@@ -14,18 +14,18 @@
 get_header(); ?>
 
 
-		<?php if ( have_posts() ) : ?>
+<?php if ( have_posts() ) : ?>
 
-			<?php
-				/*
-				 * Queue the first post, that way we know
-				 * what author we're dealing with (if that is the case).
-				 *
-				 * We reset this later so we can run the loop
-				 * properly with a call to rewind_posts().
-				 */
-				the_post();
-			?>
+<?php
+	/*
+	 * Queue the first post, that way we know
+	 * what author we're dealing with (if that is the case).
+	 *
+	 * We reset this later so we can run the loop
+	 * properly with a call to rewind_posts().
+	 */
+	the_post();
+?>
 
 <?php 
 //$author_bio_avatar_size = apply_filters( 'glasierinc_author_bio_avatar_size', 68 );
@@ -44,16 +44,16 @@ get_header(); ?>
 	</div>
 </div>
 
-			<?php
-				/*
-				 * Since we called the_post() above, we need
-				 * to rewind the loop back to the beginning.
-				 * That way we can run the loop properly, in full.
-				 */
-				rewind_posts();
-			?>
+<?php
+	/*
+	 * Since we called the_post() above, we need
+	 * to rewind the loop back to the beginning.
+	 * That way we can run the loop properly, in full.
+	 */
+	rewind_posts();
+?>
 
-			<?php //glasierinc_content_nav( 'nav-above' ); ?>
+<?php //glasierinc_content_nav( 'nav-above' ); ?>
 
 <div class="blog-block sec-pad pt80">		
 	<div class="container">
@@ -71,10 +71,8 @@ get_header(); ?>
 		</div>
 	</div>
 </div>
-		<?php else : ?>
-			<?php get_template_part( 'content', 'none' ); ?>
-		<?php endif; ?>
+<?php else : ?>
+	<?php get_template_part( 'content', 'none' ); ?>
+<?php endif; ?>
 
-
-<?php //get_sidebar(); ?>
 <?php get_footer(); ?>

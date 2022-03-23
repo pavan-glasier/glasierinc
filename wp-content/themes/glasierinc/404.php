@@ -11,26 +11,26 @@ get_header(); ?>
 
 
 
-<section class="inner-wrap">
+<div class="r-bg-a pt85 pb120">     
     <div class="container">
-        <div class="row">
-            <div class="col-md-12 inner-header">
-                <h1>404 </h1>
+        <div class="row pt80">
+            <div class="col-lg-6">
+                <div class="page-headings">
+                    <h1 class="mb15">404</h1>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<div class="default-padding">
-    <div id="process" class="work-process-area ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                	<div class="site-heading text-center">
-	                  <h2><?php _e( 'Not Found !', 'glasierinc' ); ?></h2>
-	                  <p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'glasierinc' ); ?></p>
-	               	</div>
-	               	<a class="btn btn-theme border btn-md" href="<?=site_url();?>">HOME</a>
+<div class="sec-pad">   
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="page-headings text-center">
+                    <h2 class="mb15"><?php _e( 'Not Found !', 'glasierinc' ); ?></h2>
+                    <p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'glasierinc' ); ?>.</p>
+                    <a class="ree-btn ree-btn0 ree-btn-grdt2 mt40" href="<?=site_url();?>">HOME</a>
                 </div>
             </div>
         </div>

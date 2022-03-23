@@ -36,7 +36,7 @@ get_header();?>
                                      $slider_link_btn_title = $slider_link_btn['title'];
                                      $slider_link_btn_target = $slider_link_btn['target'] ? $slider_link_btn['target'] : '_self';
                                      ?>
-                                <a href="<?php echo esc_url( $slider_link_btn_url ); ?>" class="ree-btn ree-btn-grdt1 mt40 mw-80" data-aos="fade-in" data-aos-delay="800" target="<?php echo esc_attr( $slider_link_btn_target ); ?>"><?php echo esc_html( $slider_link_btn_title ); ?><i class="fas fa-arrow-right fa-btn"></i></a>
+                                <a href="<?php echo esc_url( $slider_link_btn_url ); ?>" class="ree-btn ree-btn-grdt1 mt40 mw-80" target="<?php echo esc_attr( $slider_link_btn_target ); ?>"><?php echo esc_html( $slider_link_btn_title ); ?><i class="fas fa-arrow-right fa-btn"></i></a>
                                  <?php endif; ?>
                             </div>
                         </div>
@@ -245,12 +245,12 @@ get_header();?>
                            </p>
                         </div>
                         <div class="ree-card-content-link">
-                           <a href="<?php the_permalink();?>" class="ree-card-link mt40">Read More 
-                              <i class="fas fa-arrow-right fa-btn"></i> </a>
+                            <a href="<?php the_permalink();?>" class="ree-card-link mt40">Read More 
+                              <i class="fas fa-arrow-right fa-btn"></i>
+                            </a>
                         </div>
                      </div>
                   </div>
-             
              <?php endwhile; ?>
                </div>
             <?php wp_reset_postdata(); ?>
