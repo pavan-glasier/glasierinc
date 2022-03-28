@@ -106,14 +106,14 @@ get_header();?>
                            <a href="<?php echo esc_url( $about_link_url ); ?>" class="ree-btn ree-btn-grdt2 mr20" target="<?php echo esc_attr( $about_link_target ); ?>"> <?php echo esc_html( $about_link_title ); ?> <i class="fas fa-arrow-right fa-btn"></i></a> 
                            <?php endif; ?>
 
-                            <div class="vid-btntitl">
+                            <!-- <div class="vid-btntitl">
                                 <a href="https://www.youtube.com/watch?v=7e90gBu4pas?autoplay=1&amp;rel=0"
                                     class="ree-btn ree-btn-grdt1 ree-btn-round video-popup"><i
                                         class="fas fa-play"></i></a>
                                 <div class="vide-btntitl vcenter">
                                     <p>Watch Video</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -518,7 +518,9 @@ get_header();?>
                   <?php while ($tm_query->have_posts()) : $tm_query->the_post(); ?>
                      <div class="items">
                          <div class="review-text testimonal">
-                             <p style="color: #fff;"><?php echo get_the_content();?></p>
+                            <div style="color: #fff;">
+                                <?php echo get_the_content();?>
+                            </div>
                          </div>
                          <div class="ree-row-set mt30">
                              <div class="media vcenter">
@@ -701,7 +703,7 @@ get_header();?>
       $contact_form = get_sub_field('contact_form');
       ?>
    <!--start contact block-->
-   <section class="home-contact pb120" data-background="<?php echo get_template_directory_uri(); ?>/images/office-1.jpg">
+   <section class="home-contact pb100" data-background="<?php echo get_template_directory_uri(); ?>/images/office-1.jpg">
         <div class="container">
             <div class="row zup">
                 <div class="col-right-a">
@@ -753,15 +755,13 @@ get_header();?>
                            </div>
                            <?php endif; ?>
                         </div>
-                              
-                        <!-- <div class="live-review- mt60">
-                            <span>Read Our Customers Feedback</span>
-                            <div class="livrve">
-                                <a href="#"><img src="images/google-logo.svg" alt="review"> </a>
-                                <a href="#"><img src="images/hubspot-logo.svg" alt="review"> </a>
-                                <a href="#"><img src="images/trustpilot-logo.svg" alt="review"> </a>
-                            </div>
-                        </div> -->
+                        
+                        <?php if(!empty($contact_details['map'])): ?>
+                        <div class="our-map mt40">
+                           <p class="mb5">Our Location</p>
+                           <?php echo $contact_details['map'];?>
+                        </div>
+                        <?php endif; ?>
                     </div>
                     <?php endif; ?>
                 </div>

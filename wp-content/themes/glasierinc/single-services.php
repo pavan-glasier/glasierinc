@@ -18,6 +18,8 @@ get_header(); ?>
            <div class="col-lg-7 text-center">
             <?php if(!empty($main_heading)): ?>
               <h1 class="mb15"><?php echo $main_heading;?></h1>
+            <?php else: ?>
+                <h1 class="mb15"><?php echo the_title();?></h1>
             <?php endif; ?>
 
             <?php if(!empty($description)): ?>
@@ -40,11 +42,11 @@ get_header(); ?>
 <!--Start About-->
 <section class="service pad-tb1 bg-gradient5">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <?php if (!empty($website_performance_image)): ?>
             <div class="col-lg-4">
                 <div class="image-block wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-                    <img src="<?php echo $website_performance_image;?>" alt="image" class="img-fluid no-shadow">
+                    <img src="<?php echo $website_performance_image;?>" alt="image" class="img-fluid no-shadow w-100">
                 </div>
             </div>
             <?php endif; ?>
@@ -127,7 +129,7 @@ get_header(); ?>
 
 
 <!--Start Logo Section-->
-<div class="techonology-used-">
+<!-- <div class="techonology-used-">
     <div class="container">
         <ul class="h-scroll tech-icons">
             <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon1.png" alt="icon"></a></li>
@@ -140,7 +142,7 @@ get_header(); ?>
             <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon8.png" alt="icon"></a></li>
         </ul>
     </div>
-</div>
+</div> -->
 <!-- End Logo Section-->
 
 
@@ -154,9 +156,9 @@ get_header(); ?>
 <section class="service-block bg-gradient6 pad-tb1">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <div class="common-heading ptag">
-                    <span style="color: #fff;">Service</span>
+                    <!-- <span style="color: #fff;">Service</span> -->
                     <?php if (!empty($service_heading)): ?>
                         <h2 style="color: #fff;"><?php echo $service_heading;?></h2>
                     <?php endif; ?>
@@ -209,7 +211,7 @@ get_header(); ?>
 
 
 <!--start cta-->
-<section class="r-bg-x sec-pad">
+<!-- <section class="r-bg-x sec-pad">
     <div class="container">
         <div class="ree">
             <div class="row">
@@ -237,7 +239,7 @@ get_header(); ?>
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!--start cta-->
 
 
@@ -247,8 +249,7 @@ get_header(); ?>
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="common-heading ptag">
-                    <span>Process</span>
-                    <h2>Our App Development Process</h2>
+                    <h2>Our web development process</h2>
                     <p>Our design process follows a proven approach. We begin with a deep understanding of your
                     needs and create a planning template.
                     </p>
@@ -258,8 +259,41 @@ get_header(); ?>
         <div style="margin-bottom: 30px;"></div>
         <div class="row justify-content-center">
             <div class="col-lg-12">
-               <div class="common-heading ptag">
-                    <img src="https://glasier.in/Glasier_website/images/app-devlopment-flow.png" alt="app" class="img-fluid">
+               <div class="common-heading ptag d-flex flex-wrap">
+                    <img src="https://glasier.in/Glasier_website/images/app-devlopment-flow.png" alt="app" class="img-fluid w-100">
+                    <!-- <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow.png" alt="app" class="img-fluid"> -->
+                    <!-- <div class="flows">
+                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-1.png" class="img-fluid w-100" />
+                        <div class="flow">
+                            <h5>Understand Clients’ Vision</h5>
+                            <span>As a first step, we listen attentively and thoroughly to our client's requirements and answer their queries most accurately and efficiently.</span>
+                        </div>
+                    </div>
+
+                    <div class="flows">
+                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-2.png" class="img-fluid w-100" />
+                        <div class="flow">
+                            <h5>Planning and Conceptualization</h5>
+                            <span>A proven plan keeps your web development process organized and manageable. Creating a great customer experience is as important as achieving goals.</span>
+                        </div>
+                    </div>
+
+                    <div class="flows">
+                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-3.png" class="img-fluid w-100" />
+                        <div class="flow">
+                            <h5>Design and Develop</h5>
+                            <span>As soon as we design a platform, we send it to the client for their review. Then, we will start working on the design approved by the client.</span>
+                        </div>
+                    </div>
+
+                    <div class="flows">
+                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-4.png" class="img-fluid w-100" />
+                        <div class="flow">
+                            <h5>Testing</h5>
+                            <span>Using advanced tools, we ensure the website is responsive, user-friendly, and error-free to ensure compliance with W3C guidelines. In any issue, we ensure that changes are made to deliver quality projects.</span>
+                        </div>
+                    </div> -->
+                    
                </div>
             </div>
         </div>
@@ -268,100 +302,111 @@ get_header(); ?>
 <!--End App Development Process-->
 
 
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'industries_we_serve' ) : 
+      $we_serve_heading = get_sub_field('we_serve_heading');
+      $we_serve_description = get_sub_field('we_serve_description');
+      $we_serve_description_more = get_sub_field('we_serve_description_more');
+      ?>
 <!--Industries-->
 <section class="featured-project  sec-pad">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="page-headings text-center">
-                    <h2 class="mb15">Industries We Serve</h2>
-                    <p>Our design process follows a proven approach. We begin with a deep understanding of your
-                    needs and create a planning template. 
-                    </p>
+                    <?php if (!empty($we_serve_heading)): ?>
+                        <h2 class="mb15"><?php echo $we_serve_heading;?></h2>
+                    <?php endif; ?>
+
+                    <?php if (!empty($we_serve_description)): ?>
+                    <p><?php echo $we_serve_description;?></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
         <div class="row mt30">
+            <?php
+            if( have_rows('industries') ):
+                while( have_rows('industries') ) : the_row(); ?>
             <div class="col-lg-3 col-sm-6 col-6">
                 <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/house.svg" alt="img">
-                    <h6>Real estate</h6>
+                    <img src="<?php echo get_sub_field('industry_icon');?>" alt="img">
+                    <h6><?php echo get_sub_field('industry_name');?></h6>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/travel-case.svg" alt="img">
-                    <h6>Tour &amp; Travels</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/video-tutorials.svg" alt="img">
-                    <h6>Education</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/taxi.svg" alt="img">
-                    <h6>Transport</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/event.svg" alt="img">
-                    <h6>Event</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/smartphone.svg" alt="img">
-                    <h6>eCommerce</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/joystick.svg" alt="img">
-                    <h6>Game</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/healthcare.svg" alt="img">
-                    <h6>Healthcare</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/money-growth.svg" alt="img">
-                    <h6>Finance</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/baker.svg" alt="img">
-                    <h6>Restaurant</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/mobile-app.svg" alt="img">
-                    <h6>On-Demand</h6>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6 col-6">
-                <div class="industry-workfor">
-                    <img src="https://glasier.in/Glasier_website/images/groceries.svg" alt="img">
-                    <h6>Grocery</h6>
+            <?php endwhile;
+            endif; ?>
+        </div>
+        <div class="row mt30 justify-content-center">
+            <div class="col-lg-8">
+                <div class="page-headings text-center">
+                    <?php if (!empty($we_serve_description_more)): ?>
+                    <p><?php echo $we_serve_description_more;?></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!--Industries end-->
+<?php endif ?>
+<?php endwhile; ?>
+
+
+
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'why_choose_section' ) : 
+      $why_choose_image = get_sub_field('why_choose_image');
+      $why_choose_head = get_sub_field('why_choose_head');
+      ?>
+<section class="r-bg-x zup pad-tb1">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <?php if (!empty($why_choose_image)): ?>
+            <div class="col-lg-4">
+                <div class="sol-img m-mt30">
+                    <img src="<?php echo $why_choose_image; ?>" alt="reevan office" class="img-fluid">
+                </div>
+            </div>
+            <?php endif; ?>
+            <div class="col-lg-7">
+                <div class="pera-block ml50">
+                    <?php if (!empty($why_choose_head['why_choose_heading'])): ?>
+                    <h2><?php echo $why_choose_head['why_choose_heading'];?></h2>
+                    <?php endif; ?>
+
+                    <?php if (!empty($why_choose_head['why_choose_description'])): ?>
+                    <p><?php echo $why_choose_head['why_choose_description'];?></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <div class="row mt30">
+            <?php
+            if( have_rows('why_choose') ):
+                while( have_rows('why_choose') ) : the_row(); ?>
+            <div class="col-lg-4 mt30">
+                <div class="pera-block ml50">
+                    <h4><?php echo get_sub_field('why_choose_title');?></h4>
+                    <p><?php echo get_sub_field('why_choose_content');?></p>
+                </div>
+            </div>
+            <?php endwhile;
+            endif; ?>
+
+        </div>
+    </div>
+</section>
+<?php endif ?>
+<?php endwhile; ?>
+
 
 
 <!-- Start Some of Our Works-->
-<section class="r-bg-x pad-tb1">
+<section class="r-bg-x pad-tb1" style="display: none;">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
@@ -453,147 +498,128 @@ get_header(); ?>
 <!-- End Some of Our Works-->
 
 
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'client_testimonial' ) : 
+      $testimonial_heading = get_sub_field('testimonial_heading');
+      $testimonial_description = get_sub_field('testimonial_description');
+      $testimonial_id = get_sub_field('testimonial');
+      ?>
 <!--Start reveiws-->
 <section class="reviews-block bg-gradient6 pad-tb1">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="common-heading ptag">
-                    <span style="color: #fff;">Service Testimonials</span>
-                    <h2 style="color: #fff;">Client Speaks</h2>
-                    <p class="mb30" style="color: #fff;">Check our customers success stories.</p>
+                    <?php if(!empty($testimonial_heading)): ?>
+                    <h2 style="color: #fff;"><?php echo $testimonial_heading;?></h2>
+                    <?php endif; ?>
+
+                    <?php if(!empty($testimonial_description)): ?>
+                    <p class="mb30" style="color: #fff;"><?php echo $testimonial_description;?></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 mt30">
-                <div class="reviews-card pr-shadow">
-                    <div class="row v-center">
-                        <div class="col"> <span class="revbx-lr"><i class="fas fa-quote-left"></i></span> </div>
-                        <div class="col"> <span class="revbx-rl"><img src="https://glasier.in/Glasier_website/images/envato.png" alt="review service logo"></span></div>
-                    </div>
-                    <div class="review-text">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                           has been the industry's standard dummy text ever since the 1500s, when an unknown
-                           printer took a galley of type and scrambled it to make a type specimen book.
-                        </p>
-                    </div>
-                    <div class="-client-details-">
-                        <div class="reviewer-text">
-                            <h4>Sue Vaneer</h4>
-                            <p>Business Owner, <small>Jaipur</small></p>
-                            <div class="star-rate">
-                                <ul>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                </ul>
+            <?php 
+                  $testi_args = array(
+                      'post_type' => 'testimonial',
+                      'order' => 'DESC',
+                      'tax_query' => array(
+                           array (
+                              'taxonomy' => 'testi_category',
+                              'field' => 'id',
+                              'terms' => $testimonial_id,
+                           )
+                        ),
+                     ); ?>
+                
+              <?php $tm_query = new WP_Query($testi_args);
+               if ($tm_query->have_posts()) : ?>
+            <div class="row">
+                <?php while ($tm_query->have_posts()) : $tm_query->the_post(); ?>
+                <div class="col-md-4 mt30">
+                    <div class="reviews-card pr-shadow">
+                        <div class="row v-center">
+                            <div class="col">
+                                <span class="revbx-lr"><i class="fas fa-quote-left"></i></span>
+                            </div>
+                        </div>
+                        <div class="review-text">
+                            <?php echo the_content();?>
+                        </div>
+                        <div class="-client-details-">
+                            <div class="reviewer-text">
+                                <h4><?php echo the_title();?></h4>
+                                <p><?php echo the_field('designation');?></p>
                             </div>
                         </div>
                     </div>
                 </div>
-           </div>
-           <div class="col-md-4 mt30">
-                <div class="reviews-card pr-shadow">
-                    <div class="row v-center">
-                        <div class="col"> <span class="revbx-lr"><i class="fas fa-quote-left"></i></span> </div>
-                        <div class="col"> <span class="revbx-rl"><img src="https://glasier.in/Glasier_website/images/envato.png" alt="review service logo"></span> </div>
-                    </div>
-                    <div class="review-text">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                           has been the industry's standard dummy text ever since the 1500s, when an unknown
-                           printer took a galley of type and scrambled it to make a type specimen book.
-                        </p>
-                    </div>
-                    <div class="-client-details-">
-                        <div class="reviewer-text">
-                            <h4>Don Stairs</h4>
-                            <p>Business Owner, <small>Jaipur</small></p>
-                            <div class="star-rate">
-                                <ul>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endwhile; ?>
             </div>
-            <div class="col-md-4 mt30">
-                <div class="reviews-card pr-shadow">
-                    <div class="row v-center">
-                        <div class="col"> <span class="revbx-lr"><i class="fas fa-quote-left"></i></span> </div>
-                        <div class="col"> <span class="revbx-rl"><img src="https://glasier.in/Glasier_website/images/envato.png" alt="review service logo"></span> </div>
-                    </div>
-                    <div class="review-text">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                           has been the industry's standard dummy text ever since the 1500s, when an unknown
-                           printer took a galley of type and scrambled it to make a type specimen book.
-                        </p>
-                    </div>
-                    <div class="-client-details-">
-                        <div class="reviewer-text">
-                            <h4>Russ L. Rogers</h4>
-                            <p>Business Owner, <small>Jaipur</small></p>
-                            <div class="star-rate">
-                                <ul>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)" class="chked"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                    <li> <a href="javascript:void(0)"><i class="fas fa-star"
-                                    aria-hidden="true"></i></a> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <?php wp_reset_postdata(); ?>
+            <?php endif; ?>
+
     </div>
 </section>
 <!--End reveiws-->
+<?php endif ?>
+<?php endwhile; ?>
 
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'call_to_action' ) : 
+      $cta_tagline = get_sub_field('cta_tagline');
+      $cta_heading = get_sub_field('cta_heading');
+      $cta_link = get_sub_field('cta_link');
+      $cta_phone_no = get_sub_field('cta_phone_no');
+      ?>
 <!--Start CTA-->
 <section class="cta-area pad-tb1">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="common-heading">
-                    <span>Let's work together</span>
-                    <h2>We Love to Listen to Your Requirements</h2>
-                    <a href="javascript:void(0)" class="btn-outline">Estimate Project <i
-                    class="fas fa-chevron-right fa-icon"></i></a>
-                    <p class="cta-call">Or call us now <a href="tel:+1234567890"><i class="fas fa-phone-alt"></i>
-                    (123) 456 7890</a>
+                    <?php if (!empty($cta_tagline)): ?>
+                        <span><?php echo $cta_tagline; ?></span>
+                    <?php endif; ?>
+                    
+                    <?php if (!empty($cta_heading)): ?>
+                    <h2><?php echo $cta_heading; ?></h2>
+                    <?php endif; ?>
+
+                    <?php if($cta_link):
+                        $cta_link_target = $cta_link['target'] ? $cta_link['target'] : '_self';
+                    ?>
+                    <a href="<?php echo $cta_link['url'];?>" class="btn-outline" target="<?php echo $cta_link_target;?>" ><?php echo $cta_link['title'];?>
+                        <i class="fas fa-chevron-right fa-icon"></i>
+                    </a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($cta_phone_no)): ?>
+                    <p class="cta-call">Or call us now <a href="tel:<?php echo $cta_phone_no; ?>"><i class="fas fa-phone-alt"></i>
+                    <?php echo $cta_phone_no; ?></a>
+                    <?php endif; ?>
                     </p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="shape shape-a1"><img src="https://glasier.in/Glasier_website/images/shape-3.svg" alt="shape"></div>
-    <div class="shape shape-a2"><img src="https://glasier.in/Glasier_website/images/shape-4.svg" alt="shape"></div>
-    <div class="shape shape-a3"><img src="https://glasier.in/Glasier_website/images/shape-13.svg" alt="shape"></div>
-    <div class="shape shape-a4"><img src="https://glasier.in/Glasier_website/images/shape-11.svg" alt="shape"></div>
+    <div class="shape shape-a1">
+        <img src="<?=site_url();?>/wp-content/uploads/2022/03/shape-3.svg" alt="shape" style="filter: hue-rotate(175deg);" />
+    </div>
+    <div class="shape shape-a2">
+        <img src="<?=site_url();?>/wp-content/uploads/2022/03/shape-4.svg" alt="shape" style="filter: hue-rotate(100deg);" >
+    </div>
+    <div class="shape shape-a3">
+        <img src="<?=site_url();?>/wp-content/uploads/2022/03/shape-13.svg" alt="shape">
+    </div>
+    <div class="shape shape-a4">
+        <img src="<?=site_url();?>/wp-content/uploads/2022/03/shape-11.svg" alt="shape">
+    </div>
 </section>
 <!--End CAT-->
+<?php endif ?>
+<?php endwhile; ?>
+
 <?php get_footer(); ?>

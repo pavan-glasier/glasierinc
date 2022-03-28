@@ -270,13 +270,13 @@
             </div>
             <div class="container ft-cpy">
                 <div class="row">
-                    <div class="col-lg-5">
+                    <!-- <div class="col-lg-5">
                         <div class="ft-copyright">
                             <p>We are tracking any intention of piracy.</p>
                         </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="ft-copyright ft-r">
+                    </div> -->
+                    <div class="col-lg-12">
+                        <div class="ft-copyright text-center">
                             <p><?php echo get_field('copyright_text', 'option'); ?></p>
                         </div>
                     </div>

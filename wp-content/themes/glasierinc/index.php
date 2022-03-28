@@ -35,7 +35,7 @@ get_header(); ?>
 					<form class="mt20" role="search" method="get" action="<?=site_url();?>" >
 						<input type="text" name="s" id="s" placeholder="Search keyword"
 							class="subs-input">
-						<button class="ree-btn-grdt1 subs-btn"><i class="fas fa-arrow-right"></i></button>
+						<button class="ree-btn-grdt1 subs-btn"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
 			</div>

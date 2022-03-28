@@ -3668,13 +3668,14 @@ html body .header-bhv.sticky .mini-header-bar {
     left: 0;
     text-align: center;
 }
-/* .ree-tt {
-    background: #001339;
-    background: -moz-linear-gradient(right, #ff5b2e, #f5324f);
-    background: -webkit-linear-gradient(right, #005990, #001339);
-    background: linear-gradient(right, #ff5b2e, #f5324f);
+ .ree-tt {
+    background: #005990;
+    background: -moz-linear-gradient(right, #005990, #488fce);
+    background: -webkit-linear-gradient(right, #005990, #488fce);
+    background: linear-gradient(right, #005990, #488fce);
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-} */
+} 
 .client-logo-set {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
@@ -3975,6 +3976,7 @@ html .mb20 {
     background-repeat: no-repeat;
     padding: 50px 20px;
     margin: 0;
+    height: 100%;
     position: relative;
     border: 1px solid #d4f0ff;
     -webkit-border-radius: 8px;
@@ -4220,16 +4222,24 @@ html .mb20 {
 
 
 
-  /*MY CUSTOM CSS*/
+/*MY CUSTOM CSS*/
+.menu-dropdown li {
+    width: 100%;
+}
 .menu-dropdown a::before {
-    left: 0px;
+    left: 2px;
     content: " ";
     background: #004579;
     width: 2px;
-    height: 17px;
+    height: 18px;
     border-radius: 0;
     top: 30%;
     right: unset;
+    transform: rotate(0deg);
+    transition: all .3s ease;
+}
+.menu-dropdown a:hover::before {
+    transform: rotate(180deg);
 }
 body .custom-control-label.show::before {
     color: #333;
@@ -4270,3 +4280,19 @@ body .custom-control-label.show::after {
     font-family: "FontAwesome";
     z-index: 9999999;
 }*/
+.hc-offcanvas-nav{
+    font-family: 'Varela Round', sans-serif !important;
+}
+.ree-nav .current-menu-item a {
+    color: #005186 !important;
+}
+
+
+@media only screen and (max-width: 500px){
+    .info-b-left{width: 100%;margin-bottom: 15px;}
+    .s-card-icon-large{ display: none; }
+    .s-block-content-large {
+        margin-left: 0px;
+        width: calc(100% - 0px);
+    }
+}

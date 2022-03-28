@@ -195,11 +195,15 @@ fbq('track', 'PageView');
                 </div>
                 <div class="mobile-menu2">
                     <ul class="mob-nav2">
+                        <?php
+                        if( $header_link_btn ): ?>
                         <li>
                            <a href="<?php echo $header_link_btn['url'];?>" class="ree-btn2 ree-btn-grdt1">
                               <i class="fas fa-envelope-open-text"></i>
                            </a>
                         </li>
+                        <?php endif; ?>
+
                         <li class="navm-">
                            <a class="toggle" href="#"> 
                               <span></span> 
@@ -232,7 +236,7 @@ fbq('track', 'PageView');
                         );
                        ?>
                     
-                    <ul class="bottom-nav">
+                    <!-- <ul class="bottom-nav">
                         <li class="ree-hc">
                             <a href="tel:123567890" rel="noreferrer" target="_blank">
                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -277,7 +281,7 @@ fbq('track', 'PageView');
                                 </svg>
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </nav>
             </div>
         </div>
