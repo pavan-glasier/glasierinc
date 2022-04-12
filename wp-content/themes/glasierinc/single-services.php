@@ -129,7 +129,7 @@ get_header(); ?>
 
 
 <!--Start Logo Section-->
-<!-- <div class="techonology-used-">
+<div class="techonology-used-">
     <div class="container">
         <ul class="h-scroll tech-icons">
             <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon1.png" alt="icon"></a></li>
@@ -142,7 +142,7 @@ get_header(); ?>
             <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon8.png" alt="icon"></a></li>
         </ul>
     </div>
-</div> -->
+</div>
 <!-- End Logo Section-->
 
 
@@ -211,7 +211,7 @@ get_header(); ?>
 
 
 <!--start cta-->
-<!-- <section class="r-bg-x sec-pad">
+<section class="r-bg-x sec-pad">
     <div class="container">
         <div class="ree">
             <div class="row">
@@ -224,7 +224,7 @@ get_header(); ?>
                            excellently and delivers the project on timeline.
                         </p>
                         <div class="mult-btns">
-                           <a href="get-quote.html" class="ree-btn  ree-btn-grdt1 mt40">Talk to our experts <i
+                           <a href="#" class="ree-btn  ree-btn-grdt1 mt40">Talk to our experts <i
                               class="fas fa-arrow-right fa-btn"></i></a>
                            <span class="or">or</span>
                            <a href="tel:1234567890" class="mt40 call-us">Call Us +91 1234 567 890</a>
@@ -239,79 +239,220 @@ get_header(); ?>
             </div>
         </div>
     </div>
-</section> -->
+</section>
 <!--start cta-->
 
 
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'work_process' ) : 
+      $work_process_heading = get_sub_field('heading');
+      $process_description = get_sub_field('process_description');
+      $desktop = get_sub_field('desktop');
+      $mobile = get_sub_field('mobile');
+      $process_icons = $mobile['process_icons'];
+          $process_1 = $process_icons['process_1'];
+          $process_2 = $process_icons['process_2'];
+          $process_3 = $process_icons['process_3'];
+          $process_4 = $process_icons['process_4'];
+          $process_5 = $process_icons['process_5'];
+          $process_6 = $process_icons['process_6'];
+
+      ?>
 <!--Start App Development Process-->
-<section class="service-block pad-tb1 light-dark">
+<section class="service-block pad-tb1 pb-0 light-dark">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="common-heading ptag">
-                    <h2>Our web development process</h2>
-                    <p>Our design process follows a proven approach. We begin with a deep understanding of your
-                    needs and create a planning template.
-                    </p>
+                 <!-- <span>Process</span> -->
+                    <?php if (!empty($work_process_heading)): ?>
+                    <h2 class="mb15"><?php echo $work_process_heading;?></h2>
+                    <?php endif; ?>
+
+                    <?php if (!empty($process_description)): ?>
+                    <p><?php echo $process_description;?></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
         <div style="margin-bottom: 30px;"></div>
+
         <div class="row justify-content-center">
             <div class="col-lg-12">
-               <div class="common-heading ptag d-flex flex-wrap">
-                    <img src="https://glasier.in/Glasier_website/images/app-devlopment-flow.png" alt="app" class="img-fluid w-100">
-                    <!-- <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow.png" alt="app" class="img-fluid"> -->
-                    <!-- <div class="flows">
-                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-1.png" class="img-fluid w-100" />
-                        <div class="flow">
-                            <h5>Understand Clients’ Vision</h5>
-                            <span>As a first step, we listen attentively and thoroughly to our client's requirements and answer their queries most accurately and efficiently.</span>
+                <div class="common-heading ptag dis-desktop">
+                    <div class="content-desk-text">
+                        <?php if (!empty($desktop['image'])): ?>
+                        <img src="<?php echo $desktop['image'];?>">
+                        <?php endif; ?>
+                        
+                        <div class="row first-section">
+                            
+                            <?php if (!empty($process_1['title'])): ?>
+                            <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>01</h2>
+                                    <h6><?php echo $process_1['title'];?></h6>
+                                </div>
+                                <p><?php echo $process_1['content'];?></p>
+                            </div>
+                            <?php endif; ?>
+
+                            <?php if (!empty($process_3['title'])): ?>
+                            <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>03</h2>
+                                    <h6><?php echo $process_3['title'];?></h6>
+                                </div>
+                                <p><?php echo $process_3['content'];?></p>
+                            </div>
+                            <?php endif; ?>
+
+                            <?php if (!empty($process_5['title'])): ?>
+                            <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>05</h2>
+                                    <h6><?php echo $process_5['title'];?></h6>
+                                </div>
+                                <p><?php echo $process_5['content'];?></p>
+                            </div>
+                            <?php endif; ?>
+
+                        </div>
+
+                        <div class="row second-section">
+                            
+                            <?php if (!empty($process_2['title'])): ?>
+                            <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>02</h2>
+                                    <h6><?php echo $process_2['title'];?></h6>
+                                </div>
+                                <p><?php echo $process_2['content'];?></p>
+                            </div>
+                            <?php endif; ?>
+
+                            <?php if (!empty($process_4['title'])): ?>
+                            <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>04</h2>
+                                    <h6><?php echo $process_4['title'];?></h6>
+                                </div>
+                                <p><?php echo $process_4['content'];?></p>
+                            </div>
+                            <?php endif; ?>
+
+                            <?php if (!empty($process_6['title'])): ?>
+                            <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>06</h2>
+                                    <h6><?php echo $process_6['title'];?></h6>
+                                </div>
+                                <p><?php echo $process_6['content'];?></p>
+                            </div>
+                            <?php endif; ?>
+
                         </div>
                     </div>
-
-                    <div class="flows">
-                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-2.png" class="img-fluid w-100" />
-                        <div class="flow">
-                            <h5>Planning and Conceptualization</h5>
-                            <span>A proven plan keeps your web development process organized and manageable. Creating a great customer experience is as important as achieving goals.</span>
+            
+                </div>
+           <div class="dis-mobile">
+              <div class="row">
+                <?php if (!empty($process_1['title'])): ?>
+                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="<?php echo $process_1['icon'];?>">
+                        <div class="content-heading">
+                            <h2>01</h2>
+                            <h6><?php echo $process_1['title'];?></h6>
                         </div>
+                        <p><?php echo $process_1['content'];?></p>
                     </div>
-
-                    <div class="flows">
-                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-3.png" class="img-fluid w-100" />
-                        <div class="flow">
-                            <h5>Design and Develop</h5>
-                            <span>As soon as we design a platform, we send it to the client for their review. Then, we will start working on the design approved by the client.</span>
+                 </div>
+                 <?php endif; ?>
+                
+                <?php if (!empty($process_2['title'])): ?>
+                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="<?php echo $process_2['icon'];?>">
+                        <div class="content-heading">
+                            <h2>02</h2>
+                            <h6><?php echo $process_2['title'];?></h6>
                         </div>
+                        <p><?php echo $process_2['content'];?></p>
                     </div>
-
-                    <div class="flows">
-                        <img src="http://localhost/glasierinc/wp-content/uploads/2022/03/app-devlopment-flow-4.png" class="img-fluid w-100" />
-                        <div class="flow">
-                            <h5>Testing</h5>
-                            <span>Using advanced tools, we ensure the website is responsive, user-friendly, and error-free to ensure compliance with W3C guidelines. In any issue, we ensure that changes are made to deliver quality projects.</span>
+                 </div>
+                 <?php endif; ?>
+                <?php if (!empty($process_3['title'])): ?>
+                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="<?php echo $process_3['icon'];?>">
+                        <div class="content-heading">
+                            <h2>03</h2>
+                            <h6><?php echo $process_3['title'];?></h6>
                         </div>
-                    </div> -->
-                    
-               </div>
-            </div>
+                        <p><?php echo $process_3['content'];?></p>
+                    </div>
+                 </div>
+                 <?php endif; ?>
+
+                 <?php if (!empty($process_4['title'])): ?>
+                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="<?php echo $process_4['icon'];?>">
+                        <div class="content-heading">
+                            <h2>04</h2>
+                            <h6><?php echo $process_4['title'];?></h6>
+                        </div>
+                        <p><?php echo $process_4['content'];?></p>
+                    </div>
+                 </div>
+                 <?php endif; ?>
+
+                <?php if (!empty($process_5['title'])): ?>
+                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="<?php echo $process_5['icon'];?>">
+                        <div class="content-heading">
+                            <h2>05</h2>
+                            <h6><?php echo $process_5['title'];?></h6>
+                        </div>
+                        <p><?php echo $process_5['content'];?></p>
+                    </div>
+                 </div>
+                 <?php endif; ?>
+
+                <?php if (!empty($process_6['title'])): ?>
+                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="<?php echo $process_6['icon'];?>">
+                        <div class="content-heading">
+                            <h2>06</h2>
+                            <h6><?php echo $process_6['title'];?></h6>
+                        </div>
+                        <p><?php echo $process_6['content'];?></p>
+                    </div>
+                 </div>
+                 <?php endif; ?>
+              </div>
+           </div>
         </div>
+     </div>
     </div>
 </section>
 <!--End App Development Process-->
+<?php endif ?>
+<?php endwhile; ?>
 
 
-
-
-<?php while ( have_rows('sections') ) : the_row();?>
-   <?php if( get_row_layout() == 'industries_we_serve' ) : 
-      $we_serve_heading = get_sub_field('we_serve_heading');
+<?php
+if( have_rows('industries_we_serve', 'option') ):
+   while( have_rows('industries_we_serve', 'option') ) : the_row(); 
+    $we_serve_heading = get_sub_field('we_serve_heading');
       $we_serve_description = get_sub_field('we_serve_description');
       $we_serve_description_more = get_sub_field('we_serve_description_more');
-      ?>
+    ?>
 <!--Industries-->
-<section class="featured-project  sec-pad">
+<section class="featured-project sec-pad">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -351,9 +492,9 @@ get_header(); ?>
     </div>
 </section>
 <!--Industries end-->
-<?php endif ?>
-<?php endwhile; ?>
 
+<?php endwhile; ?>
+<?php endif ?>
 
 
 
@@ -405,98 +546,84 @@ get_header(); ?>
 
 
 
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'our_projects' ) : 
+      $project_tagline = get_sub_field('project_tagline');
+      $project_heading = get_sub_field('project_heading');
+      $project_description = get_sub_field('project_description');
+      $project_id = get_sub_field('projects');
+      $view_all_project = get_sub_field('view_all_project');
+      ?>
+
 <!-- Start Some of Our Works-->
-<section class="r-bg-x pad-tb1" style="display: none;">
+<section class="r-bg-x pad-tb1" >
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="common-heading ptag">
-                    <span>Our Projects</span>
-                    <h2>Some of Our Works</h2>
-                    <p class="mb0">We think big and have hands in all leading technology platforms to provide you
-                    wide array of services.
-                    </p>
+                    <span><?php echo $project_tagline;?></span>
+                    <h2><?php echo $project_heading;?></h2>
+                    <p class="mb0"><?php echo $project_description;?></p>
                 </div>
             </div>
         </div>
+        <?php 
+         $project_args = array(
+             'post_type' => 'portfolio',
+             'order' => 'DESC',
+             'tax_query' => array(
+                  array (
+                     'taxonomy' => 'portfolio_category',
+                     'field' => 'id',
+                     'terms' => $project_id,
+                  )
+               ),
+            ); ?>
+      <?php $project_query = new WP_Query($project_args);
+       if ($project_query->have_posts()) : ?>
         <div class="row">
+        <?php while ($project_query->have_posts()) : $project_query->the_post(); ?>
             <div class="col-lg-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                <div class="isotope_item hover-scale">
+                <div class="isotope_item hover-scale" style="pointer-events: none;">
                     <div class="item-image">
-                        <a href="#"><img src="https://glasier.in/Glasier_website/images/image-1.jpg" alt="portfolio" class="img-fluid"> </a>
+                        <a href="<?php the_permalink();?>">
+                         <?php 
+                         if ( has_post_thumbnail() ) { ?>
+                            <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>" class="img-fluid" alt="<?php echo get_the_title(); ?>" />
+                         <?php }
+                         else { ?>
+                            <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/03/Image_not_available.png" alt="<?php echo get_the_title(); ?>" />
+                         <?php }
+                         ?>
+                      </a>
                     </div>
                     <div class="item-info">
-                        <h4><a href="#">Creative </a></h4>
-                        <p>ios, design</p>
+                        <h4><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
+                        <p><?php 
+                         $term_obj_list = get_the_terms( $post->ID, 'portfolio_category' );
+                         echo $terms_string = join(', ', wp_list_pluck($term_obj_list, 'name'));
+                         ?></p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                <div class="isotope_item hover-scale">
-                    <div class="item-image">
-                        <a href="#"><img src="https://glasier.in/Glasier_website/images/image-2.jpg" alt="portfolio" class="img-fluid"> </a>
-                    </div>
-                    <div class="item-info">
-                        <h4><a href="#">Brochure Design</a></h4>
-                        <p>Graphic, Print</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
-                <div class="isotope_item hover-scale">
-                    <div class="item-image">
-                        <a href="#"><img src="https://glasier.in/Glasier_website/images/image-3.jpg" alt="portfolio" class="img-fluid"> </a>
-                    </div>
-                    <div class="item-info">
-                        <h4><a href="#">Ecommerce Development</a></h4>
-                        <p>Web application</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay=".8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
-                <div class="isotope_item hover-scale">
-                    <div class="item-image">
-                        <a href="#"><img src="https://glasier.in/Glasier_website/images/image-4.jpg" alt="portfolio" class="img-fluid"> </a>
-                    </div>
-                    <div class="item-info">
-                        <h4><a href="#">Icon Pack</a></h4>
-                        <p>Android &amp; iOs, Design</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
-                <div class="isotope_item hover-scale">
-                    <div class="item-image">
-                        <a href="#"><img src="https://glasier.in/Glasier_website/images/image-5.jpg" alt="portfolio" class="img-fluid"> </a>
-                    </div>
-                    <div class="item-info">
-                        <h4><a href="#">Smart Watch</a></h4>
-                        <p>UI/UX Design</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 wow fadeInUp" data-wow-delay="1.2s" style="visibility: visible; animation-delay: 1.2s; animation-name: fadeInUp;">
-                <div class="isotope_item hover-scale">
-                    <div class="item-image">
-                        <a href="#"><img src="https://glasier.in/Glasier_website/images/image-6.jpg" alt="portfolio" class="img-fluid"> </a>
-                    </div>
-                    <div class="item-info">
-                        <h4><a href="#">Brochure Design</a></h4>
-                        <p>Graphic, Print</p>
-                    </div>
-                </div>
-            </div>
+        <?php endwhile; ?>
         </div>
+        <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
+
+        <?php if($view_all_project):?>
         <div class="row">
             <div class="col-lg-12 maga-btn mt60">
-                <a href="javascript:void(0)" class="btn-outline">View More Projects <i
+                <a href="<?php echo $view_all_project['url'];?>" class="btn-outline"><?php echo $view_all_project['title'];?> <i
                  class="fas fa-chevron-right fa-icon"></i></a>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 </section>
 <!-- End Some of Our Works-->
-
+<?php endif ?>
+<?php endwhile; ?>
 
 
 <?php while ( have_rows('sections') ) : the_row();?>
@@ -560,20 +687,21 @@ get_header(); ?>
             </div>
             <?php wp_reset_postdata(); ?>
             <?php endif; ?>
-
     </div>
 </section>
 <!--End reveiws-->
 <?php endif ?>
 <?php endwhile; ?>
 
-<?php while ( have_rows('sections') ) : the_row();?>
-   <?php if( get_row_layout() == 'call_to_action' ) : 
-      $cta_tagline = get_sub_field('cta_tagline');
+
+<?php
+if( have_rows('call_to_action', 'option') ):
+   while( have_rows('call_to_action', 'option') ) : the_row(); 
+    $cta_tagline = get_sub_field('cta_tagline');
       $cta_heading = get_sub_field('cta_heading');
       $cta_link = get_sub_field('cta_link');
       $cta_phone_no = get_sub_field('cta_phone_no');
-      ?>
+    ?>
 <!--Start CTA-->
 <section class="cta-area pad-tb1">
     <div class="container">
@@ -619,7 +747,8 @@ get_header(); ?>
     </div>
 </section>
 <!--End CAT-->
-<?php endif ?>
 <?php endwhile; ?>
+<?php endif ?>
+
 
 <?php get_footer(); ?>

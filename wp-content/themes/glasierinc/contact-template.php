@@ -6,6 +6,18 @@
 */
 
 get_header(); ?>
+
+
+<?php
+
+$request = wp_remote_get( 'https://ipapi.co/json/' );
+if( is_wp_error( $request ) ) {
+    return false; // Bail early
+}
+$body = wp_remote_retrieve_body( $request );
+$data = json_decode( $body );
+?>
+
 <?php while ( have_rows('sections') ) : the_row();?>
   <?php if( get_row_layout() == 'title_section' ) :
   $tagline = get_sub_field('tagline');
@@ -13,202 +25,365 @@ get_header(); ?>
   $description = get_sub_field('description');
   $image = get_sub_field('image');
 ?>
-
+<?php
+$country = $data->country_name;
+$india_contact = get_field('india_contact', 'option');
+$usa_contact = get_field('usa_contact', 'option');
+$uk_contact = get_field('uk_contact', 'option');
+?>
 <!--contact info-->
-<div class="contact-head-sec pt85">
-   <div class="container">
-      <div class="row pt80">
-         <div class="col-lg-6 vcenter">
-            <div class="page-headings">
-               <?php if(!empty($tagline)): ?>
-               <span class="sub-heading mb15"><i class="fas fa-headset mr5"></i> <?php echo $tagline;?></span>
-               <?php endif; ?>
+      <div class="contact-head-sec r-bg-a pt85 pb120">
+         <div class="container">
+            <div class="row pt80">
+               <div class="col-lg-5 vcenter">
+                  <div class="page-headings">
+                     <?php if(!empty($tagline)): ?>
+                     <span class="sub-heading mb15"><i class="fas fa-headset mr5"></i> <?php echo $tagline;?></span>
+                     <?php endif; ?>
 
-               <?php if(!empty($heading)): ?>
-               <h1 class="mb15"><?php echo $heading;?></h1>
-               <?php endif; ?>
+                     <?php if(!empty($heading)): ?>
+                     <h1 class="mb15"><?php echo $heading;?></h1>
+                     <?php endif; ?>
+                     
+                     <?php if(!empty($description)): ?>
+                     <p><?php echo $description;?></p>
+                     <?php endif; ?>
+                     
+                  </div>
+               </div>
+               <?php if($country == 'India'): ?>
+                  <?php if($india_contact): ?>
+                     <div class="col-lg-7 vcenter">
+                        <div class="row">
+                           <?php if(!empty($india_contact['phone'])): ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon">
+                                       <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Phone</span>
+                                       <a href="tel:<?php echo $india_contact['phone'];?>"> <?php echo $india_contact['phone'];?> </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
 
-               <?php if(!empty($description)): ?>
-               <p><?php echo $description;?></p>
+                           <?php if(!empty($india_contact['whatsapp'])): ?>
+                              <?php 
+                                  $country_code = '91';
+                                  $result = ltrim( preg_replace("/[^0-9]+/", "",$india_contact['whatsapp']) , $country_code);
+                               ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fab fa-whatsapp"></i> </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Whatsapp</span>
+                                       <a href="https://wa.me/<?php echo $result;?>?text=hello%0A"><?php echo $india_contact['whatsapp'];?></a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+                        </div>
+                        <div class="row mt30">
+
+                           <?php if(!empty($india_contact['email'])): ?>
+                           <div class="col-lg-6">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fas fa-envelope"></i></div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Email</span>
+                                       <a href="mailto:<?php echo $india_contact['email'];?>"> 
+                                          <?php echo $india_contact['email'];?>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                           <?php $contact_skype = $india_contact['skype'];
+                               if ($contact_skype): ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fab fa-skype"></i> </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Skype</span>
+                                       <a href="skype:<?php echo $contact_skype['url'];?>"> 
+                                          <?php echo $contact_skype['title'];?>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                        </div>
+                     </div>
+                  <?php endif; ?>
+
+               <?php elseif($country == 'US'): ?>
+                  <?php if($usa_contact): ?>
+                     <div class="col-lg-7 vcenter">
+                        <div class="row">
+                           <?php if(!empty($usa_contact['phone'])): ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon">
+                                       <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Phone</span>
+                                       <a href="tel:<?php echo $usa_contact['phone'];?>"> <?php echo $usa_contact['phone'];?> </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                           <?php if(!empty($usa_contact['whatsapp'])): ?>
+                              <?php 
+                                  $country_code = '91';
+                                  $result = ltrim( preg_replace("/[^0-9]+/", "",$usa_contact['whatsapp']) , $country_code);
+                               ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fab fa-whatsapp"></i> </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Whatsapp</span>
+                                       <a href="https://wa.me/<?php echo $result;?>?text=hello%0A"><?php echo $usa_contact['whatsapp'];?></a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+                        </div>
+                        <div class="row mt30">
+
+                           <?php if(!empty($usa_contact['email'])): ?>
+                           <div class="col-lg-6">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fas fa-envelope"></i></div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Email</span>
+                                       <a href="mailto:<?php echo $usa_contact['email'];?>"> 
+                                          <?php echo $usa_contact['email'];?>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                           <?php $contact_skype = $usa_contact['skype'];
+                               if ($contact_skype): ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fab fa-skype"></i> </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Skype</span>
+                                       <a href="skype:<?php echo $contact_skype['url'];?>"> 
+                                          <?php echo $contact_skype['title'];?>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                        </div>
+                     </div>
+                  <?php endif; ?>
+
+               <?php else: ?>
+                  <?php if($uk_contact): ?>
+                     <div class="col-lg-7 vcenter">
+                        <div class="row">
+                           <?php if(!empty($uk_contact['phone'])): ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon">
+                                       <i class="fas fa-phone-alt"></i>
+                                    </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Phone</span>
+                                       <a href="tel:<?php echo $uk_contact['phone'];?>"> <?php echo $uk_contact['phone'];?> </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                           <?php if(!empty($uk_contact['whatsapp'])): ?>
+                              <?php 
+                                  $country_code = '91';
+                                  $result = ltrim( preg_replace("/[^0-9]+/", "",$uk_contact['whatsapp']) , $country_code);
+                               ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fab fa-whatsapp"></i> </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Whatsapp</span>
+                                       <a href="https://wa.me/<?php echo $result;?>?text=hello%0A"><?php echo $uk_contact['whatsapp'];?></a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+                        </div>
+                        <div class="row mt30">
+
+                           <?php if(!empty($uk_contact['email'])): ?>
+                           <div class="col-lg-6">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fas fa-envelope"></i></div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Email</span>
+                                       <a href="mailto:<?php echo $uk_contact['email'];?>"> 
+                                          <?php echo $uk_contact['email'];?>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                           <?php $contact_skype = $uk_contact['skype'];
+                               if ($contact_skype): ?>
+                           <div class="col-lg-6 m-mt30">
+                              <div class="contact-details-block">
+                                 <div class="ree-row-set">
+                                    <div class="ree-icon-set dtb-icon"> <i class="fab fa-skype"></i> </div>
+                                    <div class="ree-details-set dtb-details">
+                                       <span>Connect on Skype</span>
+                                       <a href="skype:<?php echo $contact_skype['url'];?>"> 
+                                          <?php echo $contact_skype['title'];?>
+                                       </a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <?php endif; ?>
+
+                        </div>
+                     </div>
+                  <?php endif; ?>
                <?php endif; ?>
-               
             </div>
          </div>
-
-         <?php if(!empty($image)): ?>
-         <div class="col-lg-6 vcenter">
-            <div class="sol-img m-mt30">
-               <img src="<?php echo $image; ?>" alt="img" class="img-fluid">
-            </div>
-         </div>
-         <?php endif; ?>
       </div>
-   </div>
-</div>
 <?php endif; ?>
 <?php endwhile; ?>
 
 
+
+
 <?php while ( have_rows('sections') ) : the_row();?>
   <?php if( get_row_layout() == 'contact_info' ) :
+  $c_info_tagline = get_sub_field('tagline');
+  $c_info_heading = get_sub_field('heading');
+  $c_info_description = get_sub_field('description');
   $form_group = get_sub_field('form_group');
-  $contact_details = get_sub_field('contact_details');
-  $follow_us = get_sub_field('follow_us');
+  $testimonial_id = $form_group['testimonial'];
+  $trusted = get_sub_field('trusted');
+  $logos = $trusted['logos'];
 ?>
-<div class="contact-form-sec sec-pad r-bg-a">
+<!--contact info-->
+<div class="contact-form-sec sec-pad r-bg-d">
    <div class="container">
-      <div class="row">
-         <?php if($form_group): ?>
-         <div class="col-lg-7">
-            <div class="form-contact-hom m-mt60">
-               <div class="form-block bg-w">
-                  <?php if(!empty($form_group['title'])): ?>
-                  <div class="form-head">
-                     <h3><?php echo $form_group['title'];?></h3>
+         <div class="row">           
+            <div class="col-lg-6">
+               <div class="sec-heading m-center">
+                  <span class="sub-heading mb15"><?php echo $c_info_tagline;?></span>
+                  <h2 class="mb15"><?php echo $c_info_heading;?></h2>
+                  <p><?php echo $c_info_description;?></p>
+               </div>
+               <div class="trust-logo-block mt60">
+               <?php 
+               if( $logos) { 
+                   echo '<ul class="ree-card">';
+                   foreach( $logos as $logo ) { ?>
+                       
+                     <li><img src="<?php echo $logo['logo'];?>" alt="logo"></li>
+                  <?php }
+                   echo '</ul>';
+               } ?>                                       
+                  </ul>
+               </div>
+
+               <?php 
+               $testi_args = array(
+                   'post_type' => 'testimonial',
+                   'order' => 'DESC',
+                   'tax_query' => array(
+                        array (
+                           'taxonomy' => 'testi_category',
+                           'field' => 'id',
+                           'terms' => $testimonial_id,
+                        )
+                     ),
+                  ); ?>
+             
+              <?php $tm_query = new WP_Query($testi_args);
+               if ($tm_query->have_posts()) : ?>
+               <div class="ree-card mt30 trust-review owl-carousel">
+                  <?php while ($tm_query->have_posts()) : $tm_query->the_post(); ?>
+                  <div class="items">
+                     <div class="review-text">
+                        <div><?php echo get_the_content();?></div>
+                     </div>
+                     <div class="ree-row-set mt30">
+                        <div class="media vcenter">
+                           <div class="ree-details-set user-info p-0">
+                              <h5><?php echo the_title();?></h5>
+                              <p><?php echo the_field('designation');?></p>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-                  <?php endif; ?>
-
-                  <?php if(!empty($form_group['form'])): ?>
-                  <div class="form-body">
-                     <?php echo do_shortcode('[contact-form-7 id="'.$form_group['form'].'"]');?>
-                  </div>
-                  <?php endif; ?>
+                   <?php endwhile; ?>
                </div>
-            </div>
-         </div>
-         <?php endif; ?>
-
-         <div class="col-lg-5">
-            <div class="get-conct-2 pera-block d-ml50">
-               <?php if($contact_details): ?>
-                  <?php $get_in_touch = $contact_details['get_in_touch'];?>
-               <h3><?php echo $get_in_touch['title'];?></h3>
-               <div class="contact-detalnk">
-
-                  <?php if(!empty($get_in_touch['phone_number'])): ?>
-                  <a href="tel:<?php echo $get_in_touch['phone_number'];?>">
-                     <i class="fas fa-phone-alt"></i> 
-                     <span><?php echo $get_in_touch['phone_number'];?></span>
-                  </a>
-                  <?php endif; ?>
-
-                  <?php if(!empty($get_in_touch['whatsapp'])): ?>
-                     <?php 
-                     $country_code = '91';
-                     $result = ltrim( preg_replace("/[^0-9]+/", "",$get_in_touch['whatsapp']) , $country_code);
-                     ?>
-                  <a href="https://wa.me/<?php echo $result;?>?text=hello%0A" target="_blank">
-                     <i class="fab fa-whatsapp"></i>
-                     <span><?php echo $get_in_touch['whatsapp'];?></span>
-                  </a>
-                  <?php endif; ?>
-
-                  <?php if(!empty($get_in_touch['email'])): ?>
-                  <a href="mailto:<?php echo $get_in_touch['email'];?>">
-                     <i class="fas fa-envelope"></i>
-                     <span><?php echo $get_in_touch['email'];?></span>
-                  </a>
-                  <?php endif; ?>
-                  <?php $contact_skype = $get_in_touch['skype'];
-                     if ($contact_skype): ?>
-                  <a href="skype:<?php echo $contact_skype['url'];?>"><i class="fab fa-skype"></i> <span><?php echo $contact_skype['title'];?></span></a>
-                  <?php endif; ?>
-               </div>
-
-
-               <?php $addresses = $contact_details['addresses'];?>
-               <h3 class="mt60"><?php echo $addresses['title'];?></h3>
-               <div class="contact-detalnk">
-                  <?php if(!empty($addresses['address'])): ?>
-                  <a href="#" class="contact-addressii">
-                     <i class="fas fa-map-marker-alt"></i>
-                     <?php echo $addresses['address'];?>
-                  </a>
-                  <?php endif; ?>
-
-                  <?php if(!empty($addresses['map_link'])): ?>
-                  <a href="<?php echo $addresses['map_link'];?>" target="_blank">
-                     <i class="fas fa-location-arrow"></i>
-                     <span>Get Directions</span>
-                  </a>  
-                  <?php endif; ?>       
-               </div>
+               <?php wp_reset_postdata(); ?>
                <?php endif; ?>
-
-               <?php if($follow_us): ?>
-               <h3 class="mt60"><?php echo $follow_us['title'];?></h3>
-               <ul class="footer_social mt30">
-                  <?php if(!empty($follow_us['facebook'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['facebook'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Facebook">
-                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-
-                  <?php if(!empty($follow_us['instagram'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['instagram'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Instagram">
-                        <i class="fab fa-instagram" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-
-                  <?php if(!empty($follow_us['twitter'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['twitter'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Twitter">
-                        <i class="fab fa-twitter" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-
-                  <?php if(!empty($follow_us['medium'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['medium'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Medium">
-                        <i class="fab fa-medium" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-
-                  <?php if(!empty($follow_us['dribbble'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['dribbble'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Dribbble">
-                        <i class="fab fa-dribbble" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-
-                  <?php if(!empty($follow_us['behance'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['behance'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Behance">
-                        <i class="fab fa-behance" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-
-                  <?php if(!empty($follow_us['pinterest'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['pinterest'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Pinterest">
-                        <i class="fab fa-pinterest" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-
-                  <?php if(!empty($follow_us['linkedin'])): ?>
-                  <li>
-                     <a href="<?php echo $follow_us['linkedin'];?>" target="_blank" data-toggle="tooltip" title="" data-original-title="Linkedin">
-                        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                     </a>
-                  </li>
-                  <?php endif; ?>
-               </ul>
-                <?php endif; ?>
             </div>
+
+            <?php if($form_group): ?>
+            <div class="col-lg-6">
+               <div class="form-contact-hom m-mt60">
+                  <div class="form-block bg-w">
+                     <?php if(!empty($form_group['title'])): ?>
+                     <div class="form-head">
+                        <h4><?php echo $form_group['title'];?></h4>
+                     </div>
+                     <?php endif; ?>
+
+                     <?php if(!empty($form_group['form'])): ?>
+                     <div class="form-body">
+                        <?php echo do_shortcode('[contact-form-7 id="'.$form_group['form'].'"]');?>
+                     </div>
+                     <?php endif; ?>
+                  </div>
+               </div>
+            </div>
+            <?php endif; ?>
+
          </div>
-      
-      </div>
-   </div>
+   </div>            
 </div>
+<!--contact info end-->
 
 <?php endif; ?>
 <?php endwhile; ?>

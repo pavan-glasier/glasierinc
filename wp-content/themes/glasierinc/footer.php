@@ -8,79 +8,209 @@
  * @subpackage glasierinc
  * @since glasierinc 1.0
  */
+
 ?>
    <!--start footer -->
     <footer class="footer-a">
         <div class="footer-fist-row pt40">
             <div class="container">
                 <div class="footer-rowset">
-                    <?php $contact_info = get_field('contact_info', 'option'); ?>
-                    <?php if($contact_info): ?>
-                    <div class="col footer-head">
-                        <h5><?php echo $contact_info['heading']; ?></h5>
-                        <ul class="footer-links-list social-linkz">
-                            <?php if( !empty( $contact_info['address'] ) ): ?>
-                            <li>
-                                <a href="<?php echo $contact_info['map_link'];?>" target="_blank"> 
-                                    <span><i class="fa fa-map-marker-alt"></i></span>
-                                   <?php echo $contact_info['address'];?>
-                                </a>
-                            </li>
-                            <?php endif; ?>
 
-                            <?php if( !empty( $contact_info['phone_number'] ) ): ?>
-                            <li>
-                                <a href="tel:<?php echo $contact_info['phone_number']; ?>">
-                                    <span><i class="fas fa-phone-square-alt"></i></span>
-                                   <?php echo $contact_info['phone_number']; ?>
-                                </a>
-                            </li>
-                            <?php endif; ?>
+                    <?php 
 
-                            <?php if( !empty( $contact_info['mobile_number'] ) ): ?>
-                            <li>
-                                <a href="tel:<?php echo $contact_info['mobile_number']; ?>">
-                                    <span><i class="fab fa-whatsapp-square"></i></span>
-                                   <?php echo $contact_info['mobile_number']; ?>
-                                </a>
-                            </li>
-                            <?php endif; ?>
+                        $request = wp_remote_get( 'https://ipapi.co/json/' );
+                        // $request = wp_remote_get( 'https://api.hostip.info/get_html.php?ip=207.228.238.7' );
+                        if( is_wp_error( $request ) ) {
+                            return false; // Bail early
+                        }
+                        $body = wp_remote_retrieve_body( $request );
+                        $data = json_decode( $body );
+                        ?>
+                    
+                        <?php
+                        $country = $data->country_name;
+                        $india_contact = get_field('india_contact', 'option');
+                        $usa_contact = get_field('usa_contact', 'option');
+                        $uk_contact = get_field('uk_contact', 'option');
+                     ?>
 
-                            <?php if( !empty( $contact_info['email_1'] ) ): ?>
-                            <li>
-                                <a href="mailto:<?php echo $contact_info['email_1']; ?>">
-                                    <span><i class="fas fa-envelope"></i></span>
-                                   <?php echo $contact_info['email_1']; ?>
-                                </a>
-                            </li>
-                            <?php endif; ?>
+                     <?php if($country == 'India'): ?>
+                        <?php if($india_contact): ?>
+                        <div class="col footer-head">
+                            <h5><?php echo $india_contact['heading']; ?></h5>
+                            <ul class="footer-links-list social-linkz">
+                                <?php if( !empty( $india_contact['address'] ) ): ?>
+                                <li>
+                                    <a href="#" target="_blank"> 
+                                        <span><i class="fa fa-map-marker-alt"></i></span>
+                                       <?php echo $india_contact['address'];?>
+                                    </a>
+                                </li>
+                                <?php endif; ?>
 
-                            <?php if( !empty( $contact_info['email_2'] ) ): ?>
-                            <li>
-                                <a href="mailto:<?php echo $contact_info['email_2']; ?>">
-                                    <span><i class="fas fa-envelope"></i></span>
-                                   <?php echo $contact_info['email_2']; ?>
-                                </a>
-                            </li>
-                            <?php endif; ?>
+                                <?php if( !empty( $india_contact['phone'] ) ): ?>
+                                <li>
+                                    <a href="tel:<?php echo $india_contact['phone']; ?>">
+                                        <span><i class="fas fa-phone-square-alt"></i></span>
+                                       <?php echo $india_contact['phone']; ?>
+                                    </a>
+                                </li>
+                                <?php endif; ?>
 
-                            <?php
-                            $skype = $contact_info['skype'];
-                             if( $skype ): 
-                              $skype_url = $skype['url'];
-                              $skype_title = $skype['title'];
-                              $skype_target = $skype['target'] ? $skype['target'] : '_self';
-                            ?>
-                            <li>
-                                <a href="skype:<?php echo $skype_url; ?>" target="<?php echo esc_attr( $skype_target ); ?>">
-                                    <span><i class="fab fa-skype"></i></span>
-                                    <?php echo esc_html( $skype_title ); ?>
-                                </a>
-                            </li>
-                            <?php endif; ?>
+                                <?php if( !empty( $india_contact['whatsapp'] ) ): ?>
+                                <li>
+                                    <a href="tel:<?php echo $india_contact['whatsapp']; ?>">
+                                        <span><i class="fab fa-whatsapp-square"></i></span>
+                                       <?php echo $india_contact['whatsapp']; ?>
+                                    </a>
+                                </li>
+                                <?php endif; ?>
 
-                        </ul>
-                    </div>
+                                <?php if( !empty( $india_contact['email'] ) ): ?>
+                                <li>
+                                    <a href="mailto:<?php echo $india_contact['email']; ?>">
+                                        <span><i class="fas fa-envelope"></i></span>
+                                       <?php echo $india_contact['email']; ?>
+                                    </a>
+                                </li>
+                                <?php endif; ?>
+
+
+                                <?php
+                                $skype = $india_contact['skype'];
+                                 if( $skype ): 
+                                  $skype_url = $skype['url'];
+                                  $skype_title = $skype['title'];
+                                  $skype_target = $skype['target'] ? $skype['target'] : '_self';
+                                ?>
+                                <li>
+                                    <a href="skype:<?php echo $skype_url; ?>" target="<?php echo esc_attr( $skype_target ); ?>">
+                                        <span><i class="fab fa-skype"></i></span>
+                                        <?php echo esc_html( $skype_title ); ?>
+                                    </a>
+                                </li>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                        <?php elseif($country == 'US'): ?>
+                            <?php if($usa_contact): ?>
+                            <div class="col footer-head">
+                                <h5><?php echo $usa_contact['heading']; ?></h5>
+                                <ul class="footer-links-list social-linkz">
+                                    <?php if( !empty( $usa_contact['address'] ) ): ?>
+                                    <li>
+                                        <a href="#" target="_blank"> 
+                                            <span><i class="fa fa-map-marker-alt"></i></span>
+                                           <?php echo $usa_contact['address'];?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+                                    <?php if( !empty( $usa_contact['phone'] ) ): ?>
+                                    <li>
+                                        <a href="tel:<?php echo $usa_contact['phone']; ?>">
+                                            <span><i class="fas fa-phone-square-alt"></i></span>
+                                           <?php echo $usa_contact['phone']; ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+                                    <?php if( !empty( $usa_contact['whatsapp'] ) ): ?>
+                                    <li>
+                                        <a href="tel:<?php echo $usa_contact['whatsapp']; ?>">
+                                            <span><i class="fab fa-whatsapp-square"></i></span>
+                                           <?php echo $usa_contact['whatsapp']; ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+                                    <?php if( !empty( $usa_contact['email'] ) ): ?>
+                                    <li>
+                                        <a href="mailto:<?php echo $usa_contact['email']; ?>">
+                                            <span><i class="fas fa-envelope"></i></span>
+                                           <?php echo $usa_contact['email']; ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+
+                                    <?php
+                                    $skype = $usa_contact['skype'];
+                                     if( $skype ): 
+                                      $skype_url = $skype['url'];
+                                      $skype_title = $skype['title'];
+                                      $skype_target = $skype['target'] ? $skype['target'] : '_self';
+                                    ?>
+                                    <li>
+                                        <a href="skype:<?php echo $skype_url; ?>" target="<?php echo esc_attr( $skype_target ); ?>">
+                                            <span><i class="fab fa-skype"></i></span>
+                                            <?php echo esc_html( $skype_title ); ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php if($uk_contact): ?>
+                            <div class="col footer-head">
+                                <h5><?php echo $uk_contact['heading']; ?></h5>
+                                <ul class="footer-links-list social-linkz">
+                                    <?php if( !empty( $uk_contact['address'] ) ): ?>
+                                    <li>
+                                        <a href="#" target="_blank"> 
+                                            <span><i class="fa fa-map-marker-alt"></i></span>
+                                           <?php echo $uk_contact['address'];?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+                                    <?php if( !empty( $uk_contact['phone'] ) ): ?>
+                                    <li>
+                                        <a href="tel:<?php echo $uk_contact['phone']; ?>">
+                                            <span><i class="fas fa-phone-square-alt"></i></span>
+                                           <?php echo $uk_contact['phone']; ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+                                    <?php if( !empty( $uk_contact['whatsapp'] ) ): ?>
+                                    <li>
+                                        <a href="tel:<?php echo $uk_contact['whatsapp']; ?>">
+                                            <span><i class="fab fa-whatsapp-square"></i></span>
+                                           <?php echo $uk_contact['whatsapp']; ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+                                    <?php if( !empty( $uk_contact['email'] ) ): ?>
+                                    <li>
+                                        <a href="mailto:<?php echo $uk_contact['email']; ?>">
+                                            <span><i class="fas fa-envelope"></i></span>
+                                           <?php echo $uk_contact['email']; ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+
+
+                                    <?php
+                                    $skype = $uk_contact['skype'];
+                                     if( $skype ): 
+                                      $skype_url = $skype['url'];
+                                      $skype_title = $skype['title'];
+                                      $skype_target = $skype['target'] ? $skype['target'] : '_self';
+                                    ?>
+                                    <li>
+                                        <a href="skype:<?php echo $skype_url; ?>" target="<?php echo esc_attr( $skype_target ); ?>">
+                                            <span><i class="fab fa-skype"></i></span>
+                                            <?php echo esc_html( $skype_title ); ?>
+                                        </a>
+                                    </li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                            <?php endif; ?>
                     <?php endif; ?>
 
 
@@ -183,7 +313,7 @@
                     </div>
                     <?php endif; ?>
 
-                    <?php $industries = get_field('industries', 'option'); ?>
+                    <?php $industries = get_field('industriess', 'option'); ?>
                     <?php if($industries): ?>
                     <div class="col footer-head">
                         <h5><?php echo $industries['heading'];?></h5>

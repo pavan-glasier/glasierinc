@@ -32,7 +32,6 @@
 <meta name="document-rating" content="Safe for Kids">
 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
 
-
 <title><?php wp_title( '|', true, 'right' ); ?></title>
 
 <link rel="profile" href="https://gmpg.org/xfn/11" />
@@ -41,8 +40,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 
-
-
 <!-- OPen Grapgh -->
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="website" />
@@ -50,7 +47,6 @@
 <meta property="og:description" content="" />
 <meta property="og:url" content="https://www.glasierinc.com/" />
 <meta property="og:site_name" content="Glasier Inc" />
-
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary" />
@@ -75,7 +71,19 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '245603730396550');
 fbq('track', 'PageView');
 </script>
+	
+<!-- Google Tag Manager -->	
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132672542-1"></script>
 
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-132672542-1');
+gtag('config', 'AW-776430104');
+</script>
+<!-- Google Tag Manager -->
+	
 <!-- Schema Code -->
 <script type='application/ld+json'>
     {
@@ -131,6 +139,10 @@ fbq('track', 'PageView');
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7BR93P"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
     <!--Start Preloader -->
     <div class="onloadpage" id="page-load">
@@ -188,7 +200,7 @@ fbq('track', 'PageView');
                      </div>
                   <?php endif; ?>
                 
-                <div class="ree-nav-cta">
+                <div class="ree-nav-cta" style="display: none;">
                     <ul>
                         <li><span style="font-size:30px;cursor:pointer;color: #005186;" onclick="openNav()">&#9776;</span></li>
                     </ul>
@@ -212,7 +224,7 @@ fbq('track', 'PageView');
                     </ul>
                 </div>
                 <!--Start Web Side Menu -->
-                <div id="mySidenav" class="sidenav">
+                <div id="mySidenav" class="sidenav" >
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <?php $side_menu = get_field('side_menu', 'option'); ?>
                     <?php wp_nav_menu( array(

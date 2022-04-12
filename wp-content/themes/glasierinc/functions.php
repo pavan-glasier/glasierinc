@@ -860,6 +860,56 @@ if (function_exists('acf_add_options_page')) {
 		'menu_title'	=> 'Slider',
 		'parent_slug'	=> 'sliders-settings',
 	));
+
+
+	$industries   = array(
+		'page_title' 	=> __('Industries Settings', 'glasierinc'),
+		'menu_title'	=> __('Industries', 'glasierinc'),
+		'menu_slug' 	=> 'industries-settings',
+		'capability'	=> 'edit_posts',
+		'icon_url' => 'dashicons-image-filter',
+		'position' => 8,
+		'redirect'	=> true
+	);
+	acf_add_options_page($industries);
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Industry',
+		'menu_title'	=> 'Industry',
+		'parent_slug'	=> 'industries-settings',
+	));
+
+	$cta   = array(
+		'page_title' 	=> __('Call To Action Settings', 'glasierinc'),
+		'menu_title'	=> __('Call To Action', 'glasierinc'),
+		'menu_slug' 	=> 'cta-settings',
+		'capability'	=> 'edit_posts',
+		'icon_url' => 'dashicons-format-status',
+		'position' => 9,
+		'redirect'	=> true
+	);
+	acf_add_options_page($cta);
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Call To Action',
+		'menu_title'	=> 'Call To Action',
+		'parent_slug'	=> 'cta-settings',
+	));
+
+
+	$location   = array(
+		'page_title' 	=> __('Contact Locations Settings', 'glasierinc'),
+		'menu_title'	=> __('Contact Locations', 'glasierinc'),
+		'menu_slug' 	=> 'location-settings',
+		'capability'	=> 'edit_posts',
+		'icon_url' => 'dashicons-location-alt',
+		'position' => 9,
+		'redirect'	=> true
+	);
+	acf_add_options_page($location);
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Contact Locations',
+		'menu_title'	=> 'Contact Locations',
+		'parent_slug'	=> 'location-settings',
+	));
 }
 
 
@@ -1114,3 +1164,29 @@ add_action( 'admin_head', 'fix_svg' );
 function meks_time_ago() {
 	return human_time_diff( get_the_time( 'U' ), current_time( 'timestamp' ) ).' '.__( 'ago' );
 }
+
+function na_remove_slug( $post_link, $post, $leavename ) {
+
+    if ( 'services' != $post->post_type || 'publish' != $post->post_status ) {
+        return $post_link;
+    }
+
+    $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
+
+    return $post_link;
+}
+add_filter( 'post_type_link', 'na_remove_slug', 10, 3 );
+
+
+
+function na_parse_request( $query ) {
+
+    if ( ! $query->is_main_query() || 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
+        return;
+    }
+
+    if ( ! empty( $query->query['name'] ) ) {
+        $query->set( 'post_type', array( 'post', 'services', 'page' ) );
+    }
+}
+add_action( 'pre_get_posts', 'na_parse_request' );
