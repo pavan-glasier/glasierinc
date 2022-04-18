@@ -183,7 +183,7 @@ get_header();?>
          $hire_developer = get_sub_field('hire_developer');
   ?>
       <!--start services-->
-    <section class="r-bg-i sec-pad">
+    <section class="r-bg-i sec-pad services">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -238,10 +238,10 @@ get_header();?>
                            </h3>
                            <?php 
                            $content = get_the_content();
-                           $trim_content = wp_trim_words($content, 20, ".")
+                           $trim_content = wp_trim_words($content, 22, "...")
                            ?>
                            <p>
-                              <?php echo $content;?>
+                              <?php echo $trim_content;?>
                            </p>
                         </div>
                         <div class="ree-card-content-link">
@@ -291,7 +291,7 @@ get_header();?>
          $view_all_work = get_sub_field('view_all_work');
   ?>
    <!--start work-->
-    <section class="r-bg-f sec-pad">
+    <section class="r-bg-f sec-pad portfolio-slider">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-sm-8 vcenter text-center">
@@ -534,17 +534,7 @@ get_header();?>
                          </div>
                          <div class="ree-row-set mt30">
                              <div class="media vcenter">
-                                 <div class="ree-icon-set img-round80">
-                                    <?php 
-                                    if ( has_post_thumbnail() ) { ?>
-                                       <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>"  alt="<?php echo get_the_title(); ?>" class="img-fluid" />
-                                    <?php }
-                                    else { ?>
-                                       <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/03/avatar-1.png" alt="<?php echo get_the_title(); ?>" class="img-fluid" />
-                                    <?php }
-                                    ?>
-                                 </div>
-                                 <div class="ree-details-set user-info">
+                                 <div class="ree-details-set user-info p-0">
                                      <h5 style="color: #fff;"><?php echo the_title();?></h5>
                                      <p style="color: #fff;"><?php echo the_field('designation');?></p>
                                  </div>
@@ -707,13 +697,14 @@ get_header();?>
 
 <?php
 
-$request = wp_remote_get( 'https://ipapi.co/json/' );
-// $request = wp_remote_get( 'https://api.hostip.info/get_html.php?ip=207.228.238.7' );
-if( is_wp_error( $request ) ) {
-    return false; // Bail early
-}
-$body = wp_remote_retrieve_body( $request );
-$data = json_decode( $body );
+
+// $request = wp_remote_get( 'https://ipapi.co/'.get_client_ip().'/json' );
+// if( is_wp_error( $request ) ) {
+//     return false; // Bail early
+// }
+// $body = wp_remote_retrieve_body( $request );
+// $data = json_decode( $body );
+
 ?>
 <?php while ( have_rows('sections') ) : the_row();?>
    <?php if( get_row_layout() == 'contact_us' ) : 
@@ -723,13 +714,15 @@ $data = json_decode( $body );
       $contact_form = get_sub_field('contact_form');
       ?>
 <?php
-$country = $data->country_name;
+$country = getCountry();
+// $country = $data->country_name;
 $india_contact = get_field('india_contact', 'option');
 $usa_contact = get_field('usa_contact', 'option');
 $uk_contact = get_field('uk_contact', 'option');
+$canada = get_field('canada', 'option');
 ?>
    <!--start contact block-->
-   <section class="home-contact pb100" data-background="<?php echo get_template_directory_uri(); ?>/images/office-1.jpg">
+   <section class="home-contact pb100" id="contact" data-background="<?php echo get_template_directory_uri(); ?>/images/office-1.jpg">
         <div class="container">
             <div class="row zup">
                 <div class="col-right-a">
@@ -791,7 +784,8 @@ $uk_contact = get_field('uk_contact', 'option');
                             <?php endif; ?>
                         </div>
                         <?php endif; ?>
-                    <?php elseif($country == 'US'): ?>
+					
+                    <?php elseif($country == 'United States'): ?>
                         <?php if($usa_contact): ?>
                             <div class="home-contact-block">
                                 <div class="contact-infos">
@@ -925,35 +919,16 @@ $india_contact = get_field('india_contact', 'option');
 $usa_contact = get_field('usa_contact', 'option');
 
 $uk_contact = get_field('uk_contact', 'option');
+$canada = get_field('canada', 'option');
 ?>
 <!-- start locations -->
     <div class="location-home sec-pad">
         <div class="container">
             <div class="row justify-content-center">
-               <?php if(!empty($india_contact['address'])): ?>
-                <div class="col-lg-4">
-                    <div class="location-block- mt60">
-                        <div class="loc-icon-nam">
-                            <img src="<?php echo get_template_directory_uri(); ?>/images/new-delhi.svg" alt="new-delhi">
-                            <p><span class="ree-text rt40">India</span></p>
-                        </div>
-                        <p class="pt20 pb20"><?php echo $india_contact['address'];?></p>
-                        <!-- <div class="loc-contct">
-                            <a href="javascript:void(0)" target="blank" class="rount-btn"
-                                data-toggle="tooltip" title="Map Location"><i class="fas fa-map-marker-alt"></i></a>
-                            <a href="javascript:void(0)" target="blank" class="rount-btn"
-                                data-toggle="tooltip" title="Phone Number"><i class="fas fa-phone-alt"></i></a>
-                            <a href="javascript:void(0)" target="blank" class="rount-btn"
-                                data-toggle="tooltip" title="Email Address"><i class="fas fa-envelope"></i></a>
-                            <a href="javascript:void(0)" target="blank" class="rount-btn"
-                                data-toggle="tooltip" title="Skype Id"><i class="fab fa-skype"></i></a>
-                        </div> -->
-                    </div>
-                </div>
-               <?php endif; ?>
+               
 
                <?php if(!empty($usa_contact['address'])): ?>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="location-block- mt60">
                         <div class="loc-icon-nam">
                             <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/04/statue-of-liberty-america-svgrepo-com.svg" alt="new-usa">
@@ -965,7 +940,7 @@ $uk_contact = get_field('uk_contact', 'option');
                <?php endif; ?>
 
                <?php if(!empty($uk_contact['address'])): ?>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="location-block- mt60">
                         <div class="loc-icon-nam">
                             <img src="<?php echo get_template_directory_uri(); ?>/images/big-ben.svg" alt="big-ben">
@@ -975,6 +950,32 @@ $uk_contact = get_field('uk_contact', 'option');
                     </div>
                 </div>
                 <?php endif; ?>
+				
+				<?php if(!empty($canada['address'])): ?>
+                <div class="col-lg-3">
+                    <div class="location-block- mt60">
+                        <div class="loc-icon-nam">
+                            <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/04/canada.png" alt="canada">
+                            <p><span class="ree-text rt40">Canada</span></p>
+                        </div>
+                        <p class="pt20 pb20"><?php echo $canada['address'];?></p>
+                    </div>
+                </div>
+               <?php endif; ?>
+				
+				<?php if(!empty($india_contact['address'])): ?>
+                <div class="col-lg-3">
+                    <div class="location-block- mt60">
+                        <div class="loc-icon-nam">
+                            <img src="<?php echo get_template_directory_uri(); ?>/images/new-delhi.svg" alt="new-delhi">
+                            <p><span class="ree-text rt40">India</span></p>
+                        </div>
+                        <p class="pt20 pb20"><?php echo $india_contact['address'];?></p>
+                    </div>
+                </div>
+               <?php endif; ?>
+				
+				
             </div>
         </div>
     </div>

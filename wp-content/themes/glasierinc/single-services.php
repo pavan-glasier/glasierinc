@@ -12,7 +12,7 @@ get_header(); ?>
 <?php $main_heading = get_field('main_heading');?>
 <?php $description = get_field('description');?>
 <!-- Header title -->
-<section class="header-title head-opacity" data-background="<?php echo get_template_directory_uri(); ?>/images/office.jpg">
+<section class="header-title head-opacity" data-background="<?php echo site_url(); ?>/wp-content/uploads/2022/04/Common-Banner.png">
     <div class="container">
         <div class="row justify-content-center">
            <div class="col-lg-7 text-center">
@@ -128,6 +128,20 @@ get_header(); ?>
 <?php endwhile; ?>
 
 
+
+<?php while ( have_rows('sections') ) : the_row();?>
+<?php if( get_row_layout() == 'technologies_icons' ) : 
+  ?>
+<?php
+// Check rows exists.
+if( have_rows('icons') ):
+    while( have_rows('icons') ) : the_row();
+        //echo get_sub_field('icon');
+    endwhile;
+endif; ?>
+
+<?php endif ?>
+<?php endwhile; ?>
 <!--Start Logo Section-->
 <div class="techonology-used-">
     <div class="container">
@@ -210,6 +224,12 @@ get_header(); ?>
 <?php endwhile; ?>
 
 
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'hire_for_projects' ) : 
+      $hire_pro_contents = get_sub_field('contents');
+      $hire_pro_image = get_sub_field('image');
+      ?>
 <!--start cta-->
 <section class="r-bg-x sec-pad">
     <div class="container">
@@ -217,30 +237,47 @@ get_header(); ?>
             <div class="row">
                 <div class="col-lg-6 vcenter">
                     <div class="cta-heading">
-                        <h2 class="mb15">Hire world-class <span class="ree-text rt40">developers</span> for your
-                           <span class="ree-text rt40">project</span>
+                        <?php if(!empty($hire_pro_contents['heading'])): ?>
+                        <h2 class="mb15">
+                            <?php echo $hire_pro_contents['heading'];?>
                         </h2>
-                        <p>We have a dexterity team of designers & developers that works on clients projects
-                           excellently and delivers the project on timeline.
-                        </p>
+                        <?php endif; ?>
+
+                        <?php if(!empty($hire_pro_contents['description'])): ?>
+                        <p><?php echo $hire_pro_contents['description'];?></p>
+                         <?php endif; ?>
+
+                         
+                         <?php $hire_button = $hire_pro_contents['hire_button']; 
+                         if ($hire_button) : 
+                            $link_target = $hire_button['target'] ? $hire_button['target'] : '_self';
+                         ?>
                         <div class="mult-btns">
-                           <a href="#" class="ree-btn  ree-btn-grdt1 mt40">Talk to our experts <i
+                           <a href="<?php echo $hire_button['url'];?>" class="ree-btn  ree-btn-grdt1 mt40" target="<?php echo $link_target;?>" ><?php echo $hire_button['title'];?> <i
                               class="fas fa-arrow-right fa-btn"></i></a>
+                            <?php if(!empty($hire_pro_contents['phone'])): ?>
                            <span class="or">or</span>
-                           <a href="tel:1234567890" class="mt40 call-us">Call Us +91 1234 567 890</a>
+                           <a href="tel:<?php echo $hire_pro_contents['phone'];?>" class="mt40 call-us">Call Us <?php echo $hire_pro_contents['phone'];?></a>
+                           <?php endif;?>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
+                
+                <?php if(!empty($hire_pro_image)): ?>
                 <div class="col-lg-6 vcenter text-center">
                     <div class="sol-img-png">
-                        <img src="https://glasier.in/Glasier_website/images/developers.svg" alt="app" class="img-fluid">
+                        <img src="<?php echo $hire_pro_image; ?>" alt="app" class="img-fluid">
                     </div>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
 <!--start cta-->
+<?php endif ?>
+<?php endwhile; ?>
 
 
 <?php while ( have_rows('sections') ) : the_row();?>
@@ -256,7 +293,6 @@ get_header(); ?>
           $process_4 = $process_icons['process_4'];
           $process_5 = $process_icons['process_5'];
           $process_6 = $process_icons['process_6'];
-
       ?>
 <!--Start App Development Process-->
 <section class="service-block pad-tb1 pb-0 light-dark">
@@ -275,7 +311,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div style="margin-bottom: 30px;"></div>
+        <div style="margin-bottom: 70px;"></div>
 
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -342,13 +378,13 @@ get_header(); ?>
                             <?php endif; ?>
 
                             <?php if (!empty($process_6['title'])): ?>
-                            <div class="col-md-4 text-content-idea">
+                            <!-- <div class="col-md-4 text-content-idea">
                                 <div class="text-heading">
                                     <h2>06</h2>
                                     <h6><?php echo $process_6['title'];?></h6>
                                 </div>
                                 <p><?php echo $process_6['content'];?></p>
-                            </div>
+                            </div> -->
                             <?php endif; ?>
 
                         </div>
@@ -652,6 +688,7 @@ if( have_rows('industries_we_serve', 'option') ):
                   $testi_args = array(
                       'post_type' => 'testimonial',
                       'order' => 'DESC',
+                      'posts_per_page' => 3,
                       'tax_query' => array(
                            array (
                               'taxonomy' => 'testi_category',
@@ -724,11 +761,53 @@ if( have_rows('call_to_action', 'option') ):
                     </a>
                     <?php endif; ?>
 
-                    <?php if (!empty($cta_phone_no)): ?>
-                    <p class="cta-call">Or call us now <a href="tel:<?php echo $cta_phone_no; ?>"><i class="fas fa-phone-alt"></i>
-                    <?php echo $cta_phone_no; ?></a>
+
+                    <?php 
+
+//                         $request = wp_remote_get( 'https://ipapi.co/'.get_client_ip().'/json' );
+//                         // $request = wp_remote_get( 'https://ipapi.co/json/' );
+//                         // $request = wp_remote_get( 'https://api.hostip.info/get_html.php?ip=207.228.238.7' );
+//                         if( is_wp_error( $request ) ) {
+//                             return false; // Bail early
+//                         }
+//                         $body = wp_remote_retrieve_body( $request );
+//                         $data = json_decode( $body );
+                        ?>
+                    
+                        <?php
+//                         $country = $data->country_name;
+						$country = getCountry();
+                        $india_contact = get_field('india_contact', 'option');
+                        $usa_contact = get_field('usa_contact', 'option');
+                        $uk_contact = get_field('uk_contact', 'option');
+                     ?>
+                     <?php if($country == 'India'): ?>
+                        <?php if (!empty($india_contact['phone'])): ?>
+                            <p class="cta-call">Or call us now 
+                                <a href="tel:<?php echo $india_contact['phone']; ?>">
+                                    <i class="fas fa-phone-alt"></i> <?php echo $india_contact['phone']; ?>
+                                </a>
+                            </p>
+                        <?php endif; ?>
+
+                    <?php elseif($country == 'US'): ?>
+                        <?php if (!empty($usa_contact['phone'])): ?>
+                            <p class="cta-call">Or call us now 
+                                <a href="tel:<?php echo $usa_contact['phone']; ?>">
+                                    <i class="fas fa-phone-alt"></i> <?php echo $usa_contact['phone']; ?>
+                                </a>
+                            </p>
+                        <?php endif; ?>
+
+                    <?php else: ?>
+                        <?php if (!empty($uk_contact['phone'])): ?>
+                            <p class="cta-call">Or call us now 
+                                <a href="tel:<?php echo $uk_contact['phone']; ?>">
+                                    <i class="fas fa-phone-alt"></i> <?php echo $uk_contact['phone']; ?>
+                                </a>
+                            </p>
+                        <?php endif; ?>
                     <?php endif; ?>
-                    </p>
                 </div>
             </div>
         </div>

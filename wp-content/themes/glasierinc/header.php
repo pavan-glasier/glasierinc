@@ -30,7 +30,9 @@
 <meta name="geo.country" content="UK">
 <meta name="document-type" content="Public">
 <meta name="document-rating" content="Safe for Kids">
+<meta name="robots" content='max-image-preview:large' />
 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+
 
 <title><?php wp_title( '|', true, 'right' ); ?></title>
 
@@ -71,14 +73,21 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '245603730396550');
 fbq('track', 'PageView');
 </script>
+<noscript>
+    <img height="1" width="1" style="display:none" data-src="https://www.facebook.com/tr?id=245603730396550&ev=PageView&noscript=1" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=245603730396550&ev=PageView&noscript=1" />
+    </noscript>
+</noscript>
+<!-- End Facebook Pixel Code -->
 	
 <!-- Google Tag Manager -->	
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132672542-1"></script>
-
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
+
 gtag('config', 'UA-132672542-1');
 gtag('config', 'AW-776430104');
 </script>
@@ -100,7 +109,7 @@ gtag('config', 'AW-776430104');
     "sameAs": ["https://www.facebook.com/GlasierInc/", "https://www.linkedin.com/company/glasierinc","https://twitter.com/GlasierInc","https://medium.com/@GlasierInc","https://www.behance.net/glasierinc"],
     "address": { 
     "@type": "PostalAddress", 
-    "streetAddress": "A/6, First Floor, Safal Profitaire, Corporate Rd, opp. Hotel Ramada, Prahlad Nagar, Ahmedabad, Gujarat, India 380015", 
+    "streetAddress": "A/6, First Floor, Safal Profitaire, Corporate Rd, opp. Hotel Ramada, Prahlad Nagar", 
     "addressLocality": "Ahmedabad", 
     "addressRegion": "Gujarat", 
     "postalCode": "380015", 
@@ -132,8 +141,6 @@ gtag('config', 'AW-776430104');
     <meta property="og:image" content="https://www.glasierinc.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2019/01/webs1-1.png.webp">
 <!-- //Schema Code Here -->
 
-
-
 <?php wp_head(); ?>
 
 </head>
@@ -148,8 +155,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="onloadpage" id="page-load">
         <div class="loader-div">
             <div class="on-img">
-                <img src="<?php echo get_template_directory_uri(); ?>/images/loader.gif" alt="Logo" class="img-fluid" />
-                <span>Loading Please Wait...</span>
+                <img src="<?php echo site_url(); ?>/wp-content/uploads/2022/04/loader.gif" alt="Logo" class="img-fluid" />
+<!--                 <span>Loading Please Wait...</span> -->
             </div>
         </div>
     </div>
@@ -173,17 +180,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         </a>
                      </div>
                 </div>
-                <div class="ree-nav" role="navigation">
-                    <?php $main_menu = get_field('main_menu', 'option'); ?>
+                <!-- <div class="ree-nav" role="navigation">
+                    <?php //$main_menu = get_field('main_menu', 'option'); ?>
+                    <?php 
+                    // wp_nav_menu( array(
+                    //        'theme_location'    => $main_menu['value'],
+                    //        'container'         => 'ul',
+                    //        'menu_class'        => 'nav-list',
+                    //        'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                    //        'walker'            => new WP_Bootstrap_Navwalker() )
+                    //    );
+                       ?>
+                </div> -->
+
+                <nav id='cssmenu'>
+                    <?php $main_menu = get_field('main_menu', 'option'); 
+                    // print_r($main_menu);
+                    ?>
                     <?php wp_nav_menu( array(
                            'theme_location'    => $main_menu['value'],
                            'container'         => 'ul',
-                           'menu_class'        => 'nav-list',
-                           'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-                           'walker'            => new WP_Bootstrap_Navwalker() )
+                           'menu_class'        => 'nav-menus',
+                            )
                        );
                        ?>
-                </div>
+                </nav>
                 <?php 
                   $header_link_btn = get_field('header_link_button', 'option');
                   if( $header_link_btn ): 

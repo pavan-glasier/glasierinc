@@ -3,7 +3,7 @@ $wplogoutURL = urlencode(get_the_permalink());
 $wplogoutTitle = urlencode(get_the_title());
 $wplogoutImage= urlencode(get_the_post_thumbnail_url(get_the_ID(), 'full'));
 ?>
-<div class="col-lg-4 col-sm-6">
+<div class="col-lg-6 col-sm-12">
     <div class="ree-media-crd">
         <div class="rpl-img">
             <a href="<?php the_permalink();?>">

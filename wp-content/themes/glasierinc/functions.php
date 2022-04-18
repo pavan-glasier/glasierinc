@@ -118,7 +118,9 @@ function glasierinc_setup() {
 
 
 
+add_filter( 'auto_update_plugin', '__return_false' );
 
+add_filter( 'auto_update_theme', '__return_false' );
 
 // add_filter( 'wp_nav_menu_items', 'add_extra_item_to_nav_menu', 10, 2 );
 // function add_extra_item_to_nav_menu( $items, $args ) {
@@ -1190,3 +1192,29 @@ function na_parse_request( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'na_parse_request' );
+
+
+// Function to get the client IP address
+function get_client_ip() {
+    $ipaddress = '';
+    if (isset($_SERVER['HTTP_CLIENT_IP']))
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if(isset($_SERVER['HTTP_X_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if(isset($_SERVER['HTTP_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if(isset($_SERVER['REMOTE_ADDR']))
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+function getCountry(){
+	$geoPlugin_array = unserialize( file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']) );
+	$country = $geoPlugin_array['geoplugin_countryName'];
+	return $country;
+}

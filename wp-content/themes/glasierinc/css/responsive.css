@@ -10,7 +10,8 @@
 		padding: 0 6%
 	}
 	.common-heading.ptag p {margin-bottom: 30px;}
-	.second-section {bottom: 500px;}
+/* 	.second-section {bottom: 500px;} */
+	.second-section .text-content-idea {left: 10px; bottom: -110px;}
 }
 
 @media(min-width:1200px) {
@@ -68,7 +69,7 @@
     .text-content-idea p  {
         width: 55%;
     }
-	.second-section {left: 73px;}
+/* 	.second-section {left: 73px;} */
 }
 
 @media screen and (max-width:1299px) and (min-width:1100px) {
@@ -114,10 +115,7 @@
     .text-content-idea p  {
         width: 63%;
     }
-    .second-section {
-        bottom: 495px;
-        left: 145px;
-    }
+  
 }
 
 @media only screen and (max-width:1150px) {
@@ -225,14 +223,18 @@
 		font-size: 18px
 	}
     .text-content-idea p {width: 67%;}
-	.second-section {bottom: 505px; left: 125px;}
+/* 	.second-section {bottom: 505px; left: 125px;} */
+}
+@media only screen and (max-width: 1500px) {
+	.text-content-idea p {width: 100%;}
+	.second-section .text-content-idea {left: -15px; bottom: -135px;}
 }
 
-@media only screen and (max-width: 1364px) {
-	.second-section {left: 125px;}
+@media only screen and (max-width: 1300px) {
+/* 	.second-section {left: 125px;} */
 	.common-heading.ptag p {margin-bottom: 30px;}
-	.text-content-idea p {width: 77%;}
-	
+	.text-content-idea p {width: 100%;}
+	.second-section .text-content-idea {left: -55px; bottom: -175px;}
 }
 
 @media only screen and (max-width:1200px) {
@@ -248,8 +250,17 @@
 	.hero-right-cnt .media {
 		padding-left: 0
 	}
-	.second-section {left: 100px; width: 100%;}
-	.second-section .text-content-idea {left: 0px; bottom: 20px;}
+/* 	.second-section {left: 100px; width: 100%;} */
+	.second-section .text-content-idea {left: -55px; bottom: -183px;}
+	.text-content-idea p {width: 100%}
+}
+
+@media only screen and (max-width: 1130px) {
+	.second-section .text-content-idea {left: -65px; bottom: -182px;}
+	.wide-sblock {display: block;}
+	.s-card-icon-large {width: 100%;}
+	.s-block-content-large {width: 100%; margin:0px; margin-top: 30px;}
+	.s-block-content-large p {margin-top: 10px;}
 }
 
 @media only screen and (max-width:992px) {
@@ -590,14 +601,25 @@
 	.vrt-tabb li+li {
 		margin-left: 10px
 	}
-    .text-content-idea p {width: 90%; font-size: 9px !important;}
+    .text-content-idea p {width: 100%; font-size: 9px !important;}
     .text-heading h2 {font-size: 30px;}
     .text-heading h6 {font-size: 16px; margin-top: 0px;}
-    .second-section {bottom: 415px; left: 95px;}
+    .second-section .text-content-idea {bottom: -250px; left: -112px;}
+    .first-section { top: -10px; }
+	.wide-sblock {display: block;}
+	.s-card-icon-large {width: 100%;}
+	.s-block-content-large {width: 100%; margin:0px; margin-top: 30px;}
+	.s-block-content-large p {margin-top: 10px;}
 }
 
 @media only screen and (max-width: 890px) {
-	.second-section {left: 65px;}
+/* 	.second-section {left: 115px;} */
+	.text-content-idea p {width: 100%}
+	.second-section .text-content-idea {bottom: -246px; left: -115px;}
+	.wide-sblock {display: block;}
+	.s-card-icon-large {width: 100%;}
+	.s-block-content-large {width: 100%; margin:0px; margin-top: 30px;}
+	.s-block-content-large p {margin-top: 10px;}
 }
 
 @media only screen and (max-width:767px) {
@@ -1141,5 +1163,34 @@
 	.our-team .ree-media-crd {
 		width: 100%;
 		margin: 40px auto 0
+	}
+}
+
+
+/* MY CSS PV */
+@media only screen and (max-width:500px) {
+	#cssmenu {
+	    display: none;
+	}
+	.project-type-checkbox .wpcf7-list-item {
+	    width: 100%;
+	    justify-content: flex-end;
+	}
+	.our-map iframe {
+	    width: 100% !important;
+	}
+	
+	.location-home .location-block- {
+	    text-align: center;
+	}
+	.loc-icon-nam {
+	    display: block;
+	}
+	.loc-icon-nam p {
+	    margin-left: 0;
+	    margin-top: 18px;
+	}
+	.project-stage-radio .project-stage .wpcf7-radio{
+		flex-wrap: wrap;
 	}
 }

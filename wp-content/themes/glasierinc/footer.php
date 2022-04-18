@@ -15,35 +15,43 @@
         <div class="footer-fist-row pt40">
             <div class="container">
                 <div class="footer-rowset">
-
-                    <?php 
-
-                        $request = wp_remote_get( 'https://ipapi.co/json/' );
-                        // $request = wp_remote_get( 'https://api.hostip.info/get_html.php?ip=207.228.238.7' );
-                        if( is_wp_error( $request ) ) {
-                            return false; // Bail early
-                        }
-                        $body = wp_remote_retrieve_body( $request );
-                        $data = json_decode( $body );
-                        ?>
-                    
                         <?php
-                        $country = $data->country_name;
+                        $country = getCountry();
                         $india_contact = get_field('india_contact', 'option');
                         $usa_contact = get_field('usa_contact', 'option');
                         $uk_contact = get_field('uk_contact', 'option');
+                        $canada = get_field('canada', 'option');
+                        
                      ?>
-
-                     <?php if($country == 'India'): ?>
+						<?php $contact_info = get_field('contact_info', 'option'); ?>
                         <?php if($india_contact): ?>
                         <div class="col footer-head">
-                            <h5><?php echo $india_contact['heading']; ?></h5>
+                            <h5><?php echo $contact_info['heading']; ?></h5>
                             <ul class="footer-links-list social-linkz">
-                                <?php if( !empty( $india_contact['address'] ) ): ?>
+								
+								<?php if( !empty( $usa_contact['phone'] ) ): ?>
+								<li>
+									<a href="tel:<?php echo $usa_contact['phone']; ?>">
+										<span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-united-states-48.png" /></span>
+										<?php echo $usa_contact['phone']; ?>
+									</a>
+								</li>
+								<?php endif; ?>
+								
+								<?php if( !empty( $uk_contact['phone'] ) ): ?>
+								<li>
+									<a href="tel:<?php echo $uk_contact['phone']; ?>">
+										<span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-great-britain-48.png" /></span>
+										<?php echo $uk_contact['phone']; ?>
+									</a>
+								</li>
+								<?php endif; ?>
+								
+								<?php if( !empty( $canada['phone'] ) ): ?>
                                 <li>
-                                    <a href="#" target="_blank"> 
-                                        <span><i class="fa fa-map-marker-alt"></i></span>
-                                       <?php echo $india_contact['address'];?>
+                                    <a href="tel:<?php echo $canada['phone']; ?>">
+                                        <span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-canada-48.png" /></span>
+                                       <?php echo $canada['phone']; ?>
                                     </a>
                                 </li>
                                 <?php endif; ?>
@@ -51,20 +59,14 @@
                                 <?php if( !empty( $india_contact['phone'] ) ): ?>
                                 <li>
                                     <a href="tel:<?php echo $india_contact['phone']; ?>">
-                                        <span><i class="fas fa-phone-square-alt"></i></span>
+                                        <span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-india-48.png" /></span>
                                        <?php echo $india_contact['phone']; ?>
                                     </a>
                                 </li>
                                 <?php endif; ?>
+								
+								
 
-                                <?php if( !empty( $india_contact['whatsapp'] ) ): ?>
-                                <li>
-                                    <a href="tel:<?php echo $india_contact['whatsapp']; ?>">
-                                        <span><i class="fab fa-whatsapp-square"></i></span>
-                                       <?php echo $india_contact['whatsapp']; ?>
-                                    </a>
-                                </li>
-                                <?php endif; ?>
 
                                 <?php if( !empty( $india_contact['email'] ) ): ?>
                                 <li>
@@ -93,125 +95,7 @@
                             </ul>
                         </div>
                         <?php endif; ?>
-                        <?php elseif($country == 'US'): ?>
-                            <?php if($usa_contact): ?>
-                            <div class="col footer-head">
-                                <h5><?php echo $usa_contact['heading']; ?></h5>
-                                <ul class="footer-links-list social-linkz">
-                                    <?php if( !empty( $usa_contact['address'] ) ): ?>
-                                    <li>
-                                        <a href="#" target="_blank"> 
-                                            <span><i class="fa fa-map-marker-alt"></i></span>
-                                           <?php echo $usa_contact['address'];?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-                                    <?php if( !empty( $usa_contact['phone'] ) ): ?>
-                                    <li>
-                                        <a href="tel:<?php echo $usa_contact['phone']; ?>">
-                                            <span><i class="fas fa-phone-square-alt"></i></span>
-                                           <?php echo $usa_contact['phone']; ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-                                    <?php if( !empty( $usa_contact['whatsapp'] ) ): ?>
-                                    <li>
-                                        <a href="tel:<?php echo $usa_contact['whatsapp']; ?>">
-                                            <span><i class="fab fa-whatsapp-square"></i></span>
-                                           <?php echo $usa_contact['whatsapp']; ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-                                    <?php if( !empty( $usa_contact['email'] ) ): ?>
-                                    <li>
-                                        <a href="mailto:<?php echo $usa_contact['email']; ?>">
-                                            <span><i class="fas fa-envelope"></i></span>
-                                           <?php echo $usa_contact['email']; ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-
-                                    <?php
-                                    $skype = $usa_contact['skype'];
-                                     if( $skype ): 
-                                      $skype_url = $skype['url'];
-                                      $skype_title = $skype['title'];
-                                      $skype_target = $skype['target'] ? $skype['target'] : '_self';
-                                    ?>
-                                    <li>
-                                        <a href="skype:<?php echo $skype_url; ?>" target="<?php echo esc_attr( $skype_target ); ?>">
-                                            <span><i class="fab fa-skype"></i></span>
-                                            <?php echo esc_html( $skype_title ); ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-                                </ul>
-                            </div>
-                            <?php endif; ?>
-                        <?php else: ?>
-                            <?php if($uk_contact): ?>
-                            <div class="col footer-head">
-                                <h5><?php echo $uk_contact['heading']; ?></h5>
-                                <ul class="footer-links-list social-linkz">
-                                    <?php if( !empty( $uk_contact['address'] ) ): ?>
-                                    <li>
-                                        <a href="#" target="_blank"> 
-                                            <span><i class="fa fa-map-marker-alt"></i></span>
-                                           <?php echo $uk_contact['address'];?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-                                    <?php if( !empty( $uk_contact['phone'] ) ): ?>
-                                    <li>
-                                        <a href="tel:<?php echo $uk_contact['phone']; ?>">
-                                            <span><i class="fas fa-phone-square-alt"></i></span>
-                                           <?php echo $uk_contact['phone']; ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-                                    <?php if( !empty( $uk_contact['whatsapp'] ) ): ?>
-                                    <li>
-                                        <a href="tel:<?php echo $uk_contact['whatsapp']; ?>">
-                                            <span><i class="fab fa-whatsapp-square"></i></span>
-                                           <?php echo $uk_contact['whatsapp']; ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-                                    <?php if( !empty( $uk_contact['email'] ) ): ?>
-                                    <li>
-                                        <a href="mailto:<?php echo $uk_contact['email']; ?>">
-                                            <span><i class="fas fa-envelope"></i></span>
-                                           <?php echo $uk_contact['email']; ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-
-
-                                    <?php
-                                    $skype = $uk_contact['skype'];
-                                     if( $skype ): 
-                                      $skype_url = $skype['url'];
-                                      $skype_title = $skype['title'];
-                                      $skype_target = $skype['target'] ? $skype['target'] : '_self';
-                                    ?>
-                                    <li>
-                                        <a href="skype:<?php echo $skype_url; ?>" target="<?php echo esc_attr( $skype_target ); ?>">
-                                            <span><i class="fab fa-skype"></i></span>
-                                            <?php echo esc_html( $skype_title ); ?>
-                                        </a>
-                                    </li>
-                                    <?php endif; ?>
-                                </ul>
-                            </div>
-                            <?php endif; ?>
-                    <?php endif; ?>
+                       
 
 
                     <?php $follow_us = get_field('follow_us', 'option'); ?>
@@ -440,6 +324,68 @@ $(document).ready(function() {
 
 
 </script>
+
+<script>
+
+(function($) {
+$.fn.menumaker = function(options) {  
+ var cssmenu = $(this), settings = $.extend({
+   format: "dropdown",
+   sticky: false
+ }, options);
+ return this.each(function() {
+   $(this).find(".button").on('click', function(){
+     $(this).toggleClass('menu-opened');
+     var mainmenu = $(this).next('ul');
+     if (mainmenu.hasClass('open')) { 
+       mainmenu.slideToggle().removeClass('open');
+     }
+     else {
+       mainmenu.slideToggle().addClass('open');
+       if (settings.format === "dropdown") {
+         mainmenu.find('ul').show();
+       }
+     }
+   });
+   cssmenu.find('li ul').parent().addClass('has-sub');
+multiTg = function() {
+     cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+     cssmenu.find('.submenu-button').on('click', function() {
+       $(this).toggleClass('submenu-opened');
+       if ($(this).siblings('ul').hasClass('open')) {
+         $(this).siblings('ul').removeClass('open').slideToggle();
+       }
+       else {
+         $(this).siblings('ul').addClass('open').slideToggle();
+       }
+     });
+   };
+   if (settings.format === 'multitoggle') multiTg();
+   else cssmenu.addClass('dropdown');
+   if (settings.sticky === true) cssmenu.css('position', 'fixed');
+resizeFix = function() {
+  var mediasize = 1000;
+     if ($( window ).width() > mediasize) {
+       cssmenu.find('ul').show();
+     }
+     if ($(window).width() <= mediasize) {
+       cssmenu.find('ul').hide().removeClass('open');
+     }
+   };
+   resizeFix();
+   return $(window).on('resize', resizeFix);
+ });
+  };
+})(jQuery);
+
+(function($){
+$(document).ready(function(){
+$("#cssmenu").menumaker({
+   format: "multitoggle"
+});
+});
+})(jQuery);
+    </script>
 <?php wp_footer(); ?>
 
 </body>
