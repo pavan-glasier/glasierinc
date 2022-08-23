@@ -17,8 +17,8 @@ get_header(); ?>
 <!--contact info-->
 <div class="contact-head-sec pt85">
    <div class="container">
-      <div class="row pt80">
-         <div class="col-lg-6 vcenter">
+      <div class="row ">
+         <div class="col-lg-7 vcenter">
             <div class="page-headings">
                <?php if(!empty($tagline)): ?>
                <span class="sub-heading mb15"><i class="fas fa-headset mr5"></i> <?php echo $tagline;?></span>
@@ -36,7 +36,7 @@ get_header(); ?>
          </div>
 
          <?php if(!empty($image)): ?>
-         <div class="col-lg-6 vcenter">
+         <div class="col-lg-5 vcenter">
             <div class="sol-img m-mt30">
                <img src="<?php echo $image; ?>" alt="img" class="img-fluid">
             </div>
@@ -96,35 +96,35 @@ get_header(); ?>
 				
                <div class="contact-detalnk">
 				   <?php if( !empty( $usa_contact['phone'] ) ): ?>
-					   <a href="tel:<?php echo $usa_contact['phone']; ?>">
+					   <a href="tel:<?php echo str_replace(' ','',$usa_contact['phone']); ?>">
 						   <img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-united-states-48.png" style="margin-left: -22px;width: 35px;margin-right: 15px;" />
 						   <span><?php echo $usa_contact['phone']; ?></span>
 					   </a>
 				   <?php endif; ?>
 				   
 				   <?php if( !empty( $uk_contact['phone'] ) ): ?>
-					   <a href="tel:<?php echo $uk_contact['phone']; ?>">
+					   <a href="tel:<?php echo str_replace(' ','',$uk_contact['phone']); ?>">
 						   <img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-great-britain-48.png" style="margin-left: -22px;width: 35px;margin-right: 15px;" />
 						   <span><?php echo $uk_contact['phone']; ?></span>
 					   </a>
 				   <?php endif; ?>
 				   
 				   <?php if( !empty( $canada['phone'] ) ): ?>
-					   <a href="tel:<?php echo $canada['phone']; ?>">
+					   <a href="tel:<?php echo str_replace(' ','',$canada['phone']); ?>">
 						   <img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-canada-48.png" style="margin-left: -22px;width: 35px;margin-right: 15px;" />
 						   <span><?php echo $canada['phone']; ?></span>
 					   </a>
 				   <?php endif; ?>
 				   
 				   <?php if( !empty( $india_contact['phone'] ) ): ?>
-					   <a href="tel:<?php echo $india_contact['phone']; ?>">
+					   <a href="tel:<?php echo str_replace(' ','',$india_contact['phone']); ?>">
 						   <img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-india-48.png" style="margin-left: -22px;width: 35px;margin-right: 15px;" />
 						   <span><?php echo $india_contact['phone']; ?></span>
 					   </a>
 				   <?php endif; ?>
 				   
 				   <?php if(!empty($india_contact['email'])): ?>
-					  <a href="<?php echo $india_contact['email'];?>" target="_blank">
+					  <a href="mailto:<?php echo $india_contact['email'];?>" target="_blank">
 						 <i class="fas fa-envelope fa-xl"></i>
 						 <span><?php echo $india_contact['email']; ?></span>
 					  </a>

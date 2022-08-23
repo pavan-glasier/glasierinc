@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+<!-- Meta Tag -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
+<title>Lending - IT Company in India - Web &amp; Mobile App Development Services</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&#038;family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&#038;family=Varela+Round&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&#038;family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&#038;family=Varela+Round&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&#038;family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&#038;family=Varela+Round&#038;display=swap" /></noscript>
+
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<link rel="pingback" href="http://192.168.0.128/glasierinc/xmlrpc.php">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<link data-minify="1" rel="stylesheet" href="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/css/bootstrap.css?ver=1661250339">
+<link data-minify="1" rel="stylesheet" href="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/css/fonts-icons.css?ver=1661250339">
+<link data-minify="1" rel="stylesheet" href="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/css/plugin-resets.css?ver=1661250339">
+<link data-minify="1" rel="stylesheet" href="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/css/style.css?ver=1661250339">
+<link data-minify="1" rel="stylesheet" href="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/css/responsive.css?ver=1661250339">
+<link data-minify="1" rel="stylesheet" href="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/css/color.css?ver=1661250339">
+
+	<!-- Google Tag Manager -->
+<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T7BR93P');</script>
+<!-- End Google Tag Manager -->
+	
+<!-- Facebook Pixel Code -->
+<script type="rocketlazyloadscript">
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '245603730396550');
+fbq('track', 'PageView');
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none" data-src="https://www.facebook.com/tr?id=245603730396550&ev=PageView&noscript=1" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=245603730396550&ev=PageView&noscript=1" />
+    </noscript>
+</noscript>
+<!-- End Facebook Pixel Code -->
+	
+<!-- Google Tag Manager -->	
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=UA-132672542-1"></script>
+<script type="rocketlazyloadscript">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-132672542-1');
+gtag('config', 'AW-776430104');
+</script>
+<!-- Google Tag Manager -->
+	
+<!-- Schema Code -->
+<script type='application/ld+json'>
+    {
+    "@context": "http://schema.org/", 
+    "@type": "Organization", 
+    "legalName": "Glasier inc", 
+    "url": "https://www.glasierinc.com/", 
+    "contactPoint": { 
+    "@type": "ContactPoint", 
+    "telephone": "+91-9925028258", 
+    "contactType": "Local Business" 
+    }, 
+    "logo": "https://glasierinc.com/wp-content/uploads/2019/01/logo.png", 
+    "sameAs": ["https://www.facebook.com/GlasierInc/", "https://www.linkedin.com/company/glasierinc","https://twitter.com/GlasierInc","https://medium.com/@GlasierInc","https://www.behance.net/glasierinc"],
+    "address": { 
+    "@type": "PostalAddress", 
+    "streetAddress": "A/6, First Floor, Safal Profitaire, Corporate Rd, opp. Hotel Ramada, Prahlad Nagar", 
+    "addressLocality": "Ahmedabad", 
+    "addressRegion": "Gujarat", 
+    "postalCode": "380015", 
+    "addressCountry": "India" 
+    } 
+    }, 
+"aggregateRating": {
+    "@type": "AggregateRating",
+    "bestRating": "5",
+    "ratingValue": "4.9",
+    "reviewCount": "68"
+    },
+    "review": {
+    "author": "Federico",
+    "reviewRating": {
+    "@type": "Rating",
+    "bestRating": "5",
+    "ratingValue": "5",
+    }
+    } 
+ { 
+    "@context": "http://schema.org/", 
+    "@type": "WebSite", 
+    "name": "Glasier Inc",
+    "alternateName": "glasierinc", 
+    "url": "https://www.glasierinc.com/"
+    }
+  </script>
+    <meta property="og:image" content="https://www.glasierinc.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2019/01/webs1-1.png.webp">
+<!-- //Schema Code Here -->
+
+
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7BR93P"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div id="wrapper">
+      <div class="loader-container" id="loader">
+         <div class="holder">
+            <div class="la-line-scale la-2x">
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+               <div></div>
+            </div>
+         </div>
+      </div>
+    <!-- Start  header -->
+      <header id="header" class="dark-bg" data-scroll-index="0">
+         <div class="container">
+            <div class="row">
+               <div class="col-xs-12 col-sm-4">
+                  <div class="logo pull-left">
+                     <a href="http://192.168.0.128/glasierinc/">
+                                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" class="img-responsive" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/08/footer-logo.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/08/footer-logo.png" alt="" class="img-responsive"></noscript>
+                                             </a>
+                  </div>
+                  <a href="#" class="nav-opener pull-right"><i class="fa fa-bars" aria-hidden="true"></i></a>
+               </div>
+               <div class="col-xs-12 col-sm-8">
+                  <ul class="list-inline text-right top-list">
+                                         <li>
+                        <i class="fa fa-envelope main-color"></i>
+                        <strong>Contact US :</strong>
+                        <a href="mailto:info@glasierinc.com">info@glasierinc.com</a>
+                     </li>
+                    
+                                         <li>
+                        <i class="fa fa-phone main-color"></i>
+                        <strong>Call Us :</strong>
+                        <a href="tel:+919925028258">+91 9925028258</a>
+                     </li>
+                                       </ul>
+               </div>
+            </div>
+         </div>
+         <nav id="nav">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xs-12">
+                                             <ul id="menu-lending-page-menu" class="nav-list list-inline"><li id="menu-item-1685" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1685"><a rel="0" href="#" class="smooth" data-scroll-nav="0">Home</a></li>
+<li id="menu-item-1686" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1686"><a rel="2" href="#" class="smooth" data-scroll-nav="2">About Us</a></li>
+<li id="menu-item-1687" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1687"><a rel="3" href="#" class="smooth" data-scroll-nav="3">What people say</a></li>
+<li id="menu-item-1688" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1688"><a rel="4" href="#" class="smooth" data-scroll-nav="4">Our Services</a></li>
+<li id="menu-item-1689" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1689"><a rel="5" href="#" class="smooth" data-scroll-nav="5">Our Portfolio</a></li>
+<li id="menu-item-1690" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1690"><a rel="6" href="#" class="smooth" data-scroll-nav="6">Contact Us</a></li>
+<li class="button"><a class="btn btn-default main-bg-color text-uppercase smooth" href="#" data-scroll-nav="1">Get A Quote</a></li></ul>                  </div>
+               </div>
+            </div>
+         </nav>
+      </header>
+      <!-- End header -->
+
+
+
+
+<main id="main">
+   <section data-bg="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/img05.jpg" class="bg-img-full main-banner bg-img-parallax rocket-lazyload" style="" data-scroll-index="0">
+      <span class="overlay"></span>
+      <div class="container">
+         <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-7">
+                               <span class="title">Full-time Dedicated Agency</span>
+                
+                               <h1 class="heading text-uppercase">Let’s get started with Glasier Inc</h1>
+               <span class="divider white"></span>
+               
+                                    <div class="btn-holder">
+                        <a href="#" class="btn btn-default main-bg-color text-uppercase" target="_self" data-scroll-nav="2"> Explore More</a>
+                     </div>
+                                 <span data-bg="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/arrow.png" class="arrow rocket-lazyload" style=""></span>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-5">
+               <section data-bg="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/img02.jpg" class="quote-form rocket-lazyload" style=""
+                  data-scroll-index="1">
+                                    <h2 class="form-heading text-center text-uppercase">REGISTER NOW</h2>
+                  
+                                      <div role="form" class="wpcf7" id="wpcf7-f1703-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/glasierinc/lending/#wpcf7-f1703-o1" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="1703" />
+<input type="hidden" name="_wpcf7_version" value="5.5.6" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1703-o1" />
+<input type="hidden" name="_wpcf7_container_post" value="0" />
+<input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+</div>
+<fieldset>
+<div class="form-group"><span class="wpcf7-form-control-wrap your-name"><input type="text" name="your-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Your Name*" /></span></div>
+<div class="form-group">
+<span class="wpcf7-form-control-wrap your-email"><input type="email" name="your-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" placeholder="Your Email*" /></span></div>
+<div class="form-group"><span class="wpcf7-form-control-wrap your-phone"><input type="number" name="your-phone" value="" class="wpcf7-form-control wpcf7-number wpcf7-validates-as-required wpcf7-validates-as-number form-control" aria-required="true" aria-invalid="false" placeholder="Your Number*" /></span></div>
+<div id="msgSubmit" class="form-message hidden"></div>
+<p><span class="info"><i class="fa fa-info-circle main-color" aria-hidden="true"></i> We will never share your personal info</span><button class="btn btn-default main-bg-color has-spinner wpcf7-submit" type="submit" id="form-submit">GET A QUOTE</button></fieldset>
+<p style="display: none !important;"><label>&#916;<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js" value="81"/><script type="rocketlazyloadscript">document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>                                 </section>
+            </div>
+         </div>
+      </div>
+   </section>
+
+
+   <section class="about-section pad-top-lg pad-bottom-sm" data-scroll-index="2">
+      <div class="container">
+         <header class="main-heading row">
+            <div class="col-xs-12 col-sm-10 col-sm-push-1 col-lg-8 col-lg-push-2 text-center">
+               <h2 class="heading text-uppercase"><span class="main-color">about</span> Glasier inc</h2>
+               <span class="divider center"></span>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                  has been the industry's standard dummy text ever since the 1500s
+               </p>
+            </div>
+         </header>
+         <div class="row">
+            <div class="col-md-6">
+               <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/about-us.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/about-us.png"></noscript>
+            </div>
+            <div class="col-md-6 mt-3 about-text">
+               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eaque fugit fugiat dolorum modi. Enim numquam maxime voluptatum dolor perspiciatis repellat quasi aut, velit nulla odio vel reiciendis ab ullam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, consequatur!  </p>
+               <p>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eaque fugit fugiat dolorum modi. Enim numquam maxime voluptatum dolor perspiciatis repellat quasi aut, velit nulla odio vel reiciendis ab ullam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, consequatur!</p>
+               <p>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eaque fugit fugiat dolorum modi. Enim numquam maxime voluptatum dolor perspiciatis repellat quasi aut, velit nulla odio vel reiciendis ab ullam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, consequatur!</p>
+               <p>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eaque fugit fugiat dolorum modi. Enim numquam maxime voluptatum dolor perspiciatis repellat quasi aut, velit nulla odio vel reiciendis ab ullam! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea, consequatur!</p>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="people-say" data-scroll-index="3">
+      <div data-bg="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/img04.jpg" class="counter-section text-center bg-img-full pad-top-lg pad-bottom-lg rocket-lazyload"
+         style="" data-scroll-index="3">
+         <div class="container pad-top-xs">
+            <div id="testim" class="testim">
+               <header class="main-heading row">
+                  <div class="col-xs-12 col-sm-10 col-sm-push-1 col-lg-8 col-lg-push-2 text-center">
+                     <h2 class="heading text-uppercase"><span class="main-color">What</span> people say</h2>
+                     <span class="divider center"></span>
+                  </div>
+               </header>
+               <div class="wrap">
+                  <span id="right-arrow" class="arrow right fa fa-chevron-right"></span>
+                  <span id="left-arrow" class="arrow left fa fa-chevron-left "></span>
+                  <ul id="testim-dots" class="dots">
+                     <li class="dot active"></li>
+                     <li class="dot"></li>
+                     <li class="dot"></li>
+                     <li class="dot"></li>
+                     <li class="dot"></li>
+                  </ul>
+                  <div id="testim-content" class="cont">
+                     <div class="active">
+                        <div class="img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/man-1.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/man-1.svg" alt=""></noscript></div>
+                        <h2>Lorem P. Ipsum</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                     </div>
+                     <div>
+                        <div class="img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/man-2.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/man-2.svg" alt=""></noscript></div>
+                        <h2>Mr. Lorem Ipsum</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                     </div>
+                     <div>
+                        <div class="img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/man-3.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/man-3.svg" alt=""></noscript></div>
+                        <h2>Lorem Ipsum</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                     </div>
+                     <div>
+                        <div class="img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/woman-1.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/woman-1.svg" alt=""></noscript></div>
+                        <h2>Lorem De Ipsum</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                     </div>
+                     <div>
+                        <div class="img"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/woman-2.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/woman-2.svg" alt=""></noscript></div>
+                        <h2>Ms. Lorem R. Ipsum</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="services-section pad-top-lg pad-bottom-sm" data-scroll-index="4">
+       <div class="container">
+          <header class="main-heading row">
+             <div class="col-xs-12 col-sm-10 col-sm-push-1 col-lg-8 col-lg-push-2 text-center">
+                <h2 class="heading text-uppercase"><span class="main-color">our</span> Services</h2>
+                <span class="divider center"></span>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                   has been the industry's standard dummy text ever since the 1500s
+                </p>
+             </div>
+          </header>
+          <div class="row">
+             <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="about-box">
+                   <span class="num main-color">01.</span>
+                   <span class="title text-uppercase">Web Development</span>
+                   <span class="divider"></span>
+                   <p>Allow your brand to communicate with your customers as you would Experience a new level of interactive, innovative and eye-catching websites with...</p>
+                   <a href="#" class="more main-color text-uppercase">READ MORE...</a>
+                </div>
+             </div>
+             <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="about-box">
+                   <span class="num main-color">02.</span>
+                   <span class="title text-uppercase">Mobile Applications</span>
+                   <span class="divider"></span>
+                   <p>Apps let you bring your business name to life. Our mobile application development services in India can help your business increase its...</p>
+                   <a href="#" class="more main-color text-uppercase">READ MORE...</a>
+                </div>
+             </div>
+             <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="about-box">
+                   <span class="num main-color">03.</span>
+                   <span class="title text-uppercase">Custom Software Development Company in India</span>
+                   <span class="divider"></span>
+                   <p>Today, custom digital experiences are key to building a better future for businesses. With our expertise in creating customized, high-performing, and top-rated...</p>
+                   <a href="#" class="more main-color text-uppercase">READ MORE...</a>
+                </div>
+             </div>
+             <div class="col-xs-12 col-sm-6 col-md-4 mt-50">
+                <div class="about-box">
+                   <span class="num main-color">04.</span>
+                   <span class="title text-uppercase">Dedicated Resource</span>
+                   <span class="divider"></span>
+                   <p>Don't let the recruitment process overwhelm you. Hire an experienced development team for your dream project. Hire a world-class dedicated development team...</p>
+                   <a href="#" class="more main-color text-uppercase">READ MORE...</a>
+                </div>
+             </div>
+             <div class="col-xs-12 col-sm-6 col-md-4 mt-50">
+                <div class="about-box">
+                   <span class="num main-color">05.</span>
+                   <span class="title text-uppercase">UI/UX Design Services</span>
+                   <span class="divider"></span>
+                   <p>Creating an engaging user interface to increase engagement and create a memorable digital experience. Glasier Inc features a team of skilled designers...</p>
+                   <a href="#" class="more main-color text-uppercase">READ MORE...</a>
+                </div>
+             </div>
+             <div class="col-xs-12 col-sm-6 col-md-4 mt-50">
+                <div class="about-box">
+                   <span class="num main-color">06.</span>
+                   <span class="title text-uppercase">SEO Company India</span>
+                   <span class="divider"></span>
+                   <p>For every business, whether it's a small business or a large corporation, Glasier Inc continues to be the best SEO Company in...</p>
+                   <a href="#" class="more main-color text-uppercase">READ MORE...</a>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+   <section data-bg="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/img02.jpg" class="bg-img-full price-section pad-top-lg pad-bottom-sm rocket-lazyload" style="" data-scroll-index="5">
+      <div class="container">
+         <header class="main-heading row">
+            <div class="col-xs-12 col-sm-10 col-sm-push-1 col-lg-8 col-lg-push-2 text-center">
+               <h2 class="heading text-uppercase">
+                  <span class="main-color">Our </span> Portfolio
+               </h2>
+               <span class="divider center"></span>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+            </div>
+         </header>
+         <div class="row">
+            <div class="col-md-6 p-0">
+               <div class="portfolio-box  pad-bottom-sm">
+                  <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/port-folio-1.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/port-folio-1.png"></noscript>
+               </div>
+            </div>
+            <div class="col-md-6 p-0">
+               <div class="portfolio-box pad-bottom-sm">
+                  <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/port-folio-1.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/port-folio-1.png"></noscript>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="bg-img-full bg-img-parallax quote-section pad-top-lg pad-bottom-lg" style="background-color: #032454;">
+      <span class="overlay"></span>
+      <div class="container">
+         <div class="row">
+            <div class="col-cs-12 col-sm-10 col-lg-8 col-sm-push-1 col-lg-push-2 text-center">
+               <span class="subtitle">Creative Unbounce Landing Page</span>
+               <h2 class="text-uppercase">get a free Quote today</h2>
+               <span class="divider white center" style=""></span>
+               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                  has been the industry's standard dummy text ever since the 1500s
+               </p>
+               <button class="btn btn-default main-bg-color text-uppercase smooth"
+                  data-scroll-nav="1">Click here</button>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section class="about-section pad-top-lg pad-bottom-sm" data-scroll-index="6">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6">
+               <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/contect.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/contect.png"></noscript>
+            </div>
+            <div class="col-md-6 mt-3 about-text contect-form">
+               <section data-bg="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/img02.jpg" class="quote-form rocket-lazyload" style="">
+                  <h2 class="form-heading text-center text-uppercase">register now</h2>
+                  <!-- <span class="form-title text-center">Take your free trial</span> -->
+                  <form id="contactForm" data-toggle="validator" novalidate="true">
+                     <fieldset>
+                        <div class="form-group">
+                           <input type="text" id="name" placeholder="Your Name" class="form-control" required="" data-error="NEW ERROR MESSAGE">
+                        </div>
+                        <div class="form-group">
+                           <input type="email" id="email" placeholder="Your Email" class="form-control" required="" data-error="NEW ERROR MESSAGE">
+                        </div>
+                        <div class="form-group">
+                           <input type="tel" id="phone" placeholder="Phone Number" class="form-control" required="" data-error="NEW ERROR MESSAGE">
+                        </div>
+                        <div id="msgSubmit" class="form-message hidden"></div>
+                        <span class="info"><i class="fa fa-info-circle main-color" aria-hidden="true"></i> We will never share your personal info</span>
+                        <button class="btn btn-default main-bg-color disabled" type="submit" id="form-submit" style="pointer-events: all; cursor: pointer;">Submit</button>
+                     </fieldset>
+                  </form>
+               </section>
+            </div>
+         </div>
+      </div>
+   </section>
+   <div class="location-home sec-pad">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-3">
+               <div class="location-block- mt60">
+                  <div class="loc-icon-nam">
+                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="new-usa" class="lazyloaded" data-ll-status="loaded" data-lazy-src="https://www.glasierinc.com/wp-content/uploads/2022/04/statue-of-liberty-america-svgrepo-com.svg"><noscript><img src="https://www.glasierinc.com/wp-content/uploads/2022/04/statue-of-liberty-america-svgrepo-com.svg" alt="new-usa" class="lazyloaded" data-ll-status="loaded"></noscript>
+                     <noscript><img src="https://www.glasierinc.com/wp-content/uploads/2022/04/statue-of-liberty-america-svgrepo-com.svg" alt="new-usa"></noscript>
+                     <p><span class="ree-text rt40">USA</span></p>
+                  </div>
+                  <p class="pt20 pb20">600 Parkview Drive, 204 Apt, <br>Santa Clara, California, <br>USA</p>
+               </div>
+            </div>
+            <div class="col-lg-3">
+               <div class="location-block- mt60">
+                  <div class="loc-icon-nam">
+                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="big-ben" class="lazyloaded" data-ll-status="loaded" data-lazy-src="https://www.glasierinc.com/wp-content/themes/glasierinc/images/big-ben.svg"><noscript><img src="https://www.glasierinc.com/wp-content/themes/glasierinc/images/big-ben.svg" alt="big-ben" class="lazyloaded" data-ll-status="loaded"></noscript>
+                     <noscript><img src="https://www.glasierinc.com/wp-content/themes/glasierinc/images/big-ben.svg" alt="big-ben"></noscript>
+                     <p><span class="ree-text rt40">UK</span></p>
+                  </div>
+                  <p class="pt20 pb20">85, Great Portland Street,<br> First Floor, London,<br> W1W 7LT</p>
+               </div>
+            </div>
+            <div class="col-lg-3">
+               <div class="location-block- mt60">
+                  <div class="loc-icon-nam">
+                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="canada" class="lazyloaded" data-ll-status="loaded" data-lazy-src="https://www.glasierinc.com/wp-content/uploads/2022/04/canada.png"><noscript><img src="https://www.glasierinc.com/wp-content/uploads/2022/04/canada.png" alt="canada" class="lazyloaded" data-ll-status="loaded"></noscript>
+                     <noscript><img src="https://www.glasierinc.com/wp-content/uploads/2022/04/canada.png" alt="canada"></noscript>
+                     <p><span class="ree-text rt40">Canada</span></p>
+                  </div>
+                  <p class="pt20 pb20">40 vanier drive
+                     Guelph, <br> N1G2X7
+                     Ontario
+                  </p>
+               </div>
+            </div>
+            <div class="col-lg-3">
+               <div class="location-block- mt60">
+                  <div class="loc-icon-nam">
+                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="new-delhi" class="lazyloaded" data-ll-status="loaded" data-lazy-src="https://www.glasierinc.com/wp-content/themes/glasierinc/images/new-delhi.svg"><noscript><img src="https://www.glasierinc.com/wp-content/themes/glasierinc/images/new-delhi.svg" alt="new-delhi" class="lazyloaded" data-ll-status="loaded"></noscript>
+                     <noscript><img src="https://www.glasierinc.com/wp-content/themes/glasierinc/images/new-delhi.svg" alt="new-delhi"></noscript>
+                     <p><span class="ree-text rt40">India</span></p>
+                  </div>
+                  <p class="pt20 pb20">A/6, First Floor, Safal Profitaire, <br> Corporate Rd, opp. Hotel Ramada, <br> Prahlad Nagar, Ahmedabad, <br>Gujarat, India 380015</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</main>
+
+
+
+    <footer id="footer" class="dark-bg pad-top-xs pad-bottom-xs">
+       <div class="container">
+          <div class="row">
+             <div class="col-xs-12 col-sm-4">
+                <div class="logo pull-left">
+                    <a href="http://192.168.0.128/glasierinc/">
+                                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="" class="img-responsive" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/08/footer-logo.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/08/footer-logo.png" alt="" class="img-responsive"></noscript>
+                                             </a>
+                </div>
+             </div>
+             <div class="col-xs-12 col-sm-8">
+                <ul class="list-inline text-right top-list">
+                                        <li>
+                        <i class="fa fa-envelope main-color"></i>
+                        <strong>Contact US :</strong>
+                        <a href="mailto:info@glasierinc.com">info@glasierinc.com</a>
+                     </li>
+                    
+                                         <li>
+                        <i class="fa fa-phone main-color"></i>
+                        <strong>Call Us :</strong>
+                        <a href="tel:+919925028258">+91 9925028258</a>
+                     </li>
+                                     </ul>
+             </div>
+          </div>
+       </div>
+       <div class="container">
+          <div class="row">
+             <div class="col-xs-12 col-sm-6 bottom">
+                <p>2022 © Glasier Inc. All rights reserved.</p>
+             </div>
+                          <div class="col-xs-12 col-sm-6 bottom">
+                <ul class="list-inline text-right mt-social">
+                                        <li><a href="https://www.facebook.com/GlasierInc/"><i class="fa fa-facebook"></i></a></li>
+                    
+                                       <li><a href="https://www.behance.net/glasierinc"><i class="fa fa-behance"></i></a></li>
+                   
+                                      <li><a href="https://twitter.com/GlasierInc"><i class="fa fa-twitter"></i></a></li>
+                   
+                                      <li><a href="https://www.instagram.com/glasierinc"><i class="fa fa-instagram"></i></a></li>
+                   
+                                      <li><a href="https://medium.com/@GlasierInc"><i class="fa fa-medium"></i></a></li>
+                   
+                                      <li><a href="https://dribbble.com/glasierinc"><i class="fa fa-dribbble"></i></a></li>
+                   
+                                      <li><a href="https://www.linkedin.com/company/glasierinc"><i class="fa fa-linkedin"></i></a></li>
+                   
+                   
+                                   </ul>
+             </div>
+                      </div>
+       </div>
+    </footer>
+    <span id="back-top" class="fa fa-angle-up main-bg-color"></span>
+    <div class="popup-holder">
+       <div id="popup1" class="lightbox">
+          <section data-bg="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/lending/images/img02.jpg" class="quote-form rocket-lazyload" style="">
+             <h2 class="form-heading text-center text-uppercase">register now</h2>
+             <span class="form-title text-center">Take your free trial</span>
+             <form id="contactForm2" data-toggle="validator">
+                <fieldset>
+                   <div class="form-group">
+                      <input type="text" id="name2" placeholder="Your Name" class="form-control" required
+                         data-error="NEW ERROR MESSAGE">
+                   </div>
+                   <div class="form-group">
+                      <input type="email" id="email2" placeholder="Your Email" class="form-control" required
+                         data-error="NEW ERROR MESSAGE">
+                   </div>
+                   <div class="form-group">
+                      <input type="tel" id="phone2" placeholder="Phone Number" class="form-control" required
+                         data-error="NEW ERROR MESSAGE">
+                   </div>
+                   <div id="msgSubmit2" class="form-message hidden"></div>
+                   <span class="info"><i class="fa fa-info-circle main-color" aria-hidden="true"></i> We will
+                   never share your personal info</span>
+                   <button class="btn btn-default main-bg-color" type="submit" id="form-submit2">GET A
+                   QUOTE</button>
+                </fieldset>
+             </form>
+          </section>
+       </div>
+    </div>
+</div>
+
+
+<script type="rocketlazyloadscript" data-minify="1" src="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/js/jquery.js?ver=1661250339" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" src="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/js/plugins.js?ver=1661250339" defer></script>
+<script type="rocketlazyloadscript" data-minify="1" src="http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/lending/js/jquery.main.js?ver=1661250339" defer></script>
+<script type="rocketlazyloadscript">
+ 'use strict'
+ var testim = document.getElementById("testim"),
+ testimDots = Array.prototype.slice.call(document.getElementById("testim-dots").children),
+    testimContent = Array.prototype.slice.call(document.getElementById("testim-content").children),
+    testimLeftArrow = document.getElementById("left-arrow"),
+    testimRightArrow = document.getElementById("right-arrow"),
+    testimSpeed = 4500,
+    currentSlide = 0,
+    currentActive = 0,
+    testimTimer,
+    touchStartPos,
+    touchEndPos,
+    touchPosDiff,
+    ignoreTouch = 30;
+ ;
+ window.onload = function() {
+   // Testim Script
+   function playSlide(slide) {
+       for (var k = 0; k < testimDots.length; k++) {
+           testimContent[k].classList.remove("active");
+           testimContent[k].classList.remove("inactive");
+           testimDots[k].classList.remove("active");
+       }
+       if (slide < 0) {
+           slide = currentSlide = testimContent.length-1;
+       }
+       if (slide > testimContent.length - 1) {
+           slide = currentSlide = 0;
+       }
+       if (currentActive != currentSlide) {
+           testimContent[currentActive].classList.add("inactive");
+       }
+       testimContent[slide].classList.add("active");
+       testimDots[slide].classList.add("active");
+       currentActive = currentSlide;
+       clearTimeout(testimTimer);
+       testimTimer = setTimeout(function() {
+           playSlide(currentSlide += 1);
+       }, testimSpeed)
+   }
+   testimLeftArrow.addEventListener("click", function() {
+       playSlide(currentSlide -= 1);
+   })
+   testimRightArrow.addEventListener("click", function() {
+       playSlide(currentSlide += 1);
+   })
+   for (var l = 0; l < testimDots.length; l++) {
+       testimDots[l].addEventListener("click", function() {
+           playSlide(currentSlide = testimDots.indexOf(this));
+       })
+   }
+   playSlide(currentSlide);
+ 
+   // keyboard shortcuts
+ 
+   document.addEventListener("keyup", function(e) {
+       switch (e.keyCode) {
+           case 37:
+               testimLeftArrow.click();
+               break;
+
+           case 39:
+               testimRightArrow.click();
+               break;
+
+           case 39:
+               testimRightArrow.click();
+               break;
+           default:
+               break;
+       }
+   })
+ testim.addEventListener("touchstart", function(e) {
+        touchStartPos = e.changedTouches[0].clientX;
+ })
+ testim.addEventListener("touchend", function(e) {
+        touchEndPos = e.changedTouches[0].clientX;
+        touchPosDiff = touchStartPos - touchEndPos;
+        console.log(touchPosDiff);
+        console.log(touchStartPos);
+        console.log(touchEndPos);
+        if (touchPosDiff > 0 + ignoreTouch) {
+                testimLeftArrow.click();
+        } else if (touchPosDiff < 0 - ignoreTouch) {
+                testimRightArrow.click();
+        } else {
+            return;
+        }
+ })
+ }
+</script>
+</body>
+</html>
+
+
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1661260917 -->

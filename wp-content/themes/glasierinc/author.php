@@ -40,6 +40,17 @@ get_header(); ?>
 					<h1 class="mb15"> <?php printf( __( '%s', 'glasierinc' ), '<span class="ree-text rt40 vcard">' . get_the_author() . '</span>' );?></h1>
 				</div>
 			</div>
+			<div class="col-lg-7">
+				<div class="ree-subs-from">
+					<!-- <h4>Subscribe to get the latest insights in your inbox.</h4> -->
+					<h4>Search</h4>
+					<form class="mt20" role="search" method="get" action="<?=site_url();?>" >
+						<input type="text" name="s" id="s" placeholder="Search keyword"
+							class="subs-input">
+						<button class="ree-btn-grdt1 subs-btn"><i class="fas fa-search"></i></button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

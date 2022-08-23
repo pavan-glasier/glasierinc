@@ -1,0 +1,13 @@
+.main-color {
+  color: #054371; }
+
+ .main-banner .heading  .main-color, .counter-section .main-color, .list-inline i { color: #fff;}
+.main-bg-color {
+  background-color: #398ac9; }
+
+#nav .nav-list a.active {
+  color: #054371;
+  }
+  #nav .nav-list a:hover {color: #398ac9;}
+.main-border-color {
+  border-color: #698cf0; }

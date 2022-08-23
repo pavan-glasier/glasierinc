@@ -103,7 +103,7 @@
 		line-height: 30px
 	}
 	.half-blog-img {
-		height: 390px
+/* 		height: 390px */
 	}
 	.c-infot {
 		width: 50%
@@ -620,6 +620,9 @@
 	.s-card-icon-large {width: 100%;}
 	.s-block-content-large {width: 100%; margin:0px; margin-top: 30px;}
 	.s-block-content-large p {margin-top: 10px;}
+	.blog-list .ree-media-crd {
+		height: auto;
+	}
 }
 
 @media only screen and (max-width:767px) {
@@ -875,6 +878,9 @@
 	.portfolio-items .row+.row {
 		margin-top: 80px
 	}
+	.blog-list .ree-media-crd {
+		height: auto;
+	}
     .dis-desktop {display: none;}
     .dis-mobile {display: block;}
 }
@@ -962,8 +968,11 @@
 	}
 	.dskt-logo .nav-brand img {
 		max-height: fit-content;
-		max-width: 230px
+		max-width: 145px;
+		width: 100%;
 	}
+	
+	
 	html body .pb120 {
 		padding-bottom: 60px
 	}
@@ -1003,7 +1012,7 @@
 		white-space: nowrap;
 		padding-bottom: 1px;
 		width: 100%;
-		flex-wrap: inherit
+/* 		flex-wrap: inherit */
 	}
 	.statsnum p {
 		font-size: 15px
@@ -1111,6 +1120,44 @@
 		display: grid;
 		grid-gap: 10px
 	}
+/* MY CSS	 */
+	.hc-nav-trigger span::before, .hc-nav-trigger span::after {
+		width: 75%;
+	}
+/* 	.hc-nav-trigger span::before {
+		top: -8px;
+	}
+	.hc-nav-trigger span::after {
+		bottom: -8px;
+	} */
+	.home-contact {
+		margin-top: 50px;
+	}
+	.fourc-up-a {
+		margin: -50px 0 0;
+	}
+	.home-contact-block {
+		padding-top: 55px;
+	}
+	.services .ree-card {
+		height: auto;
+	}
+	.reviews-card {
+		height: auto;
+	}
+	.blog-list .ree-media-crd {
+		height: auto;
+	}
+	.blog-details .sol-img {
+		height: auto;
+	}
+	.half-blog-img {
+		height: auto;
+	}
+	.half-blog-card {
+		height: auto;
+	}
+/* 	/MY CSS */
 }
 
 @media only screen and (max-width:420px) {
@@ -1168,6 +1215,37 @@
 
 
 /* MY CSS PV */
+@media only screen and (max-width: 992px) {
+	.contact-popup .container {
+		max-width: 400px;
+		height: 780px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+			position: inherit;
+	  }
+	 .contact-popup .container .contactInfo {
+		top: 0;
+		height: 100%;
+	  }
+	 .contact-popup .container .contactForm {
+	  width: 100%;
+	  height: 620px;
+	  top: 0;
+	  box-shadow: none;
+		left: 0;
+	 }
+	 .contact-popup  .box {
+	  position: absolute;
+	  width: 100%;
+	  height: 220px;
+	  bottom: 0;
+	 }
+	 .contact-popup  .box h2 {font-size: 22px; margin-top: 20px}
+	  .contact-popup  .box .btn-theme {margin-bottom: 20px;}
+	  .contact-popup .contactForm:before {display: none;}
+	  .navbar-brand img {width: 100%;}
+}
 @media only screen and (max-width:500px) {
 	#cssmenu {
 	    display: none;
@@ -1192,5 +1270,9 @@
 	}
 	.project-stage-radio .project-stage .wpcf7-radio{
 		flex-wrap: wrap;
+	}
+	.form-head .job-apply-close {
+	    right: 1%;
+	    top: 2%;
 	}
 }

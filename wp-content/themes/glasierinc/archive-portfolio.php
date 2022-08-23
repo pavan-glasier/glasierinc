@@ -142,10 +142,10 @@ get_header(); ?>
 							<a href="<?php the_permalink();?>">
 				                <?php 
 				                if ( has_post_thumbnail() ) { ?>
-				                   <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>" class="img-fluid" />
+				                   <img src="<?php echo wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'full' ); ?>" class="img-fluid w-100" />
 				                <?php }
 				                else { ?>
-				                    <img src="<?=site_url();?>/wp-content/uploads/2022/03/Image_not_available.png" class="img-fluid" />
+				                    <img src="<?=site_url();?>/wp-content/uploads/2022/03/Image_not_available.png" class="img-fluid w-100" />
 				                <?php }
 				                ?>
 				            </a>

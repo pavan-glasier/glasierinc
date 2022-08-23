@@ -36,7 +36,7 @@ get_header();?>
                                      $slider_link_btn_title = $slider_link_btn['title'];
                                      $slider_link_btn_target = $slider_link_btn['target'] ? $slider_link_btn['target'] : '_self';
                                      ?>
-                                <a href="<?php echo esc_url( $slider_link_btn_url ); ?>" class="ree-btn ree-btn-grdt1 mt40 mw-80" target="<?php echo esc_attr( $slider_link_btn_target ); ?>"><?php echo esc_html( $slider_link_btn_title ); ?><i class="fas fa-arrow-right fa-btn"></i></a>
+                                <a href="<?php echo esc_url( $slider_link_btn_url ); ?>" class="ree-btn ree-btn-grdt1 mt40 mw-80" target="<?php echo esc_attr( $slider_link_btn_target ); ?>" data-toggle="modal" data-target="<?php echo esc_url( $slider_link_btn_url ); ?>"><?php echo esc_html( $slider_link_btn_title ); ?><i class="fas fa-arrow-right fa-btn"></i></a>
                                  <?php endif; ?>
                             </div>
                         </div>
@@ -307,7 +307,7 @@ get_header();?>
                 </div>
             </div>
             <div class="row mt60">
-                <div class="col-lg-12 vcenter">
+                <div class="col-lg-12 vcenter p-0">
                   <?php 
                      $work_args = array(
                          'post_type' => 'portfolio',
@@ -486,7 +486,7 @@ get_header();?>
                      if( have_rows('logos') ): ?>
                      <ul class="row justify-content-center text-center">
                         <?php while( have_rows('logos') ) : the_row(); ?>
-                         <li class="col-lg-2 col-md-3 col-sm-4 col-4">
+                         <li class="col-lg-2 col-md-3 col-sm-6 col-6">
                            <div class="brand-logo">
                               <img src="<?php echo get_sub_field('logo');?>" alt="clients" class="img-fluid">
                            </div>
@@ -532,7 +532,7 @@ get_header();?>
                                 <?php echo get_the_content();?>
                             </div>
                          </div>
-                         <div class="ree-row-set mt30">
+                         <div class="ree-row-set">
                              <div class="media vcenter">
                                  <div class="ree-details-set user-info p-0">
                                      <h5 style="color: #fff;"><?php echo the_title();?></h5>

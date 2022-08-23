@@ -53,7 +53,7 @@ get_header(); ?>
             
             <?php if (!empty($title_content_group)): ?>
             <div class="col-lg-8 block-1">
-                <div class="common-heading text-l pl25">
+                <div class="common-heading text-lg-left text-justify ">
                     <!-- <span>Overview</span> -->
                     
                     <?php if (!empty($title_content_group['title'])): ?>
@@ -257,7 +257,7 @@ endif; ?>
                               class="fas fa-arrow-right fa-btn"></i></a>
                             <?php if(!empty($hire_pro_contents['phone'])): ?>
                            <span class="or">or</span>
-                           <a href="tel:<?php echo $hire_pro_contents['phone'];?>" class="mt40 call-us">Call Us <?php echo $hire_pro_contents['phone'];?></a>
+                           <a href="tel:<?php echo str_replace(' ','',$hire_pro_contents['phone']); ?>" class="mt40 call-us">Call Us <?php echo $hire_pro_contents['phone'];?></a>
                            <?php endif;?>
                         </div>
                         <?php endif; ?>
@@ -760,22 +760,8 @@ if( have_rows('call_to_action', 'option') ):
                         <i class="fas fa-chevron-right fa-icon"></i>
                     </a>
                     <?php endif; ?>
-
-
-                    <?php 
-
-//                         $request = wp_remote_get( 'https://ipapi.co/'.get_client_ip().'/json' );
-//                         // $request = wp_remote_get( 'https://ipapi.co/json/' );
-//                         // $request = wp_remote_get( 'https://api.hostip.info/get_html.php?ip=207.228.238.7' );
-//                         if( is_wp_error( $request ) ) {
-//                             return false; // Bail early
-//                         }
-//                         $body = wp_remote_retrieve_body( $request );
-//                         $data = json_decode( $body );
-                        ?>
                     
                         <?php
-//                         $country = $data->country_name;
 						$country = getCountry();
                         $india_contact = get_field('india_contact', 'option');
                         $usa_contact = get_field('usa_contact', 'option');
@@ -784,16 +770,16 @@ if( have_rows('call_to_action', 'option') ):
                      <?php if($country == 'India'): ?>
                         <?php if (!empty($india_contact['phone'])): ?>
                             <p class="cta-call">Or call us now 
-                                <a href="tel:<?php echo $india_contact['phone']; ?>">
+                                <a href="tel:<?php echo str_replace(' ','',$india_contact['phone']); ?>">
                                     <i class="fas fa-phone-alt"></i> <?php echo $india_contact['phone']; ?>
                                 </a>
                             </p>
                         <?php endif; ?>
 
-                    <?php elseif($country == 'US'): ?>
+                    <?php elseif($country == 'United States'): ?>
                         <?php if (!empty($usa_contact['phone'])): ?>
                             <p class="cta-call">Or call us now 
-                                <a href="tel:<?php echo $usa_contact['phone']; ?>">
+                                <a href="tel:<?php echo str_replace(' ','',$usa_contact['phone']); ?>">
                                     <i class="fas fa-phone-alt"></i> <?php echo $usa_contact['phone']; ?>
                                 </a>
                             </p>
@@ -802,7 +788,7 @@ if( have_rows('call_to_action', 'option') ):
                     <?php else: ?>
                         <?php if (!empty($uk_contact['phone'])): ?>
                             <p class="cta-call">Or call us now 
-                                <a href="tel:<?php echo $uk_contact['phone']; ?>">
+                                <a href="tel:<?php echo str_replace(' ','',$uk_contact['phone']); ?>">
                                     <i class="fas fa-phone-alt"></i> <?php echo $uk_contact['phone']; ?>
                                 </a>
                             </p>

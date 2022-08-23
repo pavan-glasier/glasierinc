@@ -20,14 +20,8 @@ $wplogoutImage= urlencode(get_the_post_thumbnail_url(get_the_ID(), 'full'));
 		<div class="row pt80">
 			<div class="col-lg-12">
 				<div class="page-headings text-center">
-					<!-- <ul class="breadcrus mb20">
-						<li class="bread-non"><a href="blog.html">All Blog Posts</a></li>
-						<li>&nbsp;/&nbsp;</li>
-						<li class="bread-active"><a href="#">Marketing</a></li>
-					</ul> -->
 					<h1><?php echo the_title();?></h1>
 				</div>
-			
 			</div>
 		</div>
 	</div>
@@ -52,27 +46,41 @@ $wplogoutImage= urlencode(get_the_post_thumbnail_url(get_the_ID(), 'full'));
 					<div class="ree-blog-details">
 						<div class="info-bar">
 							
-							<?php
-								$posttags = get_the_tags();
-									if ($posttags) { ?>
-										<div class="info-b-left">
-									<?php	foreach($posttags as $tag) {?>
-										<a href="<?php echo esc_attr( get_tag_link( $tag->term_id ) );?>">#<?php echo $tag->name; ?></a>
-										<?php } ?>
-										</div>
-									<?php }
-								?>
 							<div class="info-b-right">By <a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php the_author();?></a> • <span><?php echo meks_time_ago(); ?></span> </div>
 						</div>
 						
 						<?php the_content();?>
 						
+						<div class="info-bar">
+							Tags : 
+							<?php
+								$posttags = get_the_tags();
+									if ($posttags) { ?>
+										<div class="info-b-left">
+									<?php	foreach($posttags as $tag) {?>
+										<a href="<?php echo esc_attr( get_tag_link( $tag->term_id ) );?>"><?php echo $tag->name; ?></a>
+										<?php } ?>
+										</div>
+									<?php }
+								?>
+						</div>
 					</div>
 
-					<!-- <div class="center-btn">
-						<a href="blog.html" class="ree-btn  ree-btn-grdt2 mr20">Back to Blogs <i class="fas fa-arrow-left fa-btn"></i>
-						</a>
-					</div> -->
+					<div class="center-btn">
+						<?php
+						$prev_post = get_previous_post();
+						if($prev_post) {
+						   $prev_title = strip_tags(str_replace('"', '', $prev_post->post_title));
+						   echo "\t" . '<a rel="prev" href="' . get_permalink($prev_post->ID) . '" title="' . $prev_title. '" class="ree-btn ree-btn-grdt2 mr20"><i class="fas fa-arrow-left fa-btn"></i> Previus Post</a>' . "\n";
+						}
+
+						$next_post = get_next_post();
+						if($next_post) {
+						   $next_title = strip_tags(str_replace('"', '', $next_post->post_title));
+						   echo "\t" . '<a rel="next" href="' . get_permalink($next_post->ID) . '" title="' . $next_title. '" class="ree-btn ree-btn-grdt2 mr20">Next Post <i class="fas fa-arrow-right fa-btn"></i></a>' . "\n";
+						}
+						?>
+					</div>
 
 				</div>
 			</div>
@@ -153,12 +161,7 @@ $wplogoutImage= urlencode(get_the_post_thumbnail_url(get_the_ID(), 'full'));
 									}
 								?>
                            </div>
-                           
-						   <?php
-								$next_post_url = get_permalink( get_adjacent_post(false,'',false)->ID );
-								$previous_post_url = get_permalink( get_adjacent_post(false,'',true)->ID );    
-								
-							?>
+
 							<div class="post-pagi-area">
                               <a href="<?php echo $previous_post_url;?>"><i class="fas fa-arrow-left"></i> Previus Post</a>
                               <a href="<?php echo $next_post_url;?>">Next Post <i class="fas fa-arrow-right"></i></a>

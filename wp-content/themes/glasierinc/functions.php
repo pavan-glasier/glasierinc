@@ -113,6 +113,8 @@ function glasierinc_setup() {
             'services_menu'  => __( 'Services Menu', 'glasierinc' ),
             'industries_menu'  => __( 'Industries Menu', 'glasierinc' ),
             'portfolios_menu'  => __( 'Portfolios Menu', 'glasierinc' ),
+						'footer_bottom'  => __( 'Footer Bottom Menu', 'glasierinc' ),
+						'lending_menu'  => __( 'Lending Page Menu', 'glasierinc' ),
         ) );
 
 
@@ -121,77 +123,6 @@ function glasierinc_setup() {
 add_filter( 'auto_update_plugin', '__return_false' );
 
 add_filter( 'auto_update_theme', '__return_false' );
-
-// add_filter( 'wp_nav_menu_items', 'add_extra_item_to_nav_menu', 10, 2 );
-// function add_extra_item_to_nav_menu( $items, $args ) {
-//     if (is_user_logged_in() && $args->theme_location == 'primary_menu') {
-//         $items .= '<li><a href="Account">My Account</a></li>';
-//     }
-//     elseif (!is_user_logged_in() && $args->theme_location == 'primary_menu') {
-//         $items .= '<li><a href="Sign in  /  Register">Sign in  /  Register</a></li>';
-//     }
-//     return $items;
-// }
-
-
-
-// add_filter('wp_nav_menu_items', 'my_wp_nav_menu_items', 10, 2);
-
-// function my_wp_nav_menu_items( $items, $args ) {
-	
-// 	// get menu
-// 	$menu = wp_get_nav_menu_object($args->menu);
-	
-	
-// 	// modify primary only
-// 	if( $args->theme_location == 'primary_menu' ) {
-		
-// 		// vars
-// 		$logo = get_field('menu_button', $menu);
-		
-		
-// 		// prepend logo
-// 		$html_logo = '<li class="menu-item-logo"><a href="'.home_url().'"><img src="'.$logo['url'].'" alt="'.$logo['alt'].'" /></a></li>';
-		
-		
-// 		// append html
-// 		$items = $items . $html_logo;
-		
-// 	}
-	
-	
-// 	// return
-// 	return $items;
-	
-// }
-
-
-
-
-function add_btn_menu($items, $args) {
-	
-
-   $menu = wp_get_nav_menu_object($args->menu);
-    if( $args->theme_location == 'primary_menu' ){
-
-
-    	$menu_button = get_field('menu_button', $menu);
-    	if($menu_button){
-    	$items .= '<li>'
-            . '<a class="smooth-menu btn-top" href="'.$menu_button['url'].'">'.$menu_button['title'].'</a>'
-            . '</li>';
-      }
-    }
-  return $items;
-}
-add_filter('wp_nav_menu_items', 'add_btn_menu', 10, 2);
-
-
-
-
-
-
-
 
 
 
@@ -823,98 +754,111 @@ endif;
 
 
 
+add_action('acf/init', 'my_acf_op_init');
+function my_acf_op_init() {
 
-if (function_exists('acf_add_options_page')) {
-	// Theme General Settings
-	$general_settings   = array(
-		'page_title' 	=> __('Theme General Settings', 'glasierinc'),
-		'menu_title'	=> __('Theme Settings', 'glasierinc'),
-		'menu_slug' 	=> 'theme-general-settings',
-		'capability'	=> 'edit_posts',
-		'redirect'	=> true
-	);
-	acf_add_options_page($general_settings);
+	if (function_exists('acf_add_options_page')) {
+		// Theme General Settings
+		$general_settings   = array(
+			'page_title' 	=> __('Theme General Settings', 'glasierinc'),
+			'menu_title'	=> __('Theme Settings', 'glasierinc'),
+			'menu_slug' 	=> 'theme-general-settings',
+			'capability'	=> 'edit_posts',
+			'redirect'	=> true
+		);
+		acf_add_options_page($general_settings);
 
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Header',
-		'menu_title'	=> 'Theme Header',
-		'parent_slug'	=> 'theme-general-settings',
-	));
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Footer',
-		'menu_title'	=> 'Theme Footer',
-		'parent_slug'	=> 'theme-general-settings',
-	));
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Header',
+			'menu_title'	=> 'Theme Header',
+			'parent_slug'	=> 'theme-general-settings',
+		));
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Footer',
+			'menu_title'	=> 'Theme Footer',
+			'parent_slug'	=> 'theme-general-settings',
+		));
 
-
-	$slider   = array(
-		'page_title' 	=> __('Sliders Settings', 'glasierinc'),
-		'menu_title'	=> __('Sliders', 'glasierinc'),
-		'menu_slug' 	=> 'sliders-settings',
-		'capability'	=> 'edit_posts',
-		'icon_url' => 'dashicons-images-alt2',
-		'position' => 4,
-		'redirect'	=> true
-	);
-	acf_add_options_page($slider);
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Slider',
-		'menu_title'	=> 'Slider',
-		'parent_slug'	=> 'sliders-settings',
-	));
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Lending Page Header',
+			'menu_title'	=> 'Lending Page Header',
+			'parent_slug'	=> 'theme-general-settings',
+		));
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Lending Page Footer',
+			'menu_title'	=> 'Lending Page Footer',
+			'parent_slug'	=> 'theme-general-settings',
+		));
 
 
-	$industries   = array(
-		'page_title' 	=> __('Industries Settings', 'glasierinc'),
-		'menu_title'	=> __('Industries', 'glasierinc'),
-		'menu_slug' 	=> 'industries-settings',
-		'capability'	=> 'edit_posts',
-		'icon_url' => 'dashicons-image-filter',
-		'position' => 8,
-		'redirect'	=> true
-	);
-	acf_add_options_page($industries);
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Industry',
-		'menu_title'	=> 'Industry',
-		'parent_slug'	=> 'industries-settings',
-	));
-
-	$cta   = array(
-		'page_title' 	=> __('Call To Action Settings', 'glasierinc'),
-		'menu_title'	=> __('Call To Action', 'glasierinc'),
-		'menu_slug' 	=> 'cta-settings',
-		'capability'	=> 'edit_posts',
-		'icon_url' => 'dashicons-format-status',
-		'position' => 9,
-		'redirect'	=> true
-	);
-	acf_add_options_page($cta);
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Call To Action',
-		'menu_title'	=> 'Call To Action',
-		'parent_slug'	=> 'cta-settings',
-	));
+		$slider   = array(
+			'page_title' 	=> __('Sliders Settings', 'glasierinc'),
+			'menu_title'	=> __('Sliders', 'glasierinc'),
+			'menu_slug' 	=> 'sliders-settings',
+			'capability'	=> 'edit_posts',
+			'icon_url' => 'dashicons-images-alt2',
+			'position' => 4,
+			'redirect'	=> true
+		);
+		acf_add_options_page($slider);
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Slider',
+			'menu_title'	=> 'Slider',
+			'parent_slug'	=> 'sliders-settings',
+		));
 
 
-	$location   = array(
-		'page_title' 	=> __('Contact Locations Settings', 'glasierinc'),
-		'menu_title'	=> __('Contact Locations', 'glasierinc'),
-		'menu_slug' 	=> 'location-settings',
-		'capability'	=> 'edit_posts',
-		'icon_url' => 'dashicons-location-alt',
-		'position' => 9,
-		'redirect'	=> true
-	);
-	acf_add_options_page($location);
-	acf_add_options_sub_page(array(
-		'page_title' 	=> 'Contact Locations',
-		'menu_title'	=> 'Contact Locations',
-		'parent_slug'	=> 'location-settings',
-	));
+		$industries   = array(
+			'page_title' 	=> __('Industries Settings', 'glasierinc'),
+			'menu_title'	=> __('Industries', 'glasierinc'),
+			'menu_slug' 	=> 'industries-settings',
+			'capability'	=> 'edit_posts',
+			'icon_url' => 'dashicons-image-filter',
+			'position' => 8,
+			'redirect'	=> true
+		);
+		acf_add_options_page($industries);
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Industry',
+			'menu_title'	=> 'Industry',
+			'parent_slug'	=> 'industries-settings',
+		));
+
+		$cta   = array(
+			'page_title' 	=> __('Call To Action Settings', 'glasierinc'),
+			'menu_title'	=> __('Call To Action', 'glasierinc'),
+			'menu_slug' 	=> 'cta-settings',
+			'capability'	=> 'edit_posts',
+			'icon_url' => 'dashicons-format-status',
+			'position' => 9,
+			'redirect'	=> true
+		);
+		acf_add_options_page($cta);
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Call To Action',
+			'menu_title'	=> 'Call To Action',
+			'parent_slug'	=> 'cta-settings',
+		));
+
+
+		$location   = array(
+			'page_title' 	=> __('Contact Locations Settings', 'glasierinc'),
+			'menu_title'	=> __('Contact Locations', 'glasierinc'),
+			'menu_slug' 	=> 'location-settings',
+			'capability'	=> 'edit_posts',
+			'icon_url' => 'dashicons-location-alt',
+			'position' => 9,
+			'redirect'	=> true
+		);
+		acf_add_options_page($location);
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Contact Locations',
+			'menu_title'	=> 'Contact Locations',
+			'parent_slug'	=> 'location-settings',
+		));
+	}
+
 }
-
-
 
 
 
@@ -944,18 +888,15 @@ function change_default_jquery( ){
 
 
 function myscript_css() {
-  
-  
+  if(!is_page('1654')){
 	  wp_enqueue_style( 'bootstrap-min', get_template_directory_uri() . '/css/bootstrap.min.css', array(), 'all');
 	  wp_enqueue_style( 'plugin-min', get_template_directory_uri() . '/css/plugin.min.css', array(), 'all');
-	  wp_enqueue_style( 'all-min', get_template_directory_uri() . '/css/all.min.css', array(), 'all');
-
+	  // wp_enqueue_style( 'all-min', get_template_directory_uri() . '/css/all.min.css', array(), 'all');
 		wp_enqueue_style( 'main-style', get_template_directory_uri() . '/css/style.css', array(), 'all');
 		wp_enqueue_style( 'responsive', get_template_directory_uri() . '/css/responsive.css', array(), 'all');
-
 	  wp_enqueue_style( 'fontAwesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
 	  wp_enqueue_style( 'fontsPoppins', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap');
-
+	}
 }
 add_action( 'wp_head' , 'myscript_css', 1 );
 
@@ -964,141 +905,19 @@ add_action( 'wp_head' , 'myscript_css', 1 );
 
 
 function foot_theme_scripts() {
- 
-  //wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js');
-  
-
-  wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr-3.5.0.min.js', array(), true);
-  wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.6.0.min.js', array(), true);
-  wp_enqueue_script( 'bootstrap-bundle-min', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array(), true);
-  wp_enqueue_script( 'app-bundle', get_template_directory_uri() . '/js/app.bundle.js', array(), true);
-  wp_enqueue_script( 'main', get_template_directory_uri() . '/js/main.js', array(), true);
-
+	if(!is_page('1654')){
+	  wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr-3.5.0.min.js', array(), true);
+	  wp_enqueue_script( 'jquery', get_template_directory_uri() . '/js/jquery-3.6.0.min.js', array(), true);
+	  wp_enqueue_script( 'bootstrap-bundle-min', get_template_directory_uri() . '/js/bootstrap.bundle.min.js', array(), true);
+	  wp_enqueue_script( 'app-bundle', get_template_directory_uri() . '/js/app.bundle.js', array(), true);
+	  wp_enqueue_script( 'main', get_template_directory_uri() . '/js/main.js', array(), true);
+	}
  }
 
 add_action( 'wp_footer', 'foot_theme_scripts' );
 
 
 require get_template_directory() . '/better-comments.php';
-
-
-// function action_wpcf7_mail_sent( $contact_form ) {
-
-//     $id = $contact_form->id;
-//       if ( $id === 345) {
-//         $submission = WPCF7_Submission::get_instance();
-//         if ( $submission ) {
-//             $posted_data = $submission->get_posted_data();
-            
-//             $name = $posted_data['your-name'];
-//             $email = $posted_data['your-email'];
-//             $phone = $posted_data['phone'];
-//             $website = $posted_data['website'];
-//             $company_name = $posted_data['company_name'];
-//             $country = $posted_data['country'];
-//             $project_type = $posted_data['project_type'];
-//             $project_stage = $posted_data['project_stage'];
-//             $price = $posted_data['price'];
-//             $project_description = $posted_data['project-description'];
-//             $communication = $posted_data['communication'];
-//             $upload_file = $posted_data['upload-file'];
-//             $checkbox_ndaSign = $posted_data['checkbox-ndaSign'];
-//             $checkbox_tc = $posted_data['checkbox-tc'];
-
-//             $url = 'https://hook.integromat.com/f2e1xtxoqo6l7m4ikcn6i64naskvmda2';
-//             $args = array(
-//                 'body' => array(
-//                     'name' => $name,
-//                     'email' => $email,
-//                     'phone' => $phone,
-// 				            'website' => $website,
-// 				            'company_name' => $company_name,
-// 				            'country' => $country,
-// 				            'project_type' => $project_type,
-// 				            'project_stage' => $project_stage,
-// 				            'price' => $price,
-// 				            'project_description' => $project_description,
-// 				            'communication' => $communication,
-// 				            'upload_file' => $upload_file,
-// 				            'checkbox_ndaSign' => $checkbox_ndaSign,
-// 				            'checkbox_tc' => $checkbox_tc,
-//                 )
-//             );
-
-//             wp_remote_post( $url, $args );
-            
-//             retrun;
-
-//         }
-//      }
-// }
-   
-// // add the action 
-// add_action( 'wpcf7_mail_sent', 'action_wpcf7_mail_sent', 10, 1 );
-
-
-
-
-
-// API SUBMIT DATA PRODUCT INQUIRY FORM
-function on_submitInq( $form ) {
-    if ( $form->id === 345) {
-	    $submission = WPCF7_Submission::get_instance();
-	    $data = $submission->get_posted_data();
-	    
-	    // $fullname = sanitize_text_field($data['fullname']);
-	    
-	    $url = 'http://192.168.0.128/php-rest-api/glasierinc-api-insert.php';
-
-	    $response = wp_safe_remote_post($url, [
-	        'body' => json_encode([
-	            'name' => $data['fullname'],
-	            'email' => $data['email'],
-	            'phone' => $data['phone'],
-	            'website' => $data['website'],
-	            'company_name' => $data['company_name'],
-	            'country' => $data['country'],
-	            'project_type' => $data['project_type'],
-	            'project_stage' => $data['project_stage'],
-	            'price' => $data['price'],
-	            'project_description' => $data['project_description'],
-	            'communication' => $data['communication'],
-	            'upload_file' => $data['upload_file'],
-	        ]),
-	    ]);
-
-	    if ( is_wp_error($response) ) {
-	    	
-	        $body = wp_remote_retrieve_body($response);
-	        $result = json_decode($body);
-	        $msg = $result->message;
-	        $submission->set_response($result->message);
-	        $submission->set_status($result->status);
-	    }
-	    
-
-	}
-}
-
-add_action('wpcf7_mail_sent', 'on_submitInq', 10, 1);
-
-
-
-
-
-
-// function disable_create_newpost() {
-// 	if(current_user_can('editor')){
-//    global $wp_post_types;
-//     $wp_post_types['solutions']->cap->create_posts = 'do_not_allow';
-//     $wp_post_types['services']->cap->create_posts = 'do_not_allow';
-//     $wp_post_types['footer']->cap->create_posts = 'do_not_allow';
-//     $wp_post_types['page']->cap->create_posts = 'do_not_allow';
-// 	}
-    
-// }
-// add_action('init','disable_create_newpost');
-
 
 
 function glasierinc_pagination(){
@@ -1129,20 +948,16 @@ function glasierinc_pagination(){
 
 // // Allow SVG
 add_filter( 'wp_check_filetype_and_ext', function($data, $file, $filename, $mimes) {
-
   global $wp_version;
   if ( $wp_version !== '4.7.1' ) {
      return $data;
   }
-
   $filetype = wp_check_filetype( $filename, $mimes );
-
   return [
       'ext'             => $filetype['ext'],
       'type'            => $filetype['type'],
       'proper_filename' => $data['proper_filename']
   ];
-
 }, 10, 4 );
 
 function cc_mime_types( $mimes ){
@@ -1168,13 +983,10 @@ function meks_time_ago() {
 }
 
 function na_remove_slug( $post_link, $post, $leavename ) {
-
     if ( 'services' != $post->post_type || 'publish' != $post->post_status ) {
         return $post_link;
     }
-
     $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
-
     return $post_link;
 }
 add_filter( 'post_type_link', 'na_remove_slug', 10, 3 );
@@ -1182,11 +994,9 @@ add_filter( 'post_type_link', 'na_remove_slug', 10, 3 );
 
 
 function na_parse_request( $query ) {
-
     if ( ! $query->is_main_query() || 2 != count( $query->query ) || ! isset( $query->query['page'] ) ) {
         return;
     }
-
     if ( ! empty( $query->query['name'] ) ) {
         $query->set( 'post_type', array( 'post', 'services', 'page' ) );
     }
@@ -1218,3 +1028,132 @@ function getCountry(){
 	$country = $geoPlugin_array['geoplugin_countryName'];
 	return $country;
 }
+
+add_action( 'init', 'cp_change_post_object' );
+// Change dashboard Posts to Blogs
+function cp_change_post_object() {
+    $get_post_type = get_post_type_object('post');
+    $labels = $get_post_type->labels;
+        $labels->name = 'Blogs';
+        $labels->singular_name = 'Blogs';
+        $labels->add_new = 'Add Blogs';
+        $labels->add_new_item = 'Add Blogs';
+        $labels->edit_item = 'Edit Blogs';
+        $labels->new_item = 'Blogs';
+        $labels->view_item = 'View Blogs';
+        $labels->search_items = 'Search Blogs';
+        $labels->not_found = 'No Blogs found';
+        $labels->not_found_in_trash = 'No Blogs found in Trash';
+        $labels->all_items = 'All Blogs';
+        $labels->menu_name = 'Blogs';
+        $labels->name_admin_bar = 'Blogs';
+}
+
+
+function custom_login_logo_url() {
+return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'custom_login_logo_url' );
+
+
+
+// add a new logo to the login page
+function wptutsplus_login_logo() { ?>
+    <style type="text/css">
+        .login #login h1 a {
+            background-image: url( <?=site_url();?>/wp-content/uploads/2022/03/logo.png );
+            background-size: 200px auto;
+						height: 50px;
+						width: 100%;
+						margin-bottom: 10px;
+			  }
+        .login #nav a, .login #backtoblog a {
+            color: #005186 !important;
+        }
+        .login #nav a:hover, .login #backtoblog a:hover {
+            color: #005186 !important;
+        }
+				.login #login_error, .login .message, .login .success {
+					margin-bottom: 10px;
+				}
+				.login form {
+					margin-top: 10px;
+				}
+    </style>
+<?php }
+add_action( 'login_enqueue_scripts', 'wptutsplus_login_logo' );
+
+
+
+// CF7
+add_action('wpcf7_init', 'custom_add_shortcode_lptitle');
+
+function custom_add_shortcode_lptitle() {
+    wpcf7_add_shortcode('selectjob', 'custom_lptitle_shortcode_handler'); // "lptitle" is the type of the form-tag
+}
+
+function custom_lptitle_shortcode_handler($tag) {
+    global $post;
+     $argss = array(
+       'post_type' => 'career',
+       'order' => 'DESC',
+       'posts_per_page' => -1,
+      );
+     // $name = [];
+     $careerr_query = new WP_Query($argss);
+      if ($careerr_query->have_posts()) : 
+
+      $select = '<select id="select_job" name="select_job" class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required" aria-required="true" aria-invalid="false">';
+      // $select .= '<option value="">Select Job Title</option>';
+      	while ($careerr_query->have_posts()) : $careerr_query->the_post();
+				$select .= '<option value="'.get_the_title().'">'.get_the_title().'</option>';
+      	 	endwhile; 
+      	$select .= '</select>';
+      	wp_reset_postdata();
+      endif;
+    return $select;
+}
+
+
+
+
+add_action( 'wp_footer', 'mycustom_wp_footer' );
+function mycustom_wp_footer() {
+?>
+	<script type="text/javascript">
+		document.addEventListener( 'wpcf7submit', function( event ) {
+			$('.wpcf7-response-output').html(event.detail.apiResponse.message);
+			$('label').attr("file-name", "");
+		}, false );
+	</script>
+<?php }
+
+
+function add_btn_menu($items, $args) {
+   $menu = wp_get_nav_menu_object($args->menu);
+    if( $args->theme_location == 'lending_menu' ){
+    	$header_button = get_field('header_button', 'option');
+    	if($header_button){
+    	$items .= '<li class="button">'
+            . '<a class="btn btn-default main-bg-color text-uppercase smooth" href="'.$header_button['url'].'" data-scroll-nav="1">'.$header_button['title'].'</a>'
+            . '</li>';
+      }
+    }
+  return $items;
+}
+add_filter('wp_nav_menu_items', 'add_btn_menu', 10, 2);
+
+
+
+
+function add_menu_link_class( $atts, $item, $args ) {
+  if (property_exists($args, 'link_class')) {
+    $atts['class'] = $args->link_class;
+  }
+  if (property_exists($args, 'data_scroll_nav')) {
+    $atts['data-scroll-nav'] = $atts['rel'];
+  }
+  
+  return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );

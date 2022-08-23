@@ -16,6 +16,25 @@
 .float-right {
     float: right;
 }
+#process .content h1,
+#process .content h2,
+#process .content h3,
+#process .content h4,
+#process .content h5,
+#process .content h6
+{
+	margin-bottom: 15px;
+}
+#process .content p
+{
+	margin-bottom: 20px;
+}
+#process .content input.form-control {
+    height: calc(1.9em + .75rem + 2px);
+}
+#process .content .wpcf7-not-valid-tip {
+    margin-top: 5px;
+}
 </style>
 
 <div class="r-bg-a pt85 pb120">     

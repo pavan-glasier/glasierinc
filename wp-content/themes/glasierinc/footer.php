@@ -31,16 +31,16 @@
 								
 								<?php if( !empty( $usa_contact['phone'] ) ): ?>
 								<li>
-									<a href="tel:<?php echo $usa_contact['phone']; ?>">
+									<a href="tel:<?php echo str_replace(' ','',$usa_contact['phone']); ?>">
 										<span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-united-states-48.png" /></span>
-										<?php echo $usa_contact['phone']; ?>
+										<?php echo trim($usa_contact['phone']); ?>
 									</a>
 								</li>
 								<?php endif; ?>
 								
 								<?php if( !empty( $uk_contact['phone'] ) ): ?>
 								<li>
-									<a href="tel:<?php echo $uk_contact['phone']; ?>">
+									<a href="tel:<?php echo str_replace(' ','',$uk_contact['phone']); ?>">
 										<span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-great-britain-48.png" /></span>
 										<?php echo $uk_contact['phone']; ?>
 									</a>
@@ -49,7 +49,7 @@
 								
 								<?php if( !empty( $canada['phone'] ) ): ?>
                                 <li>
-                                    <a href="tel:<?php echo $canada['phone']; ?>">
+                                    <a href="tel:<?php echo str_replace(' ','',$canada['phone']); ?>">
                                         <span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-canada-48.png" /></span>
                                        <?php echo $canada['phone']; ?>
                                     </a>
@@ -58,7 +58,7 @@
 
                                 <?php if( !empty( $india_contact['phone'] ) ): ?>
                                 <li>
-                                    <a href="tel:<?php echo $india_contact['phone']; ?>">
+                                    <a href="tel:<?php echo str_replace(' ','',$india_contact['phone']); ?>">
                                         <span><img src="<?php echo site_url();?>/wp-content/uploads/2022/04/icons8-india-48.png" /></span>
                                        <?php echo $india_contact['phone']; ?>
                                     </a>
@@ -243,14 +243,6 @@
                                        
                                     </a>
                                 </div>
-                                <!-- <div class="star-rating-review mt30">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                </div>
-                                <h6 class="mt10">Overall client rating is 4.9 out of 8,500 Clients for Reevan</h6> -->
                             </div>
                         </div>
                         <div class="col-lg-6 vcenter">
@@ -275,7 +267,7 @@
                               $our_work_target = $our_work['target'] ? $our_work['target'] : '_self';
                               ?>
                              <div class="col-lg-3 vcenter ft-btn">
-                                <a href="<?php echo esc_url( $our_work_url ); ?>" class="ree-btn ree-btn-grdt1 mw-80 no-shadows" target="<?php echo esc_attr( $our_work_target ); ?>"> <?php echo esc_html( $our_work_title ); ?> <i class="fas fa-arrow-right fa-btn"></i></a>
+                                <a href="<?php echo esc_url( $our_work_url ); ?>" class="ree-btn ree-btn-grdt1 mw-80 no-shadows" target="<?php echo esc_attr( $our_work_target ); ?>" data-toggle="modal" data-target="<?php echo esc_url( $our_work_url ); ?>"> <?php echo esc_html( $our_work_title ); ?> <i class="fas fa-arrow-right fa-btn"></i></a>
                              </div>
                           <?php endif; ?>
 
@@ -284,13 +276,20 @@
             </div>
             <div class="container ft-cpy">
                 <div class="row">
-                    <!-- <div class="col-lg-5">
+					<?php 
+                          $footer_bottom_links = get_field('footer_bottom_links', 'option'); ?>
+                    <div class="col-lg-3">
                         <div class="ft-copyright">
-                            <p>We are tracking any intention of piracy.</p>
+							<?php wp_nav_menu( array(
+                               'theme_location'    => $footer_bottom_links,
+                               'container'         => 'ul',
+                               'menu_class'        => 'footer-bottom' 
+                            ) );
+                        	?>
                         </div>
-                    </div> -->
-                    <div class="col-lg-12">
-                        <div class="ft-copyright text-center">
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="ft-copyright text-right">
                             <p><?php echo get_field('copyright_text', 'option'); ?></p>
                         </div>
                     </div>
@@ -300,8 +299,89 @@
     </footer>
     <!-- end footer -->
 
-   
+
+<?php 
+$popup_args = array(
+	'post_type' => 'popups',
+); ?>
+
+<?php $popup_query = new WP_Query($popup_args);
+if ($popup_query->have_posts()) : ?>
+
+<?php while ($popup_query->have_posts()) : $popup_query->the_post(); ?>
+<?php
+ $popup_form = get_field('popup_form');
+ $popup_contents = get_field('contents');
+if( $popup_form ): ?>
+<!-- Modal Popup -->
+<div id="popup-<?php echo $popup_form['form'];?>" class="modal fade bd-example-modal-md contact-popup " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+       <section>
+          <div class="container">
+			  <?php if( $popup_contents ): ?>
+             <div class="contactInfo">
+                <div class="box">
+                   <div class="content-box">
+					   <?php if(!empty($popup_contents['content'])) : ?>
+						<h2><?php echo $popup_contents['content'];?></h2>
+						<?php endif;?>
+                     <?php if($popup_contents['link']) : 
+					   $linkBtn = $popup_contents['link'];
+					   ?>
+                      <div class="text-center">
+                         <a class="btn btn-theme border btn-md sucess-buton" href="<?php echo $linkBtn['url'];?>"><span><?php echo $linkBtn['title'];?></span></a>
+                      </div>
+					   <?php endif;?>
+                   </div>
+                </div>
+             </div>
+			  <?php endif;?>
+             <div class="contactForm">
+                <div class="form">
+					<?php if(!empty($popup_form['popup_heading'])) : ?>
+                   	<h2><?php echo $popup_form['popup_heading'];?></h2>
+					<?php endif;?>
+					
+					<?php if(!empty($popup_form['popup_description'])) : ?>
+                   	<p><?php echo $popup_form['popup_description'];?></p>
+					<?php endif;?>
+					
+					<?php if(!empty($popup_form['form'])) : ?>
+                   <?php echo do_shortcode('[contact-form-7 id="'.$popup_form['form'].'"]');?>
+					<?php endif;?>
+
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                   </button>
+                </div>
+             </div>
+          </div>
+       </section>
+    </div>
+ </div>
+<?php endif; ?>
+<?php endwhile; ?>
+<?php wp_reset_postdata(); ?>
+<?php endif; ?>
+
+
+
+<!-- 1. First, copy the code: -->
+<script type="text/javascript"> _linkedin_partner_id = "4020962"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id); </script>
+<script type="text/javascript"> (function(l) { if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])}; window.lintrk.q=[]} var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(window.lintrk); </script> 
+<noscript> <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=4020962&fmt=gif" /> </noscript>
+<!-- 2. Next, paste the code into the global footer of your domain either before or after the <body> tag. -->
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$('input[type="file"]').change(function(e) {
+    var fileName = e.target.files[0].name;
+    $(e.target).parent('span').parent('label').attr("file-name", fileName);
+});
+</script>
+
 <script>
 function openNav() {
     document.getElementById("mySidenav").style.width = "100%";
