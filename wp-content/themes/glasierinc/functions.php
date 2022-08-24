@@ -900,10 +900,6 @@ function myscript_css() {
 }
 add_action( 'wp_head' , 'myscript_css', 1 );
 
-
-
-
-
 function foot_theme_scripts() {
 	if(!is_page('1654')){
 	  wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr-3.5.0.min.js', array(), true);

@@ -5186,3 +5186,113 @@ input[type="radio"]:checked:after {
 span.wpcf7-list-item-label {
     cursor: pointer;
 }
+
+
+/*SERVICE PAGE*/
+.service-form .form-block {
+    background: #ffffff;
+    border: 2px solid #0051862b;
+}
+.service-form .form-body {
+    padding: 20px 30px;
+}
+.service-form .form-block input,
+.service-form .form-block select {
+    height: 42px;
+    font-size: 14px;
+}
+.service-form .iti--allow-dropdown ~ .wpcf7-not-valid-tip {
+    margin-top: 3px;
+}
+.service-form .form-block textarea {
+    height: 80px;
+    font-size: 14px;
+}
+.service-form .h-captcha:not([data-size="invisible"]) {
+    margin-bottom: 0rem;
+    transform: scale(0.77);
+    -webkit-transform: scale(0.77);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    position: absolute;
+    top: -30px;
+}
+.service-form button.ree-btn.ree-btn-grdt1.w-100.has-spinner.wpcf7-submit {
+    line-height: 40px;
+    font-size: 15px;
+}
+.service-form .wpcf7-spinner {
+    position: absolute;
+    right: 0;
+    top: 20%;
+    background: #4a8fca;
+    opacity: 1;
+}
+.service-form .label-f-form {
+    font-size: 14px;
+    line-height: 22px;
+}
+.service-form .custom-control-label::before {
+    width: .85rem;
+    height: .85rem;
+}
+.service-form .custom-control-label::after {
+    width: .85rem;
+    height: .85rem;
+}
+.service-form .wpcf7 form .wpcf7-response-output {
+    font-size: 16px;
+}
+
+/* FAQ's */
+.accordion .cards {
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.accordion.ac-1 .card-header {
+    border-bottom: 1px solid rgb(224 236 255);
+}
+.accordion.ac-1 .card-header h6 {
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 40px;
+    /*padding-left: 30px;*/
+    position: relative;
+}
+.accordion.ac-1 .collapsible-link::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background: #0000;
+    top: calc(36% - 1px);
+    right: 1rem;
+    display: block;
+    transition: all 0.3s;
+    background-image: url(http://192.168.0.128/glasierinc/wp-content/uploads/2022/08/arrow-26.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.accordion.ac-1 .collapsible-link::after {display: none;}
+/*.accordion.ac-1 .card-header h6:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border-radius: 100%;
+}
+.accordion.ac-1 .card-header h6:after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 100%;
+}*/

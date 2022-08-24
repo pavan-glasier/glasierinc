@@ -401,8 +401,6 @@ $(document).ready(function() {
         }
     });
 });
-
-
 </script>
 
 <script>
@@ -459,13 +457,71 @@ resizeFix = function() {
 })(jQuery);
 
 (function($){
-$(document).ready(function(){
-$("#cssmenu").menumaker({
-   format: "multitoggle"
-});
-});
+    $(document).ready(function(){
+        $("#cssmenu").menumaker({
+           format: "multitoggle"
+        });
+    });
 })(jQuery);
-    </script>
+</script>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+   const phoneInputField = document.querySelector("#phone");
+   const phoneInput = window.intlTelInput(phoneInputField, {
+     utilsScript:
+       "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+   });
+ </script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+   var iti_country = jQuery('.iti__country');
+   var code1 = iti_country.find('.iti__dial-code').html();
+      jQuery('#phone').val(code1);
+   iti_country.on('touchstart click', function () {
+      var code = jQuery(this).find('.iti__dial-code').html();
+      jQuery('#phone').val(code);
+      if (event.keyCode === 13) {
+         jQuery('#phone').val(code);
+       }
+   });
+});
+</script>
+
+<script type="text/javascript">
+function Validate() {
+    var pattern = new RegExp("([^\d])\d{10}([^\d])");
+    if (pattern.test(document.getElementById('phone').value)) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+</script>
+<script>
+$(document).ready(function () {
+    $("#phone").keypress(function (e) {
+        var phoneVal = $(this).val();
+        var regex = new RegExp(/^[0][1-11]\d{11}$|^[1-11]\d{11}$/);
+        var key = e.charCode || e.keyCode || 0;
+        // only numbers
+        if (key < 43 || key > 58) {
+            return false;
+        }
+        // only 12 digit
+        if(phoneVal.length > 11) {
+            console.log(phoneVal.length)
+            return false;
+        }
+        return true
+    });
+});
+</script>
+
 <?php wp_footer(); ?>
 
 </body>
