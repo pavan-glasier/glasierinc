@@ -1,0 +1,8 @@
+/* 
+ * ACF "repeat-horizontal" class, display repeaters in horizontal columns 
+ */
+ .repeat-horizontal .acf-repeater tbody {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 332px 332px 332px 332px;
+}

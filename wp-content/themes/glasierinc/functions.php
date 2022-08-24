@@ -917,6 +917,15 @@ function foot_theme_scripts() {
 add_action( 'wp_footer', 'foot_theme_scripts' );
 
 
+function admin_theme_style()
+{
+  wp_enqueue_style( 'acf-admin', get_template_directory_uri() . '/css/acf-admin.css' );
+}
+add_action('admin_enqueue_scripts', 'admin_theme_style');
+add_action('login_enqueue_scripts', 'admin_theme_style');
+
+
+
 require get_template_directory() . '/better-comments.php';
 
 

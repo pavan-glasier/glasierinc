@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let r;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",r=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(r){e["rocket"+t]=n=r}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,r=document.createRange(),i=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const a=document.createDocumentFragment();r.setStart(a,0),a.appendChild(r.createContextualFragment(t)),i.insertBefore(a,o)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+<!-- Meta Tag -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+<meta name="Robots" content="all">
+<meta name="Googlebot" content="index, follow">
+<meta name="Yahoobot" content="index, follow">
+<meta name="MSNbot" content="index, follow">
+<meta name="robots" content="Index, Follow">
+<meta name="allow-search" content="yes">
+<meta name="rating" content="General">
+<meta name="document-distribution" content="Global">
+<meta name="language" content="EN">
+<meta name="author" content="Glasier Inc">
+<meta name="copyright" content="glasierinc.com">
+<meta name="reply-to" content="info@glasierinc.com">
+<meta name="geo.country" content="UK">
+<meta name="document-type" content="Public">
+<meta name="document-rating" content="Safe for Kids">
+<meta name="robots" content='max-image-preview:large' />
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
+
+
+<title>Best Android App Development Company in India, USA and UK</title><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Open%20Sans%3A400italic%2C700italic%2C400%2C700&#038;subset=latin%2Clatin-ext&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open%20Sans%3A400italic%2C700italic%2C400%2C700&#038;subset=latin%2Clatin-ext&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open%20Sans%3A400italic%2C700italic%2C400%2C700&#038;subset=latin%2Clatin-ext&#038;display=swap" /></noscript><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Varela+Round&#038;family=Roboto%3Awght%40400%3B500%3B700&#038;ver=6.0.1&#038;display=swap" /><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&#038;family=Roboto%3Awght%40400%3B500%3B700&#038;ver=6.0.1&#038;display=swap" media="print" onload="this.media='all'" /><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&#038;family=Roboto%3Awght%40400%3B500%3B700&#038;ver=6.0.1&#038;display=swap" /></noscript>
+
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+<link rel="pingback" href="http://192.168.0.128/glasierinc/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+	<!-- Google Tag Manager -->
+<script type="rocketlazyloadscript">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T7BR93P');</script>
+<!-- End Google Tag Manager -->
+	<meta name="facebook-domain-verification" content="0k5qtat5evvwad0nc6x1p4l810yoiz" />
+<!-- Facebook Pixel Code -->
+<script type="rocketlazyloadscript">
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '245603730396550');
+fbq('track', 'PageView');
+</script>
+<noscript>
+    <img height="1" width="1" style="display:none" data-src="https://www.facebook.com/tr?id=245603730396550&ev=PageView&noscript=1" class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=245603730396550&ev=PageView&noscript=1" />
+    </noscript>
+</noscript>
+<!-- End Facebook Pixel Code -->
+	
+<!-- Google Tag Manager -->	
+<script type="rocketlazyloadscript" async src="https://www.googletagmanager.com/gtag/js?id=UA-132672542-1"></script>
+<script type="rocketlazyloadscript">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-132672542-1');
+gtag('config', 'AW-776430104');
+</script>
+<!-- Google Tag Manager -->
+	
+<!-- Schema Code -->
+<script type='application/ld+json'>
+    {
+    "@context": "http://schema.org/", 
+    "@type": "Organization", 
+    "legalName": "Glasier inc", 
+    "url": "https://www.glasierinc.com/", 
+    "contactPoint": { 
+    "@type": "ContactPoint", 
+    "telephone": "+91-9925028258", 
+    "contactType": "Local Business" 
+    }, 
+    "logo": "https://glasierinc.com/wp-content/uploads/2019/01/logo.png", 
+    "sameAs": ["https://www.facebook.com/GlasierInc/", "https://www.linkedin.com/company/glasierinc","https://twitter.com/GlasierInc","https://medium.com/@GlasierInc","https://www.behance.net/glasierinc"],
+    "address": { 
+    "@type": "PostalAddress", 
+    "streetAddress": "A/6, First Floor, Safal Profitaire, Corporate Rd, opp. Hotel Ramada, Prahlad Nagar", 
+    "addressLocality": "Ahmedabad", 
+    "addressRegion": "Gujarat", 
+    "postalCode": "380015", 
+    "addressCountry": "India" 
+    } 
+    }, 
+"aggregateRating": {
+    "@type": "AggregateRating",
+    "bestRating": "5",
+    "ratingValue": "4.9",
+    "reviewCount": "68"
+    },
+    "review": {
+    "author": "Federico",
+    "reviewRating": {
+    "@type": "Rating",
+    "bestRating": "5",
+    "ratingValue": "5",
+    }
+    } 
+ { 
+    "@context": "http://schema.org/", 
+    "@type": "WebSite", 
+    "name": "Glasier Inc",
+    "alternateName": "glasierinc", 
+    "url": "https://www.glasierinc.com/"
+    }
+  </script>
+    <meta property="og:image" content="https://www.glasierinc.com/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2019/01/webs1-1.png.webp">
+<!-- //Schema Code Here -->
+
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v18.6 - https://yoast.com/wordpress/plugins/seo/ -->
+	<meta name="description" content="Need a Android App Development Company in Ahmedabad India. Glasier Inc. We offers custom android application development services in UK &amp; USA that skilled android app developers." />
+	<link rel="canonical" href="http://192.168.0.128/glasierinc/android-app-development-services/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Best Android App Development Company in India, USA and UK" />
+	<meta property="og:description" content="Need a Android App Development Company in Ahmedabad India. Glasier Inc. We offers custom android application development services in UK &amp; USA that skilled android app developers." />
+	<meta property="og:url" content="http://192.168.0.128/glasierinc/android-app-development-services/" />
+	<meta property="og:site_name" content="IT Company in India - Web &amp; Mobile App Development Services" />
+	<meta property="article:publisher" content="https://www.facebook.com/GlasierInc/" />
+	<meta property="article:modified_time" content="2022-07-29T10:45:05+00:00" />
+	<meta property="og:image" content="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/1st-banner-copy-1.png" />
+	<meta property="og:image:width" content="500" />
+	<meta property="og:image:height" content="500" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Best Android App Development Company in India, USA and UK" />
+	<meta name="twitter:description" content="Need an Android App Development Company in Ahmedabad India. Glasier Inc. We offer custom android application development services in UK &amp; USA that are skilled android app developers." />
+	<meta name="twitter:image" content="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/1st-banner-copy-1.png" />
+	<meta name="twitter:site" content="@GlasierInc" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"http://192.168.0.128/glasierinc/#website","url":"http://192.168.0.128/glasierinc/","name":"IT Company in India - Web &amp; Mobile App Development Services","description":"","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"http://192.168.0.128/glasierinc/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"http://192.168.0.128/glasierinc/android-app-development-services/#primaryimage","inLanguage":"en-US","url":"http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/1st-banner-copy-1.png","contentUrl":"http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/1st-banner-copy-1.png","width":500,"height":500},{"@type":"WebPage","@id":"http://192.168.0.128/glasierinc/android-app-development-services/#webpage","url":"http://192.168.0.128/glasierinc/android-app-development-services/","name":"Best Android App Development Company in India, USA and UK","isPartOf":{"@id":"http://192.168.0.128/glasierinc/#website"},"datePublished":"2022-04-12T09:06:07+00:00","dateModified":"2022-07-29T10:45:05+00:00","description":"Need a Android App Development Company in Ahmedabad India. Glasier Inc. We offers custom android application development services in UK & USA that skilled android app developers.","breadcrumb":{"@id":"http://192.168.0.128/glasierinc/android-app-development-services/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["http://192.168.0.128/glasierinc/android-app-development-services/"]}]},{"@type":"BreadcrumbList","@id":"http://192.168.0.128/glasierinc/android-app-development-services/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"http://192.168.0.128/glasierinc/"},{"@type":"ListItem","position":2,"name":"Services","item":"http://192.168.0.128/glasierinc/services/"},{"@type":"ListItem","position":3,"name":"Android app development"}]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//hcaptcha.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="IT Company in India - Web &amp; Mobile App Development Services &raquo; Feed" href="http://192.168.0.128/glasierinc/feed/" />
+<link rel="alternate" type="application/rss+xml" title="IT Company in India - Web &amp; Mobile App Development Services &raquo; Comments Feed" href="http://192.168.0.128/glasierinc/comments/feed/" />
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<style id='wp-block-library-theme-inline-css' type='text/css'>
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{padding:.5em;border:1px solid;word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--blue: #21759b;--wp--preset--color--dark-gray: #444;--wp--preset--color--medium-gray: #9f9f9f;--wp--preset--color--light-gray: #e6e6e6;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link data-minify="1" rel='stylesheet' id='contact-form-7-css'  href='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=1661244033' type='text/css' media='all' />
+
+<link rel='stylesheet' id='bootstrap-min-css'  href='http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/css/bootstrap.min.css?ver=all' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='plugin-min-css'  href='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/css/plugin.min.css?ver=1661244033' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='main-style-css'  href='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/css/style.css?ver=1661244033' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='responsive-css'  href='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/css/responsive.css?ver=1661244033' type='text/css' media='all' />
+<link data-minify="1" rel='stylesheet' id='fontAwesome-css'  href='http://192.168.0.128/glasierinc/wp-content/cache/min/1/ajax/libs/font-awesome/6.0.0/css/all.min.css?ver=1659335533' type='text/css' media='all' />
+
+<link rel="https://api.w.org/" href="http://192.168.0.128/glasierinc/wp-json/" /><link rel="alternate" type="application/json" href="http://192.168.0.128/glasierinc/wp-json/wp/v2/services/793" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://192.168.0.128/glasierinc/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://192.168.0.128/glasierinc/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 6.0.1" />
+<link rel='shortlink' href='http://192.168.0.128/glasierinc/?p=793' />
+<link rel="alternate" type="application/json+oembed" href="http://192.168.0.128/glasierinc/wp-json/oembed/1.0/embed?url=http%3A%2F%2F192.168.0.128%2Fglasierinc%2Fandroid-app-development-services%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://192.168.0.128/glasierinc/wp-json/oembed/1.0/embed?url=http%3A%2F%2F192.168.0.128%2Fglasierinc%2Fandroid-app-development-services%2F&#038;format=xml" />
+		<style>
+			.h-captcha:not([data-size="invisible"]) {
+				margin-bottom: 2rem;
+			}
+			.elementor-field-type-hcaptcha .elementor-field {
+				background: transparent !important;
+			}
+			.elementor-field-type-hcaptcha .h-captcha {
+				margin-bottom: -9px;
+			}
+		</style>
+		<link rel="icon" href="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/cropped-logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/cropped-logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/cropped-logo-180x180.png" />
+<meta name="msapplication-TileImage" content="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/cropped-logo-270x270.png" />
+		<style type="text/css" id="wp-custom-css">
+			.radio-566 label {
+    display: flex;
+    align-items: center;
+}
+.radio-566 label input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    margin: 0 8px;
+    line-height: 20px;
+    padding: 0;
+}
+.career-custom-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript>
+</head>
+<body class="services-template-default single single-services postid-793 wp-embed-responsive custom-font-enabled single-author">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7BR93P"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <!--Start Preloader -->
+    <div class="onloadpage" id="page-load">
+        <div class="loader-div">
+            <div class="on-img">
+                <!-- <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Logo" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/loader-2.gif" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/loader-2.gif" alt="Logo" class="img-fluid" /></noscript> -->
+            </div>
+        </div>
+    </div>
+    <!--End Preloader -->
+
+    <!--Start Header-->
+    <header class="ree-header fixed-top">
+        <div class="container m-p-l-r-0">
+            <div class="menu-header horzontl">
+                <div class="menu-logo">
+                     <div class="dskt-logo">
+                        
+                        <a class="nav-brand" href="http://192.168.0.128/glasierinc/">
+                                                      <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="ree-logo" alt="glasierinc" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/logo.png" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/logo.png" class="ree-logo" alt="glasierinc" /></noscript>
+                                                      
+                        </a>
+                     </div>
+                </div>
+
+                <nav id='cssmenu'>
+                                        <ul id="menu-main-menu" class="nav-menus"><li id="menu-item-61" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-61"><a href="http://192.168.0.128/glasierinc/">Home</a></li>
+<li id="menu-item-295" class="disabled-menu menu-item menu-item-type-post_type menu-item-object-page menu-item-295"><a href="http://192.168.0.128/glasierinc/about-us/">About Us</a></li>
+<li id="menu-item-1200" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-1200"><a href="#">Services</a>
+<ul class="sub-menu">
+	<li id="menu-item-1132" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1132"><a href="#">Web Development</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1133" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1133"><a href="http://192.168.0.128/glasierinc/web-development-services/">Website Development</a></li>
+		<li id="menu-item-1634" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1634"><a href="http://192.168.0.128/glasierinc/progressive-web-app-development/">Web Application Development</a></li>
+		<li id="menu-item-1639" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1639"><a href="http://192.168.0.128/glasierinc/opensource-cms-development/">Opensource CMS Development</a></li>
+		<li id="menu-item-1439" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1439"><a href="http://192.168.0.128/glasierinc/react-js-development-company/">React JS development</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1134" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1134"><a href="#">Web Design</a></li>
+	<li id="menu-item-1168" class="menu-item menu-item-type-post_type menu-item-object-services current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1168"><a href="http://192.168.0.128/glasierinc/mobile-application-development/">Mobile App Development</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1137" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1137"><a href="http://192.168.0.128/glasierinc/ios-app-development-services/">iOS App Development</a></li>
+		<li id="menu-item-1138" class="menu-item menu-item-type-post_type menu-item-object-services current-menu-item menu-item-1138"><a href="http://192.168.0.128/glasierinc/android-app-development-services/" aria-current="page">Android app development</a></li>
+		<li id="menu-item-1172" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1172"><a href="http://192.168.0.128/glasierinc/cross-platform-app-development/">Cross-Platform App Development Company</a></li>
+		<li id="menu-item-1568" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1568"><a href="http://192.168.0.128/glasierinc/hybrid-mobile-app-development-services/">Hybrid Mobile App Development Services</a></li>
+		<li id="menu-item-1633" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1633"><a href="http://192.168.0.128/glasierinc/bespoke-web-development/">Bespoke Web Development</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1170" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1170"><a href="http://192.168.0.128/glasierinc/mobile-app-design-services/">Mobile Design</a></li>
+	<li id="menu-item-1162" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-has-children menu-item-1162"><a href="http://192.168.0.128/glasierinc/digital-marketing-services/">Digital Marketing Services</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1141" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1141"><a href="http://192.168.0.128/glasierinc/seo-services/">SEO</a></li>
+		<li id="menu-item-1142" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1142"><a href="http://192.168.0.128/glasierinc/smm-services/">SMM</a></li>
+		<li id="menu-item-1567" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1567"><a href="http://192.168.0.128/glasierinc/google-ad-management-company/">Google Ad words company</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1144" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-has-children menu-item-1144"><a href="http://192.168.0.128/glasierinc/software-development-services/">Software Development</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1164" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1164"><a href="http://192.168.0.128/glasierinc/enterprise-software-development/">Enterprise Software Development</a></li>
+		<li id="menu-item-1165" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1165"><a href="http://192.168.0.128/glasierinc/erp-software-development/">ERP Software Development Services</a></li>
+		<li id="menu-item-1166" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1166"><a href="http://192.168.0.128/glasierinc/software-product-engineering/">Software Product Engineering Company</a></li>
+		<li id="menu-item-1167" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1167"><a href="http://192.168.0.128/glasierinc/software-product-development/">Software Product Development Services</a></li>
+		<li id="menu-item-1646" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1646"><a href="http://192.168.0.128/glasierinc/third-party-software-development/">Third Party Software Development</a></li>
+		<li id="menu-item-1647" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1647"><a href="http://192.168.0.128/glasierinc/software-enhancement-and-modernization/">Software Enhancement and Modernization Services</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1495" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1495"><a href="http://192.168.0.128/glasierinc/woocommerce-development-services/">Woocommerce Development</a></li>
+	<li id="menu-item-1147" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-has-children menu-item-1147"><a href="http://192.168.0.128/glasierinc/ui-ux-design-services/">UI/UX Design Services</a>
+	<ul class="sub-menu">
+		<li id="menu-item-1148" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1148"><a href="http://192.168.0.128/glasierinc/graphic-design-agency/">Graphic design</a></li>
+		<li id="menu-item-1649" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1649"><a href="http://192.168.0.128/glasierinc/product-design-services/">Product Design Services</a></li>
+		<li id="menu-item-1648" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1648"><a href="http://192.168.0.128/glasierinc/web-app-design/">Web App Design Services</a></li>
+		<li id="menu-item-1135" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1135"><a href="http://192.168.0.128/glasierinc/website-designer-company/">Website Design</a></li>
+		<li id="menu-item-1169" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1169"><a href="http://192.168.0.128/glasierinc/trustworthy-mobile-design-services/">Mobile design services</a></li>
+		<li id="menu-item-1173" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1173"><a href="http://192.168.0.128/glasierinc/wireframes-and-prototypes-development/">Wireframes and Prototypes Development Services</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1149" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1149"><a href="http://192.168.0.128/glasierinc/mvp-development-company/">MVP Development</a></li>
+	<li id="menu-item-1150" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1150"><a href="http://192.168.0.128/glasierinc/poc-development/">POC Development Services</a></li>
+	<li id="menu-item-1174" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1174"><a href="http://192.168.0.128/glasierinc/top-qa-testing-services/">Top QA &#038; Software Testing Company</a></li>
+</ul>
+</li>
+<li id="menu-item-564" class="disabled-menu menu-item menu-item-type-post_type_archive menu-item-object-portfolio menu-item-564"><a href="http://192.168.0.128/glasierinc/portfolio/">Portfolio</a></li>
+<li id="menu-item-290" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-290"><a href="http://192.168.0.128/glasierinc/blog/">Blogs</a></li>
+<li id="menu-item-1554" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1554"><a href="http://192.168.0.128/glasierinc/career/">Career</a></li>
+</ul>                </nav>
+                                     <div class="ree-nav-cta">
+                        <ul>
+                           <li>
+                              <a href="http://192.168.0.128/glasierinc/contact-us/" class="ree-btn ree-btn0 ree-btn-grdt2" target="_self"> Get In Touch</a> 
+                           </li>
+                        </ul>
+                     </div>
+                                  
+                <div class="ree-nav-cta" style="display: none;">
+                    <ul>
+                        <li><span style="font-size:30px;cursor:pointer;color: #005186;" onclick="openNav()">&#9776;</span></li>
+                    </ul>
+                </div>
+                <div class="mobile-menu2">
+                    <ul class="mob-nav2">
+                        <!--                         <li>
+                           <a href="http://192.168.0.128/glasierinc/contact-us/" class="ree-btn2 ree-btn-grdt1">
+                              <i class="fas fa-envelope-open-text"></i>
+                           </a>
+                        </li> -->
+                        
+                        <li class="navm-">
+                           <a class="toggle" href="#"> 
+                              <span></span> 
+                           </a> 
+                        </li>
+                    </ul>
+                </div>
+                <!--Start Web Side Menu -->
+                <div id="mySidenav" class="sidenav" >
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                        <ul id="menu-sidebar-menu" class=""><li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16"><a href="http://localhost/glasierinc/">Home</a></li>
+<li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a href="http://192.168.0.128/glasierinc/sample-page/">Sample Page</a></li>
+<li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14"><a href="http://localhost/glasierinc/">Home</a></li>
+<li id="menu-item-15" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-15"><a href="http://192.168.0.128/glasierinc/sample-page/">Sample Page</a></li>
+</ul>                  </div>
+                <!--End Web Side Menu-->
+                <!-- mobile Nav -->
+                <nav id="main-nav">
+                                      <ul id="menu-main-menu-1" class=""><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-61"><a href="http://192.168.0.128/glasierinc/">Home</a></li>
+<li class="disabled-menu menu-item menu-item-type-post_type menu-item-object-page menu-item-295"><a href="http://192.168.0.128/glasierinc/about-us/">About Us</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-1200"><a href="#">Services</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1132"><a href="#">Web Development</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1133"><a href="http://192.168.0.128/glasierinc/web-development-services/">Website Development</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1634"><a href="http://192.168.0.128/glasierinc/progressive-web-app-development/">Web Application Development</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1639"><a href="http://192.168.0.128/glasierinc/opensource-cms-development/">Opensource CMS Development</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1439"><a href="http://192.168.0.128/glasierinc/react-js-development-company/">React JS development</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1134"><a href="#">Web Design</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1168"><a href="http://192.168.0.128/glasierinc/mobile-application-development/">Mobile App Development</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1137"><a href="http://192.168.0.128/glasierinc/ios-app-development-services/">iOS App Development</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services current-menu-item menu-item-1138"><a href="http://192.168.0.128/glasierinc/android-app-development-services/" aria-current="page">Android app development</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1172"><a href="http://192.168.0.128/glasierinc/cross-platform-app-development/">Cross-Platform App Development Company</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1568"><a href="http://192.168.0.128/glasierinc/hybrid-mobile-app-development-services/">Hybrid Mobile App Development Services</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1633"><a href="http://192.168.0.128/glasierinc/bespoke-web-development/">Bespoke Web Development</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1170"><a href="http://192.168.0.128/glasierinc/mobile-app-design-services/">Mobile Design</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-has-children menu-item-1162"><a href="http://192.168.0.128/glasierinc/digital-marketing-services/">Digital Marketing Services</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1141"><a href="http://192.168.0.128/glasierinc/seo-services/">SEO</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1142"><a href="http://192.168.0.128/glasierinc/smm-services/">SMM</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1567"><a href="http://192.168.0.128/glasierinc/google-ad-management-company/">Google Ad words company</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-has-children menu-item-1144"><a href="http://192.168.0.128/glasierinc/software-development-services/">Software Development</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1164"><a href="http://192.168.0.128/glasierinc/enterprise-software-development/">Enterprise Software Development</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1165"><a href="http://192.168.0.128/glasierinc/erp-software-development/">ERP Software Development Services</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1166"><a href="http://192.168.0.128/glasierinc/software-product-engineering/">Software Product Engineering Company</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1167"><a href="http://192.168.0.128/glasierinc/software-product-development/">Software Product Development Services</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1646"><a href="http://192.168.0.128/glasierinc/third-party-software-development/">Third Party Software Development</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1647"><a href="http://192.168.0.128/glasierinc/software-enhancement-and-modernization/">Software Enhancement and Modernization Services</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1495"><a href="http://192.168.0.128/glasierinc/woocommerce-development-services/">Woocommerce Development</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-has-children menu-item-1147"><a href="http://192.168.0.128/glasierinc/ui-ux-design-services/">UI/UX Design Services</a>
+	<ul class="sub-menu">
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1148"><a href="http://192.168.0.128/glasierinc/graphic-design-agency/">Graphic design</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1649"><a href="http://192.168.0.128/glasierinc/product-design-services/">Product Design Services</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1648"><a href="http://192.168.0.128/glasierinc/web-app-design/">Web App Design Services</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1135"><a href="http://192.168.0.128/glasierinc/website-designer-company/">Website Design</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1169"><a href="http://192.168.0.128/glasierinc/trustworthy-mobile-design-services/">Mobile design services</a></li>
+		<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1173"><a href="http://192.168.0.128/glasierinc/wireframes-and-prototypes-development/">Wireframes and Prototypes Development Services</a></li>
+	</ul>
+</li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1149"><a href="http://192.168.0.128/glasierinc/mvp-development-company/">MVP Development</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1150"><a href="http://192.168.0.128/glasierinc/poc-development/">POC Development Services</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1174"><a href="http://192.168.0.128/glasierinc/top-qa-testing-services/">Top QA &#038; Software Testing Company</a></li>
+</ul>
+</li>
+<li class="disabled-menu menu-item menu-item-type-post_type_archive menu-item-object-portfolio menu-item-564"><a href="http://192.168.0.128/glasierinc/portfolio/">Portfolio</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-290"><a href="http://192.168.0.128/glasierinc/blog/">Blogs</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1554"><a href="http://192.168.0.128/glasierinc/career/">Career</a></li>
+</ul>					
+					<ul class="">
+													   <li class="ree-hc">
+								  <a href="http://192.168.0.128/glasierinc/contact-us/" class="get-in-touch ree-btn ree-btn0 ree-btn-grdt2 " target="_self" style="border: 1px solid;padding: 0 20px;border-radius: 100px;text-align: center;margin: 0 15px;"> Get In Touch</a> 
+							   </li>
+					                          
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+
+<!-- Header title -->
+<section class="header-title head-opacity" data-background="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Common-Banner.png">
+    <div class="container">
+        <div class="row justify-content-center">
+           <div class="col-lg-7 text-center">
+                          <h1 class="mb15">Top Android app development company in India</h1>
+            
+                       </div>
+        </div>
+    </div>
+</section>
+<!-- Header title end -->
+
+
+   <!--Start About-->
+<section class="service pad-tb1 bg-gradient5">
+    <div class="container">
+        <div class="row align-items-center">
+                        <div class="col-lg-4">
+                <div class="image-block wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="image" class="img-fluid no-shadow w-100" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/1st-banner-copy-1.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/1st-banner-copy-1.png" alt="image" class="img-fluid no-shadow w-100"></noscript>
+                </div>
+            </div>
+                        
+                        <div class="col-lg-8 block-1">
+                <div class="common-heading text-lg-left text-justify ">
+                    <!-- <span>Overview</span> -->
+                    
+                                        <h2>Bring Your Business to Life with Android Applications</h2>
+                    
+                                        <p> 
+                        The <b>android application development</b>at Glasier Inc helps its clients build robust Android applications that can help their business grow exponentially.
+<br><br>
+Glasier Inc, the reliable <b>android application development company</b> UK provides custom <b>Android app development services in the USA</b> with a highly skilled team of experts to help you succeed. Glasier Inc provides a complete range of specialized <b>Android app development services in Canada</b> that businesses need to expand their marketing strategy and acquire large numbers of customers. In addition, we ensure that our offshore <b>Android development</b> teams constantly update themselves about the latest technological advancements, skills, and market trends, thus providing state-of-the-art Android solutions for numerous business verticals.
+<br><br>
+Our Android developers can develop high-quality, effective, and highly reliable Android applications with the latest Android platform.                    </p>
+                                    </div>
+            </div>
+                    </div>
+    </div>
+</section>
+<!--End About-->
+                     
+
+
+
+
+
+<!--Start Logo Section-->
+<div class="techonology-used-">
+    <div class="container">
+        <ul class="h-scroll tech-icons">
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon1.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon1.png" alt="icon"></noscript></a></li>
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon2.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon2.png" alt="icon"></noscript></a></li>
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon3.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon3.png" alt="icon"></noscript></a></li>
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon4.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon4.png" alt="icon"></noscript></a></li>
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon5.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon5.png" alt="icon"></noscript></a></li>
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon6.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon6.png" alt="icon"></noscript></a></li>
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon7.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon7.png" alt="icon"></noscript></a></li>
+            <li><a href="#"><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="icon" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon8.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/images/stack-icon8.png" alt="icon"></noscript></a></li>
+        </ul>
+    </div>
+</div>
+<!-- End Logo Section-->
+
+
+
+<!-- Start Our Servoces-->
+<section class="service-block bg-gradient6 pad-tb1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="common-heading ptag">
+                    <!-- <span style="color: #fff;">Service</span> -->
+                                            <h2 style="color: #fff;">Our Comprehensive Android App Development Services</h2>
+                                        
+                                        <p class="mb30" style="color: #fff;">We offer comprehensive Android development services.                    </p>
+                                    </div>
+            </div>
+        </div>
+        <div class="row upset link-hover">
+                        <div class="col-lg-6 col-sm-6 mt30  wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="s-block wide-sblock">
+                                        <div class="s-card-icon-large">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="service" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Custom-Android-Aapp-Development.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Custom-Android-Aapp-Development.png" alt="service" class="img-fluid"></noscript>
+                    </div>
+                    
+                    <div class="s-block-content-large">
+                                                <h4>Custom Android Apps Development services</h4>
+                        
+                                                <p>Having access to a team of Android developers, we can meet various business requirements. Creating countless Android apps for different industrial verticals with the shortest timeline possible has been one of our best achievements. We know how to make them shine with our experience in developing applications that stand out from the rest. </p>
+                                            </div>
+                </div>
+            </div>
+                        <div class="col-lg-6 col-sm-6 mt30  wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="s-block wide-sblock">
+                                        <div class="s-card-icon-large">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="service" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/UI-UX-copy.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/UI-UX-copy.png" alt="service" class="img-fluid"></noscript>
+                    </div>
+                    
+                    <div class="s-block-content-large">
+                                                <h4>Android UI/UX Design</h4>
+                        
+                                                <p>Our focus is on creating Android devices that are powerful and reliable and that provide an incredible user experience. Our designers use Android's functionality and skills to create alluring designs that appeal to a broad audience. As a result, our Android apps are well designed with impeccable UI/UX for a wide range of business niches. </p>
+                                            </div>
+                </div>
+            </div>
+                        <div class="col-lg-6 col-sm-6 mt30  wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="s-block wide-sblock">
+                                        <div class="s-card-icon-large">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="service" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Web-Apps.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Web-Apps.png" alt="service" class="img-fluid"></noscript>
+                    </div>
+                    
+                    <div class="s-block-content-large">
+                                                <h4>Android Web-based Apps</h4>
+                        
+                                                <p>With our Android web applications, we develop easy-to-install, highly secure, and easy-to-maintain applications. As your business grows, you can easily add features to your Android web application by selecting our Android-based development service. Our clients around the globe have been blown away by our innovative web-based app solutions. </p>
+                                            </div>
+                </div>
+            </div>
+                        <div class="col-lg-6 col-sm-6 mt30  wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="s-block wide-sblock">
+                                        <div class="s-card-icon-large">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="service" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Android-App-Porting.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Android-App-Porting.png" alt="service" class="img-fluid"></noscript>
+                    </div>
+                    
+                    <div class="s-block-content-large">
+                                                <h4>Android App Porting</h4>
+                        
+                                                <p>Our Android app porting service offers the newest industry standards and features. This service is designed for businesses to gain more clients and grow their businesses by building an effective presence on various devices and operating systems. </p>
+                                            </div>
+                </div>
+            </div>
+                        <div class="col-lg-6 col-sm-6 mt30  wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="s-block wide-sblock">
+                                        <div class="s-card-icon-large">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="service" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/Usability-Testing.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/Usability-Testing.png" alt="service" class="img-fluid"></noscript>
+                    </div>
+                    
+                    <div class="s-block-content-large">
+                                                <h4>Android App Testing</h4>
+                        
+                                                <p>We test your app rigorously for bugs that can cripple the operation before making it market-ready. The team of quality inspectors at Glasier Inc works tirelessly to ensure that your Android app operates flawlessly and is fully functional. </p>
+                                            </div>
+                </div>
+            </div>
+                        <div class="col-lg-6 col-sm-6 mt30  wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="s-block wide-sblock">
+                                        <div class="s-card-icon-large">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="service" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Android-App-Consultation.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Android-App-Consultation.png" alt="service" class="img-fluid"></noscript>
+                    </div>
+                    
+                    <div class="s-block-content-large">
+                                                <h4>Android App Consultation</h4>
+                        
+                                                <p>As your Android app developer, we will be there from the beginning to the end. Interested in creating an app? Contact us today. Creating your vision into reality is what we do. The Android development process starts with us carefully analyzing your requirements. </p>
+                                            </div>
+                </div>
+            </div>
+                    </div>
+        <!-- <div class="-cta-btn mt70">
+            <div class="free-cta-title v-center wow zoomInDown" data-wow-delay="1.1s" style="visibility: visible; animation-delay: 1.1s; animation-name: zoomInDown;">
+                <p style="color: #fff;">Hire a <span>Dedicated Developer</span></p>
+                <a href="javascript:void(0)" class="btn-outline">Estimate Project 
+                    <i class="fas fa-chevron-right fa-icon"></i>
+                </a>
+            </div>
+        </div> -->
+    </div>
+</section>
+<!-- End Over Services-->
+
+
+
+            <!--start cta-->
+<section class="r-bg-x sec-pad">
+    <div class="container">
+        <div class="ree">
+            <div class="row">
+                <div class="col-lg-6 vcenter">
+                    <div class="cta-heading">
+                                                <h2 class="mb15">
+                            Hire world-class <span class="ree-text rt40">developers</span> for your <span class="ree-text rt40">project</span>                        </h2>
+                        
+                                                <p>We have a dexterity team of designers & developers that works on clients projects excellently and delivers the project on timeline.</p>
+                         
+                         
+                                                 <div class="mult-btns">
+                           <a href="#" class="ree-btn  ree-btn-grdt1 mt40" target="_self" >Talk to our experts <i
+                              class="fas fa-arrow-right fa-btn"></i></a>
+                                                       <span class="or">or</span>
+                           <a href="tel:+91-9925028258" class="mt40 call-us">Call Us +91-9925028258</a>
+                                                   </div>
+                                            </div>
+                </div>
+                
+                                <div class="col-lg-6 vcenter text-center">
+                    <div class="sol-img-png">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="app" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/Hire-Developer.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/Hire-Developer.png" alt="app" class="img-fluid"></noscript>
+                    </div>
+                </div>
+                            </div>
+        </div>
+    </div>
+</section>
+<!--start cta-->
+            
+
+               <!--Start App Development Process-->
+<section class="service-block pad-tb1 pb-0 light-dark">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="common-heading ptag">
+                 <!-- <span>Process</span> -->
+                                        <h2 class="mb15">Our Step-By-Step Android App Development Process</h2>
+                    
+                                    </div>
+            </div>
+        </div>
+        <div style="margin-bottom: 70px;"></div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="common-heading ptag dis-desktop">
+                    <div class="content-desk-text">
+                                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/android-app-development.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/android-app-development.png"></noscript>
+                                                
+                        <div class="row first-section">
+                            
+                                                        <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>01</h2>
+                                    <h6>Ideation and Planning</h6>
+                                </div>
+                                <p>Our android mobile application development company in Ahmedabad will learn about your project's objectives as a first step. Our detailed insight will allow us to create a seamless flow for every site page after refining the plan. Using the wireframes for android development services, we then develop the app.</p>
+                            </div>
+                            
+                                                        <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>03</h2>
+                                    <h6>Testing and QA</h6>
+                                </div>
+                                <p>We will conduct a testing check during this stage to ensure that the app runs smoothly and check for bugs. Finally, our developers will finish the app and resolve any remaining issues.</p>
+                            </div>
+                            
+                                                        <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>05</h2>
+                                    <h6>Maintenance</h6>
+                                </div>
+                                <p>We provide 24*7 maintenance & support service for all our clients to resolve all the issues in real-time.</p>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row second-section">
+                            
+                                                        <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>02</h2>
+                                    <h6>Design and Development</h6>
+                                </div>
+                                <p>Developing the app will be the next step. This phase aims to create a visually appealing app that includes graphics, icons, and features. We'll also build the app using our android development services to integrate the server-side components and add the required functions.</p>
+                            </div>
+                            
+                                                        <div class="col-md-4 text-content-idea">
+                                <div class="text-heading">
+                                    <h2>04</h2>
+                                    <h6>App Deployment</h6>
+                                </div>
+                                <p>The last phase has begun! After that, the app will be deployed into the Play Store. Consequently, you can generate a profitable ROI by getting your customers to download the app.</p>
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+            
+                </div>
+           <div class="dis-mobile">
+              <div class="row">
+                                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-01.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-01.png"></noscript>
+                        <div class="content-heading">
+                            <h2>01</h2>
+                            <h6>Ideation and Planning</h6>
+                        </div>
+                        <p>Our android mobile application development company in Ahmedabad will learn about your project's objectives as a first step. Our detailed insight will allow us to create a seamless flow for every site page after refining the plan. Using the wireframes for android development services, we then develop the app.</p>
+                    </div>
+                 </div>
+                                 
+                                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-02-4.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-02-4.png"></noscript>
+                        <div class="content-heading">
+                            <h2>02</h2>
+                            <h6>Design and Development</h6>
+                        </div>
+                        <p>Developing the app will be the next step. This phase aims to create a visually appealing app that includes graphics, icons, and features. We'll also build the app using our android development services to integrate the server-side components and add the required functions.</p>
+                    </div>
+                 </div>
+                                                  <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-03.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-03.png"></noscript>
+                        <div class="content-heading">
+                            <h2>03</h2>
+                            <h6>Testing and QA</h6>
+                        </div>
+                        <p>We will conduct a testing check during this stage to ensure that the app runs smoothly and check for bugs. Finally, our developers will finish the app and resolve any remaining issues.</p>
+                    </div>
+                 </div>
+                 
+                                  <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-05-4.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/process-05-4.png"></noscript>
+                        <div class="content-heading">
+                            <h2>04</h2>
+                            <h6>App Deployment</h6>
+                        </div>
+                        <p>The last phase has begun! After that, the app will be deployed into the Play Store. Consequently, you can generate a profitable ROI by getting your customers to download the app.</p>
+                    </div>
+                 </div>
+                 
+                                 <div class="col-md-12 mb-20">
+                    <div class="content-text text-center">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/process-05-1.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/process-05-1.png"></noscript>
+                        <div class="content-heading">
+                            <h2>05</h2>
+                            <h6>Maintenance</h6>
+                        </div>
+                        <p>We provide 24*7 maintenance & support service for all our clients to resolve all the issues in real-time.</p>
+                    </div>
+                 </div>
+                 
+                              </div>
+           </div>
+        </div>
+     </div>
+    </div>
+</section>
+<!--End App Development Process-->
+         
+
+<!--Industries-->
+<section class="featured-project sec-pad">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="page-headings text-center">
+                                            <h2 class="mb15">Industries We Serve</h2>
+                    
+                                        <p>Throughout our extensive experience, we have served companies of all sizes and types in many industries,</p>
+                                    </div>
+            </div>
+        </div>
+        <div class="row mt30">
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/fashion-icon.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/fashion-icon.png" alt="img"></noscript>
+                    <h6>Fashion</h6>
+                </div>
+            </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/video-tutorials.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/video-tutorials.svg" alt="img"></noscript>
+                    <h6>Education</h6>
+                </div>
+            </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/mobile-app.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/mobile-app.svg" alt="img"></noscript>
+                    <h6>Banking</h6>
+                </div>
+            </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/joystick.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/joystick.svg" alt="img"></noscript>
+                    <h6>Entertainment</h6>
+                </div>
+            </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/travel-case.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/travel-case.svg" alt="img"></noscript>
+                    <h6>Travels</h6>
+                </div>
+            </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/smartphone.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/smartphone.svg" alt="img"></noscript>
+                    <h6>eCommerce</h6>
+                </div>
+            </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/hospitality-icon.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/hospitality-icon.png" alt="img"></noscript>
+                    <h6>Hospitality</h6>
+                </div>
+            </div>
+                        <div class="col-lg-3 col-sm-6 col-6">
+                <div class="industry-workfor">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="img" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/healthcare.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/healthcare.svg" alt="img"></noscript>
+                    <h6>Healthcare</h6>
+                </div>
+            </div>
+                    </div>
+        <div class="row mt30 justify-content-center">
+            <div class="col-lg-8">
+                <div class="page-headings text-center">
+                                        <p>and many more.
+<br>
+<br>
+By creating powerful websites with excellent elements and bringing ideas to life, we have created countless websites that have helped businesses thrive. Our tailored website development services will redefine how you do business by meeting your ROI expectations and goals.</p>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Industries end-->
+
+
+
+
+                  <section class="r-bg-x zup pad-tb1">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+                        <div class="col-lg-4">
+                <div class="sol-img m-mt30">
+                    <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="reevan office" class="img-fluid" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Last-banner-copy-1.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/Last-banner-copy-1.png" alt="reevan office" class="img-fluid"></noscript>
+                </div>
+            </div>
+                        <div class="col-lg-7">
+                <div class="pera-block ml50">
+                                        <h2>Why choosing us is a smart move.</h2>
+                    
+                                        <p>At Glasier Inc., we have dedicated Android developers with extensive skill sets that enable us to deliver what you need in an Android app. Using cutting-edge technology in conjunction with their skills & experience, we develop Android applications with the symphony.</p>
+                                    </div>
+            </div>
+        </div>
+        <div class="row mt30">
+                        <div class="col-lg-4 mt30">
+                <div class="pera-block ml50">
+                    <h4>Experience & expertise</h4>
+                    <p>To get quality <b> android app development software,</b> you should be careful about who you outsource to.</p>
+                </div>
+            </div>
+                        <div class="col-lg-4 mt30">
+                <div class="pera-block ml50">
+                    <h4>Latest Technologies</h4>
+                    <p>In 2011, Android was much different than it is today. More features have been added, and more technologies are supported than ever.</p>
+                </div>
+            </div>
+                        <div class="col-lg-4 mt30">
+                <div class="pera-block ml50">
+                    <h4>Quality apps</h4>
+                    <p>Before releasing the app, we conduct thorough quality control and quality assessment procedures to ensure it is nearly perfect.</p>
+                </div>
+            </div>
+                        <div class="col-lg-4 mt30">
+                <div class="pera-block ml50">
+                    <h4>Flexible pricing</h4>
+                    <p>We don't require you to pay the quoted price upfront when engaging our Android app development services.</p>
+                </div>
+            </div>
+                        <div class="col-lg-4 mt30">
+                <div class="pera-block ml50">
+                    <h4>Cloud team</h4>
+                    <p>With our dedicated cloud team, your project will be worked on round-the-clock, and you can reach us via Skype, phone, or chat whenever you want.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+      
+
+
+                     
+<!-- Start Some of Our Works-->
+<section class="r-bg-x pad-tb1" >
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="common-heading ptag">
+                    <span>Our Projects</span>
+                    <h2>Some of Our Works</h2>
+                    <p class="mb0">We think big and have hands in all leading technology platforms to provide you wide array of services.</p>
+                </div>
+            </div>
+        </div>
+                      <div class="row">
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="isotope_item hover-scale" style="pointer-events: none;">
+                    <div class="item-image">
+                        <a href="http://192.168.0.128/glasierinc/portfolio/bellezoe/">
+                                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="img-fluid" alt="Bellezoe" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/bellezoe.jpg" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/bellezoe.jpg" class="img-fluid" alt="Bellezoe" /></noscript>
+                                               </a>
+                    </div>
+                    <div class="item-info">
+                        <h4><a href="http://192.168.0.128/glasierinc/portfolio/bellezoe/">Bellezoe</a></h4>
+                        <p>Html, Php, Wordpress</p>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="isotope_item hover-scale" style="pointer-events: none;">
+                    <div class="item-image">
+                        <a href="http://192.168.0.128/glasierinc/portfolio/musk-clinic/">
+                                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="img-fluid" alt="Musk Clinic" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/musk-clinic.jpg" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/musk-clinic.jpg" class="img-fluid" alt="Musk Clinic" /></noscript>
+                                               </a>
+                    </div>
+                    <div class="item-info">
+                        <h4><a href="http://192.168.0.128/glasierinc/portfolio/musk-clinic/">Musk Clinic</a></h4>
+                        <p>Html, Wordpress</p>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="isotope_item hover-scale" style="pointer-events: none;">
+                    <div class="item-image">
+                        <a href="http://192.168.0.128/glasierinc/portfolio/the-white-chalet/">
+                                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="img-fluid" alt="The White Chalet" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/the-white-chalet.jpg" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/the-white-chalet.jpg" class="img-fluid" alt="The White Chalet" /></noscript>
+                                               </a>
+                    </div>
+                    <div class="item-info">
+                        <h4><a href="http://192.168.0.128/glasierinc/portfolio/the-white-chalet/">The White Chalet</a></h4>
+                        <p>Html, Php, Wordpress</p>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="isotope_item hover-scale" style="pointer-events: none;">
+                    <div class="item-image">
+                        <a href="http://192.168.0.128/glasierinc/portfolio/girlvent/">
+                                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="img-fluid" alt="Girlvent" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/girlvent.jpg" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/girlvent.jpg" class="img-fluid" alt="Girlvent" /></noscript>
+                                               </a>
+                    </div>
+                    <div class="item-info">
+                        <h4><a href="http://192.168.0.128/glasierinc/portfolio/girlvent/">Girlvent</a></h4>
+                        <p>Android, ios</p>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="isotope_item hover-scale" style="pointer-events: none;">
+                    <div class="item-image">
+                        <a href="http://192.168.0.128/glasierinc/portfolio/food/">
+                                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="img-fluid" alt="Food" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/food.jpg" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/food.jpg" class="img-fluid" alt="Food" /></noscript>
+                                               </a>
+                    </div>
+                    <div class="item-info">
+                        <h4><a href="http://192.168.0.128/glasierinc/portfolio/food/">Food</a></h4>
+                        <p>Android, ios, Php</p>
+                    </div>
+                </div>
+            </div>
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="isotope_item hover-scale" style="pointer-events: none;">
+                    <div class="item-image">
+                        <a href="http://192.168.0.128/glasierinc/portfolio/iv-near-me/">
+                                                     <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="img-fluid" alt="IV Near Me" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/IV-near-me.jpg" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/IV-near-me.jpg" class="img-fluid" alt="IV Near Me" /></noscript>
+                                               </a>
+                    </div>
+                    <div class="item-info">
+                        <h4><a href="http://192.168.0.128/glasierinc/portfolio/iv-near-me/">IV Near Me</a></h4>
+                        <p>Android, Html, ios, Php, Wordpress</p>
+                    </div>
+                </div>
+            </div>
+                </div>
+                
+                <div class="row">
+            <div class="col-lg-12 maga-btn mt60">
+                <a href="#" class="btn-outline">View More Projects <i
+                 class="fas fa-chevron-right fa-icon"></i></a>
+            </div>
+        </div>
+            </div>
+</section>
+<!-- End Some of Our Works-->
+   
+
+                        <!--Start reveiws-->
+<section class="reviews-block bg-gradient6 pad-tb1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="common-heading ptag">
+                                        <h2 style="color: #fff;">Client Speaks</h2>
+                    
+                                        <p class="mb30" style="color: #fff;">Check our customers success stories.</p>
+                                    </div>
+            </div>
+        </div>
+                            
+                          <div class="row">
+                                <div class="col-md-4 mt30">
+                    <div class="reviews-card pr-shadow">
+                        <div class="row v-center">
+                            <div class="col">
+                                <span class="revbx-lr"><i class="fas fa-quote-left"></i></span>
+                            </div>
+                        </div>
+                        <div class="review-text">
+                            
+<p>&#8220;Glasier inc has been very good at getting the relevant skills on board in a short period of time”<br>Assigned resources produced a working MVP within an aggressive time frame and made revisions quickly, all while working with limited funds. This sense of urgency sets them apart from the competition and makes Glasier Inc a great partner for startups.<br>Spandan Shah</p>
+                        </div>
+                        <div class="-client-details-">
+                            <div class="reviewer-text">
+                                <h4>FoodVault</h4>
+                                <p>Founder</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="col-md-4 mt30">
+                    <div class="reviews-card pr-shadow">
+                        <div class="row v-center">
+                            <div class="col">
+                                <span class="revbx-lr"><i class="fas fa-quote-left"></i></span>
+                            </div>
+                        </div>
+                        <div class="review-text">
+                            
+<p>We were very happy with the work of Glasier inc. We gave them a challenging project which required several changes due to the nature of the project. Glasier inc was flexible with these changes and was able to provide work above and beyond what we asked for. On several occasions we asked for additional work that was not originally agreed upon and Glasier&#8217;s team performed this work in an exceptional manner.<br>Fabrizio Capaccioli</p>
+                        </div>
+                        <div class="-client-details-">
+                            <div class="reviewer-text">
+                                <h4>ASAcert SR</h4>
+                                <p>Founder</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <div class="col-md-4 mt30">
+                    <div class="reviews-card pr-shadow">
+                        <div class="row v-center">
+                            <div class="col">
+                                <span class="revbx-lr"><i class="fas fa-quote-left"></i></span>
+                            </div>
+                        </div>
+                        <div class="review-text">
+                            
+<p>Glasier inc’ communication and technical expertise were impressive. They provided timely and detailed updates, which helped alleviate concerns over unexpected technical obstacles. While their initial timeline estimate was off, the team’s responsiveness led to a successful launch.<br>Debora Iori</p>
+                        </div>
+                        <div class="-client-details-">
+                            <div class="reviewer-text">
+                                <h4>Rotary Club Italy</h4>
+                                <p>Director</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+                            </div>
+</section>
+<!--End reveiws-->
+
+
+<!--Start CTA-->
+<section class="cta-area pad-tb1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="common-heading">
+                                            <span>Let's work together</span>
+                                        
+                                        <h2>We Love to Listen to Your Requirements</h2>
+                    
+                                        <a href="http://192.168.0.128/glasierinc/contact-us/" class="btn-outline" target="_self" >Contact Us                        <i class="fas fa-chevron-right fa-icon"></i>
+                    </a>
+                                        
+                                                                                                 <p class="cta-call">Or call us now 
+                                <a href="tel:+4402032392165">
+                                    <i class="fas fa-phone-alt"></i> +44 020 3239 2165                                </a>
+                            </p>
+                                                            </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape shape-a1">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="shape" style="filter: hue-rotate(175deg);" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-3.svg" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-3.svg" alt="shape" style="filter: hue-rotate(175deg);" /></noscript>
+    </div>
+    <div class="shape shape-a2">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="shape" style="filter: hue-rotate(100deg);" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-4.svg" ><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-4.svg" alt="shape" style="filter: hue-rotate(100deg);" ></noscript>
+    </div>
+    <div class="shape shape-a3">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="shape" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-13.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-13.svg" alt="shape"></noscript>
+    </div>
+    <div class="shape shape-a4">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="shape" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-11.svg"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/shape-11.svg" alt="shape"></noscript>
+    </div>
+</section>
+<!--End CAT-->
+
+
+   <!--start footer -->
+    <footer class="footer-a">
+        <div class="footer-fist-row pt40">
+            <div class="container">
+                <div class="footer-rowset">
+                        						                                                <div class="col footer-head">
+                            <h5>Contact info</h5>
+                            <ul class="footer-links-list social-linkz">
+								
+																<li>
+									<a href="tel:+13152150321">
+										<span><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-united-states-48.png" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-united-states-48.png" /></noscript></span>
+										+1 315 215 0321									</a>
+								</li>
+																
+																<li>
+									<a href="tel:+4402032392165">
+										<span><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-great-britain-48.png" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-great-britain-48.png" /></noscript></span>
+										+44 020 3239 2165									</a>
+								</li>
+																
+								                                <li>
+                                    <a href="tel:+13152150321">
+                                        <span><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-canada-48.png" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-canada-48.png" /></noscript></span>
+                                       +1 315 215 0321                                    </a>
+                                </li>
+                                
+                                                                <li>
+                                    <a href="tel:+919925028258">
+                                        <span><img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-india-48.png" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/04/icons8-india-48.png" /></noscript></span>
+                                       +91 9925028258                                    </a>
+                                </li>
+                                								
+								
+
+
+                                                                <li>
+                                    <a href="mailto:info@192.168.0.128">
+                                        <span><i class="fas fa-envelope"></i></span>
+                                       info@192.168.0.128                                    </a>
+                                </li>
+                                
+
+                                                                <li>
+                                    <a href="skype:ridham201103" target="_self">
+                                        <span><i class="fab fa-skype"></i></span>
+                                        Glasier Inc                                    </a>
+                                </li>
+                                                            </ul>
+                        </div>
+                                               
+
+
+                                                            <div class="col footer-head">
+                        <h5>Follow Us</h5>
+                        <ul class="footer-links-list social-linkz">
+                                                        <li>
+                                <a href="https://www.facebook.com/GlasierInc/">
+                                    <span><i class="fab fa-facebook-f"></i></span> Facebook
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://twitter.com/GlasierInc">
+                                    <span><i class="fab fa-twitter"></i></span> Twitter
+                                </a>
+                            </li>
+                            
+
+                                                        <li>
+                                <a href="https://www.linkedin.com/company/glasierinc">
+                                    <span><i class="fab fa-linkedin-in"></i></span> Linkedin
+                                </a>
+                            </li>
+                                                        
+                                                        <li>
+                                <a href="https://www.instagram.com/glasierinc">
+                                    <span><i class="fab fa-instagram"></i></span> Instagram
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://medium.com/@GlasierInc">
+                                    <span><i class="fab fa-medium"></i></span> Medium
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://dribbble.com/glasierinc">
+                                    <span><i class="fab fa-dribbble"></i></span> Dribbble
+                                </a>
+                            </li>
+                            
+                                                        <li>
+                                <a href="https://www.behance.net/glasierinc">
+                                    <span><i class="fab fa-behance"></i></span> Behance
+                                </a>
+                            </li>
+                            
+                            
+                            
+                            
+
+                            
+                        </ul>
+                    </div>
+                    
+                                                            <div class="col footer-head">
+                        <h5>Services</h5>
+                                                <ul id="menu-services" class="footer-links-list"><li id="menu-item-1249" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1249"><a href="http://192.168.0.128/glasierinc/web-development-services/">Web Development</a></li>
+<li id="menu-item-1203" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1203"><a href="http://192.168.0.128/glasierinc/mobile-application-development/">Mobile Applications Development</a></li>
+<li id="menu-item-1250" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1250"><a href="http://192.168.0.128/glasierinc/software-development-services/">Custom Software Development</a></li>
+<li id="menu-item-1251" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1251"><a href="#">Dedicated Resource</a></li>
+<li id="menu-item-1252" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1252"><a href="http://192.168.0.128/glasierinc/ui-ux-design-services/">UI/UX Design</a></li>
+<li id="menu-item-1206" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1206"><a href="http://192.168.0.128/glasierinc/seo-services/">SEO</a></li>
+<li id="menu-item-1207" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1207"><a href="http://192.168.0.128/glasierinc/top-qa-testing-services/">Top QA &#038; testing</a></li>
+<li id="menu-item-1208" class="menu-item menu-item-type-post_type menu-item-object-services menu-item-1208"><a href="http://192.168.0.128/glasierinc/wireframes-and-prototypes-development/">Wireframes and Prototypes Development Services</a></li>
+</ul>                    </div>
+                    
+                                                            <div class="col footer-head">
+                        <h5>Industries</h5>
+                                                <ul id="menu-industries-menu" class="footer-links-list"><li id="menu-item-712" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-712"><a href="#fashion">Fashion</a></li>
+<li id="menu-item-713" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-713"><a href="#education">Education</a></li>
+<li id="menu-item-714" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-714"><a href="#banking">Banking</a></li>
+<li id="menu-item-715" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-715"><a href="#entertainment">Entertainment</a></li>
+<li id="menu-item-716" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-716"><a href="#travels">Travels</a></li>
+<li id="menu-item-717" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-717"><a href="#eCommerce">eCommerce</a></li>
+<li id="menu-item-718" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-718"><a href="#Hospitality">Hospitality</a></li>
+<li id="menu-item-719" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-719"><a href="#Healthcare">Healthcare</a></li>
+</ul>                    </div>
+                    
+                                                            <div class="col footer-head">
+                        <h5>Portfolios</h5>
+                                                <ul id="menu-portfolio" class="footer-links-list"><li id="menu-item-720" class="disabled-menu menu-item menu-item-type-post_type menu-item-object-portfolio menu-item-720"><a href="http://192.168.0.128/glasierinc/portfolio/bellezoe/">Bellezoe</a></li>
+<li id="menu-item-721" class="disabled-menu menu-item menu-item-type-post_type menu-item-object-portfolio menu-item-721"><a href="http://192.168.0.128/glasierinc/portfolio/musk-clinic/">Musk Clinic</a></li>
+<li id="menu-item-722" class="disabled-menu menu-item menu-item-type-post_type menu-item-object-portfolio menu-item-722"><a href="http://192.168.0.128/glasierinc/portfolio/the-white-chalet/">The White Chalet</a></li>
+<li id="menu-item-723" class="disabled-menu menu-item menu-item-type-post_type menu-item-object-portfolio menu-item-723"><a href="http://192.168.0.128/glasierinc/portfolio/girlvent/">Girlvent</a></li>
+<li id="menu-item-724" class="disabled-menu menu-item menu-item-type-post_type menu-item-object-portfolio menu-item-724"><a href="http://192.168.0.128/glasierinc/portfolio/food/">Food</a></li>
+<li id="menu-item-725" class="disabled-menu menu-item menu-item-type-post_type menu-item-object-portfolio menu-item-725"><a href="http://192.168.0.128/glasierinc/portfolio/iv-near-me/">IV Near Me</a></li>
+</ul>                    </div>
+                    
+                </div>
+            </div>
+            <div class="footer-abt mt70 pt40 pb40">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 vcenter">
+                            <div class="footer-ree-lg">
+                                <div class="footer-logo">
+                                    <a href="http://192.168.0.128/glasierinc/">
+                                                                              <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" class="img" alt="glasierinc" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/footer-logo.png" /><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/footer-logo.png" class="img" alt="glasierinc" /></noscript>
+                                                                              
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 vcenter">
+                            <div class="ref-logo">
+                                
+                            
+                                                                        <a href="https://www.appfutura.com/developers/glasierinc"> 
+                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Logo" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/app.png.webp"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/app.png.webp" alt="Logo"></noscript> 
+                                        </a>
+                                                                        <a href="https://clutch.co/profile/glasier"> 
+                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Logo" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/cluch.png.webp"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/03/cluch.png.webp" alt="Logo"></noscript> 
+                                        </a>
+                                                                        <a href="https://startup.siliconindia.com/best-ahmedabad-startup-to-work-for--2020/glasier-a-step-ahead-nwid-25207.html"> 
+                                            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" alt="Logo" data-lazy-src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/06/Skype_Picture_2022_05_11T05_55_32_325Z-1.png"><noscript><img src="http://192.168.0.128/glasierinc/wp-content/uploads/2022/06/Skype_Picture_2022_05_11T05_55_32_325Z-1.png" alt="Logo"></noscript> 
+                                        </a>
+                                                            </div>
+                        </div>
+                                                     <div class="col-lg-3 vcenter ft-btn">
+                                <a href="#popup-1367" class="ree-btn ree-btn-grdt1 mw-80 no-shadows" target="_self" data-toggle="modal" data-target="#popup-1367"> Let&#039;s Talk <i class="fas fa-arrow-right fa-btn"></i></a>
+                             </div>
+                          
+                    </div>
+                </div>
+            </div>
+            <div class="container ft-cpy">
+                <div class="row">
+					                    <div class="col-lg-3">
+                        <div class="ft-copyright">
+							                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="ft-copyright text-right">
+                            <p>© Copyright 2022. All Rights Reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+
+
+
+
+<!-- Modal Popup -->
+<div id="popup-1367" class="modal fade bd-example-modal-md contact-popup " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+       <section>
+          <div class="container">
+			               <div class="contactInfo">
+                <div class="box">
+                   <div class="content-box">
+					   						<h2>Discuss your fintech product with the experts now.</h2>
+						                                           <div class="text-center">
+                         <a class="btn btn-theme border btn-md sucess-buton" href="http://192.168.0.128/glasierinc/contact-us/"><span>Let's Begin</span></a>
+                      </div>
+					                      </div>
+                </div>
+             </div>
+			               <div class="contactForm">
+                <div class="form">
+					                   	<h2>Hey, let's talk.</h2>
+										
+					                   	<p>Please fill the form below. Our team will get in touch with you shortly</p>
+										
+					                   <div role="form" class="wpcf7" id="wpcf7-f1367-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"><p role="status" aria-live="polite" aria-atomic="true"></p> <ul></ul></div>
+<form action="/glasierinc/android-app-development-services/#wpcf7-f1367-o1" method="post" class="wpcf7-form init" novalidate="novalidate" data-status="init">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="1367" />
+<input type="hidden" name="_wpcf7_version" value="5.5.6" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1367-o1" />
+<input type="hidden" name="_wpcf7_container_post" value="0" />
+<input type="hidden" name="_wpcf7_posted_data_hash" value="" />
+</div>
+<div class="row">
+<div class="col-md-12">
+<div class="form-group "><span class="wpcf7-form-control-wrap fullname"><input type="text" name="fullname" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Enter your name*" /></span></div>
+</div>
+<div class="col-md-12">
+<div class="form-group "><span class="wpcf7-form-control-wrap email"><input type="email" name="email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" placeholder="Enter Email Address*" /></span></div>
+</div>
+<div class="col-md-12">
+<div class="form-group"><span class="wpcf7-form-control-wrap phone"><input type="text" name="phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Enter your phone number*" /></span></div>
+</div>
+<div class="col-md-12 message-part">
+<div class="form-group "><span class="wpcf7-form-control-wrap message"><textarea name="message" cols="40" rows="4" class="wpcf7-form-control wpcf7-textarea form-control" aria-invalid="false" placeholder="How can we help?"></textarea></span></div>
+</div>
+<div class="col-md-12">	<div
+			class="h-captcha"
+			data-sitekey="d9d38040-8fc0-49cd-bc22-12145bb02963"
+			data-theme="light"
+			data-size="normal"
+						data-auto="false">
+	</div>
+	<input type="hidden" id="hcaptcha_nonce" name="hcaptcha_nonce" value="6e0dca82a0" /><input type="hidden" name="_wp_http_referer" value="/glasierinc/android-app-development-services/" /></div>
+<div class="col-md-12 text-center"><button type="submit" name="submit" class="ree-btn ree-btn-grdt1 w-100 has-spinner no-shadows wpcf7-submit">Send</button></div>
+</div>
+<p style="display: none !important;"><label>&#916;<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js" value="8"/><script type="rocketlazyloadscript">document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p><div class="wpcf7-response-output" aria-hidden="true"></div></form></div>					
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                   </button>
+                </div>
+             </div>
+          </div>
+       </section>
+    </div>
+ </div>
+
+
+
+<!-- 1. First, copy the code: -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript"> _linkedin_partner_id = "4020962"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id); </script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript"> (function(l) { if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])}; window.lintrk.q=[]} var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(window.lintrk); </script> 
+<noscript> <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=4020962&fmt=gif" /> </noscript>
+<!-- 2. Next, paste the code into the global footer of your domain either before or after the <body> tag. -->
+
+
+
+<script type="rocketlazyloadscript" data-minify="1" src="http://192.168.0.128/glasierinc/wp-content/cache/min/1/ajax/libs/jquery/3.5.1/jquery.min.js?ver=1659335533" defer></script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+$('input[type="file"]').change(function(e) {
+    var fileName = e.target.files[0].name;
+    $(e.target).parent('span').parent('label').attr("file-name", fileName);
+});
+});</script>
+
+<script type="rocketlazyloadscript">
+function openNav() {
+    document.getElementById("mySidenav").style.width = "100%";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+$(document).ready(function() {
+    $("#acceptence").click(function() {
+        if ($('#customCheck').prop('checked')) {
+          $("#acceptence").removeClass('show');
+        } else {
+          $("#acceptence").addClass('show');
+        }
+    });
+});
+
+
+});</script>
+
+<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+
+(function($) {
+$.fn.menumaker = function(options) {  
+ var cssmenu = $(this), settings = $.extend({
+   format: "dropdown",
+   sticky: false
+ }, options);
+ return this.each(function() {
+   $(this).find(".button").on('click', function(){
+     $(this).toggleClass('menu-opened');
+     var mainmenu = $(this).next('ul');
+     if (mainmenu.hasClass('open')) { 
+       mainmenu.slideToggle().removeClass('open');
+     }
+     else {
+       mainmenu.slideToggle().addClass('open');
+       if (settings.format === "dropdown") {
+         mainmenu.find('ul').show();
+       }
+     }
+   });
+   cssmenu.find('li ul').parent().addClass('has-sub');
+multiTg = function() {
+     cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+     cssmenu.find('.submenu-button').on('click', function() {
+       $(this).toggleClass('submenu-opened');
+       if ($(this).siblings('ul').hasClass('open')) {
+         $(this).siblings('ul').removeClass('open').slideToggle();
+       }
+       else {
+         $(this).siblings('ul').addClass('open').slideToggle();
+       }
+     });
+   };
+   if (settings.format === 'multitoggle') multiTg();
+   else cssmenu.addClass('dropdown');
+   if (settings.sticky === true) cssmenu.css('position', 'fixed');
+resizeFix = function() {
+  var mediasize = 1000;
+     if ($( window ).width() > mediasize) {
+       cssmenu.find('ul').show();
+     }
+     if ($(window).width() <= mediasize) {
+       cssmenu.find('ul').hide().removeClass('open');
+     }
+   };
+   resizeFix();
+   return $(window).on('resize', resizeFix);
+ });
+  };
+})(jQuery);
+
+(function($){
+$(document).ready(function(){
+$("#cssmenu").menumaker({
+   format: "multitoggle"
+});
+});
+})(jQuery);
+    });</script>
+	<script type="rocketlazyloadscript" data-rocket-type="text/javascript">window.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener( 'wpcf7submit', function( event ) {
+			$('.wpcf7-response-output').html(event.detail.apiResponse.message);
+			$('label').attr("file-name", "");
+		}, false );
+	});</script>
+
+		<script type="rocketlazyloadscript">
+			( () => {
+				'use strict';
+
+				let loaded = false,
+					scrolled = false,
+					timerId;
+
+				function load() {
+					if ( loaded ) {
+						return;
+					}
+
+					loaded = true;
+					clearTimeout( timerId );
+
+					window.removeEventListener( 'touchstart', load );
+					document.removeEventListener( 'mouseenter', load );
+					document.removeEventListener( 'click', load );
+					window.removeEventListener( 'load', delayedLoad );
+
+							const t = document.getElementsByTagName( 'script' )[0];
+		const s = document.createElement('script');
+		s.type  = 'text/javascript';
+		s['src'] = 'https://js.hcaptcha.com/1/api.js?onload=hCaptchaOnLoad&render=explicit&recaptchacompat=off';
+		s.async = true;
+		t.parentNode.insertBefore( s, t );
+						}
+
+				function scrollHandler() {
+					if ( ! scrolled ) {
+						// Ignore first scroll event, which can be on page load.
+						scrolled = true;
+						return;
+					}
+
+					window.removeEventListener( 'scroll', scrollHandler );
+					load();
+				}
+
+				function delayedLoad() {
+					window.addEventListener( 'scroll', scrollHandler );
+					const delay = -1;
+
+					if ( delay >= 0 ) {
+						setTimeout( load, delay );
+					}
+				}
+
+				window.addEventListener( 'touchstart', load );
+				document.addEventListener( 'mouseenter', load );
+				document.addEventListener( 'click', load );
+				window.addEventListener( 'load', delayedLoad );
+			} )();
+		</script>
+
+		<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9' id='regenerator-runtime-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"http:\/\/192.168.0.128\/glasierinc\/wp-json\/","namespace":"contact-form-7\/v1"},"cached":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/plugins/contact-form-7/includes/js/index.js?ver=1661244033' id='contact-form-7-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/glasierinc(\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$))|\/wp-admin\/|\/logout\/|\/wp-login.php","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"http:\/\/192.168.0.128\/glasierinc","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/js/jquery-3.6.0.min.js?ver=1' id='jquery-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/js/navigation.js?ver=1661244033' id='glasierinc-navigation-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/js/modernizr-3.5.0.min.js?ver=1' id='modernizr-js' defer></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/themes/glasierinc/js/bootstrap.bundle.min.js?ver=1' id='bootstrap-bundle-min-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/js/app.bundle.js?ver=1661244033' id='app-bundle-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/themes/glasierinc/js/main.js?ver=1661244033' id='main-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/plugins/hcaptcha-for-forms-and-more/assets/js/hcaptcha/app.js?ver=1661244034' id='hcaptcha-js' defer></script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='http://192.168.0.128/glasierinc/wp-content/cache/min/1/glasierinc/wp-content/plugins/hcaptcha-for-forms-and-more/assets/js/hcaptcha-cf7.js?ver=1661244034' id='hcaptcha-cf7-js' defer></script>
+<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="http://192.168.0.128/glasierinc/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script>
+</body>
+</html>
+
+
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me - Debug: cached@1661331084 -->

@@ -2454,3 +2454,21 @@ body {
 .contect-form{
 	margin-top: 153px;
 }
+
+/* LENDING PAGE NEW CSS */
+.banner-form p, .image-form p{
+	position: relative;
+}
+.banner-form .wpcf7-spinner {
+    position: absolute;
+    left: 48%;
+    top: 12px;
+}
+.image-form .wpcf7-spinner {
+    position: absolute;
+    left: 58%;
+    top: 14px;
+}
+.wpcf7 form .wpcf7-response-output {
+    margin: 1em 0em 0em !important;
+}
