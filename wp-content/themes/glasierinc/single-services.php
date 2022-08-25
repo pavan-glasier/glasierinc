@@ -741,92 +741,60 @@ if( have_rows('industries_we_serve', 'option') ):
 <?php endif ?>
 <?php endwhile; ?>
 
+
+<?php while ( have_rows('sections') ) : the_row();?>
+   <?php if( get_row_layout() == 'faqs' ) : 
+      $faq_heading = get_sub_field('heading');
+      $faq_description = get_sub_field('description');
+      ?>
 <section class="r-bg-a sec-pad">
    <div class="container">
+        <?php if(!empty($faq_heading) && !empty($faq_description)): ?>
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="page-headings text-center">
-                    <h2 class="mb15">FAQ's</h2>
-                    <p>Throughout our extensive experience, we have served companies of all sizes and types in many industries,</p>
+                    <?php if(!empty($faq_heading)): ?>
+                    <h2 class="mb15"><?php echo $faq_heading;?></h2>
+                    <?php endif; ?>
+
+                    <?php if(!empty($faq_description)): ?>
+                    <p><?php echo $faq_description;?></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
+        <?php endif; ?>
+    <?php if( have_rows('faq') ): $faqCount = 1; ?>
       <div class="row justify-content-center mt30">
          <div class="col-lg-10">
             <div class="feature-list">
                <div id="accordionExample" class="accordion ac-1">
+                <?php 
+                while( have_rows('faq') ) : the_row(); ?>
                   <!-- Accordion item 1 -->
                   <div class="cards">
                      <div id="heading1" class="card-header">
-                        <h6 class="mb-0 "><a href="#" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1" class="d-block  collapsed  collapsible-link">GPS Tracking devices are enabled with real-time monitoring</a></h6>
+                        <h6 class="mb-0 ">
+                            <a href="#" data-toggle="collapse" data-target="#collapse<?php echo $faqCount;?>" aria-expanded="<?php echo ($faqCount == 1) ? 'true' : 'false';?>" aria-controls="collapse<?php echo $faqCount;?>" class="d-block collapsible-link <?php echo ($faqCount == 1) ? '' : 'collapsed';?>"><?php echo get_sub_field('question');?></a>
+                        </h6>
                      </div>
-                     <div id="collapse1" aria-labelledby="heading1" data-parent="#accordionExample" class="collapse show">
+                     <div id="collapse<?php echo $faqCount;?>" aria-labelledby="heading1" data-parent="#accordionExample" 
+                        class="collapse <?php echo ($faqCount == 1) ? 'show' : '';?>">
                         <div class="card-body p-4">
-                           <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.</p>
+                           <p class="font-weight-light m-0"><?php echo get_sub_field('answer');?></p>
                         </div>
                      </div>
                   </div>
-                  <!-- Accordion item 2 -->
-                  <div class="cards">
-                     <div id="heading2" class="card-header">
-                        <h6 class="mb-0 "><a href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="d-block  collapsed  collapsible-link">Flexible Project settings</a></h6>
-                     </div>
-                     <div id="collapse2" aria-labelledby="heading2" data-parent="#accordionExample" class="collapse">
-                        <div class="card-body p-4">
-                           <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Accordion item 3 -->
-                  <div class="cards">
-                     <div id="heading3" class="card-header">
-                        <h6 class="mb-0 "><a href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3" class="d-block  collapsed  collapsible-link">Integrated Store Publishing</a></h6>
-                     </div>
-                     <div id="collapse3" aria-labelledby="heading3" data-parent="#accordionExample" class="collapse">
-                        <div class="card-body p-4">
-                           <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Accordion item 4 -->
-                  <div class="cards">
-                     <div id="heading4" class="card-header">
-                        <h6 class="mb-0 "><a href="#" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4" class="d-block  collapsed  collapsible-link">Visual Layout Components</a></h6>
-                     </div>
-                     <div id="collapse4" aria-labelledby="heading4" data-parent="#accordionExample" class="collapse">
-                        <div class="card-body p-4">
-                           <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Accordion item 5 -->
-                  <div class="cards">
-                     <div id="heading5" class="card-header">
-                        <h6 class="mb-0 "><a href="#" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5" class="d-block  collapsed  collapsible-link">Dynamic Components (feed via the CMS)</a></h6>
-                     </div>
-                     <div id="collapse5" aria-labelledby="heading5" data-parent="#accordionExample" class="collapse">
-                        <div class="card-body p-4">
-                           <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- Accordion item 6 -->
-                  <div class="cards">
-                     <div id="heading6" class="card-header">
-                        <h6 class="mb-0 "><a href="#" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6" class="d-block  collapsed  collapsible-link">Shopping Cart and Payments</a></h6>
-                     </div>
-                     <div id="collapse6" aria-labelledby="heading6" data-parent="#accordionExample" class="collapse">
-                        <div class="card-body p-4">
-                           <p class="font-weight-light m-0">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.</p>
-                        </div>
-                     </div>
-                  </div>
+                  <?php $faqCount++; endwhile; ?>
                </div>
             </div>
          </div>
       </div>
+      <?php endif; ?>
    </div>
 </section>
+<?php endif ?>
+<?php endwhile; ?>
 
 
 <?php

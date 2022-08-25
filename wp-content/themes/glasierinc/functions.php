@@ -1010,6 +1010,9 @@ add_action( 'pre_get_posts', 'na_parse_request' );
 
 
 // Function to get the client IP address
+// 
+
+// add_shortcode('ipaddress', 'get_client_ip');
 function get_client_ip() {
     $ipaddress = '';
     if (isset($_SERVER['HTTP_CLIENT_IP']))
@@ -1028,6 +1031,8 @@ function get_client_ip() {
         $ipaddress = 'UNKNOWN';
     return $ipaddress;
 }
+
+
 function getCountry(){
 	$geoPlugin_array = unserialize( file_get_contents('http://www.geoplugin.net/php.gp?ip=' . $_SERVER['REMOTE_ADDR']) );
 	$country = $geoPlugin_array['geoplugin_countryName'];
@@ -1162,3 +1167,52 @@ function add_menu_link_class( $atts, $item, $args ) {
   return $atts;
 }
 add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );
+
+
+
+// API Submit form
+function on_submitInq( $form ) {
+    if ( $form->id === 809) {
+	    $submission = WPCF7_Submission::get_instance();
+	    $data = $submission->get_posted_data();
+	    
+	    $fullname = sanitize_text_field($data['fullname']);
+	    $email = sanitize_text_field($data['email']);
+	    $phone = sanitize_text_field($data['phone']);
+	    $website = sanitize_text_field($data['website']);
+	    $company = sanitize_text_field($data['company']);
+	    $price = sanitize_text_field($data['price']);
+	    $country = sanitize_text_field($data['country']);
+	    $interest = sanitize_text_field($data['interest']);
+	    $attach_files = $data['attach-files'];
+	    
+	    $url = 'https://glasier.co/pms/api/add-inquiry-glasierinc';
+
+	    $body = array(
+			  	'name' => $fullname,
+          'email' => $email,
+          'phone' => $phone,
+          'website' => $website,
+          'company_name' => $company,
+          'country' => $country,
+          'project_type' => $interest,
+          'price' => $price,
+          'upload_file' => $attach_files,
+			);
+	    $response = wp_remote_post($url, [
+        	'body'=> $body
+	    ]);
+
+	    if ( is_wp_error($response) ) {
+	        // $abort = TRUE;
+	        $body = wp_remote_retrieve_body($response);
+	        $result = json_decode($body);
+	        $msg = $result->message;
+	        $submission->set_response($result->message);
+	        $submission->set_status($result->status);
+	        // error_log(print_r($response, true));
+	    }
+	}
+}
+
+add_action('wpcf7_mail_sent', 'on_submitInq', 10, 1);

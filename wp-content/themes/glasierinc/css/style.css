@@ -5192,6 +5192,7 @@ span.wpcf7-list-item-label {
 .service-form .form-block {
     background: #ffffff;
     border: 2px solid #0051862b;
+    margin-top: 20px;
 }
 .service-form .form-body {
     padding: 20px 30px;
@@ -5230,7 +5231,7 @@ span.wpcf7-list-item-label {
 }
 .service-form .label-f-form {
     font-size: 14px;
-    line-height: 22px;
+    line-height: 23px;
 }
 .service-form .custom-control-label::before {
     width: .85rem;
@@ -5243,7 +5244,17 @@ span.wpcf7-list-item-label {
 .service-form .wpcf7 form .wpcf7-response-output {
     font-size: 16px;
 }
-
+@media only screen and (max-width: 767px){
+    .service-form .h-captcha:not([data-size="invisible"]) {
+        transform: scale(.94);
+        -webkit-transform: scale(.94);
+        position: relative;
+        top: unset;
+    }
+    .service-form .custom-control {
+        padding-left: 5px;
+    }
+}
 /* FAQ's */
 .accordion .cards {
     background: #fff;
@@ -5276,23 +5287,3 @@ span.wpcf7-list-item-label {
     background-size: 100%;
 }
 .accordion.ac-1 .collapsible-link::after {display: none;}
-/*.accordion.ac-1 .card-header h6:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 20px;
-    height: 20px;
-    background: #000;
-    border-radius: 100%;
-}
-.accordion.ac-1 .card-header h6:after {
-    content: "";
-    position: absolute;
-    left: 5px;
-    top: 15px;
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    border-radius: 100%;
-}*/
