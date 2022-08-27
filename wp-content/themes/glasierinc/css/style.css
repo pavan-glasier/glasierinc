@@ -4304,7 +4304,11 @@ body .custom-control-label.show::before {
 }*/
 body .custom-control-label.show::after {
     background: #fff;
-    -webkit-mask-box-image: url(http://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+    -webkit-mask-box-image: url(https://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+	-webkit-mask-image: url(https://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+    -webkit-mask-origin: border-box;
+    mask-image: url(https://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+    mask-origin: border-box;
 }
 .review-text.testimonal p:before,
 .review-text.testimonal p:after{
@@ -5065,6 +5069,11 @@ button.ree-btn.ree-btn-grdt1.w-100.has-spinner.wpcf7-submit {
 	margin-top: 0;
 	margin-bottom: 0;
 }
+.contact-popup .cf7sr-recaptcha .wpcf7-not-valid-tip {
+    bottom: unset;
+    position: relative;
+    top: -8px;
+}
 .contact-popup .wpcf7 form.invalid .wpcf7-response-output {
     font-size: 15px;
     margin-bottom: 0;
@@ -5153,7 +5162,11 @@ input[type="radio"]:checked:before {
     text-align: center;
     line-height: 18px;
     background: #fff;
-    -webkit-mask-box-image: url(http://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+    -webkit-mask-box-image: url(https://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+	-webkit-mask-image: url(https://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+	-webkit-mask-origin: border-box;
+	mask-image: url(https://www.glasierinc.com/wp-content/uploads/2022/05/black-checkmark-png-4.png);
+	mask-origin: border-box;
 }
 input[type="checkbox"]:checked:after,
 input[type="radio"]:checked:after {
@@ -5217,6 +5230,12 @@ span.wpcf7-list-item-label {
     -webkit-transform-origin: 0 0;
     position: absolute;
     top: -30px;
+}
+.cf7sr-g-recaptcha {
+	transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
 }
 .service-form button.ree-btn.ree-btn-grdt1.w-100.has-spinner.wpcf7-submit {
     line-height: 40px;
