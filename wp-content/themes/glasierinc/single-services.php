@@ -145,33 +145,29 @@ get_header(); ?>
 <?php while ( have_rows('sections') ) : the_row();?>
 <?php if( get_row_layout() == 'technologies_icons' ) : 
   ?>
-<?php
-// Check rows exists.
-if( have_rows('icons') ):
-    while( have_rows('icons') ) : the_row();
-        //echo get_sub_field('icon');
-    endwhile;
-endif; ?>
-
-<?php endif ?>
-<?php endwhile; ?>
+<?php 
+$icons = get_sub_field('icons');
+if( $icons ): ?>
 <!--Start Logo Section-->
 <div class="techonology-used-">
     <div class="container">
         <ul class="h-scroll tech-icons">
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon1.png" alt="icon"></a></li>
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon2.png" alt="icon"></a></li>
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon3.png" alt="icon"></a></li>
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon4.png" alt="icon"></a></li>
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon5.png" alt="icon"></a></li>
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon6.png" alt="icon"></a></li>
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon7.png" alt="icon"></a></li>
-            <li><a href="#"><img src="<?php echo get_template_directory_uri(); ?>/images/stack-icon8.png" alt="icon"></a></li>
-        </ul>
+        <?php foreach( $icons as $icon ): ?>
+            <li>
+                <a href="javascript:void(0);">
+                     <img src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt']); ?>" />
+                </a>
+            </li>
+        <?php endforeach; ?>
+    	</ul>
     </div>
 </div>
 <!-- End Logo Section-->
+<?php endif; ?>
 
+
+<?php endif ?>
+<?php endwhile; ?>
 
 
 <?php while ( have_rows('sections') ) : the_row();?>
@@ -749,12 +745,13 @@ if( have_rows('industries_we_serve', 'option') ):
       ?>
 <section class="r-bg-a sec-pad">
    <div class="container">
-        <?php if(!empty($faq_heading) && !empty($faq_description)): ?>
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="page-headings text-center">
                     <?php if(!empty($faq_heading)): ?>
                     <h2 class="mb15"><?php echo $faq_heading;?></h2>
+					<?php else: ?>
+					<h2 class="mb15">FAQ's</h2>
                     <?php endif; ?>
 
                     <?php if(!empty($faq_description)): ?>
@@ -763,7 +760,6 @@ if( have_rows('industries_we_serve', 'option') ):
                 </div>
             </div>
         </div>
-        <?php endif; ?>
     <?php if( have_rows('faq') ): $faqCount = 1; ?>
       <div class="row justify-content-center mt30">
          <div class="col-lg-10">

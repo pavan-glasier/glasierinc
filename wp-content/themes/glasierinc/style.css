@@ -46,4 +46,8 @@ http://blog.typekit.com/2011/11/09/type-study-sizing-the-legible-letter/
 
 /* =Reset
 -------------------------------------------------------------- */
-
+input[type="checkbox"],
+input[type="radio"] {
+	height: 18px;
+    width: 18px;
+}

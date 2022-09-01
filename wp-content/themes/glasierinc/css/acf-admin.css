@@ -6,3 +6,9 @@
     gap: 1rem;
     grid-template-columns: 332px 332px 332px 332px;
 }
+
+ .repeat-horizontal-5 .acf-repeater tbody {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}

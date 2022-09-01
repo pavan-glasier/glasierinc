@@ -7,7 +7,6 @@
 
 function wpcf7_add_shortcode( $tag, $func, $has_name = false ) {
 	wpcf7_deprecated_function( __FUNCTION__, '4.6', 'wpcf7_add_form_tag' );
-
 	return wpcf7_add_form_tag( $tag, $func, $has_name );
 }
 

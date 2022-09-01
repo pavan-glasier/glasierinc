@@ -1099,7 +1099,8 @@ add_action( 'login_enqueue_scripts', 'wptutsplus_login_logo' );
 add_action('wpcf7_init', 'custom_add_shortcode_lptitle');
 
 function custom_add_shortcode_lptitle() {
-    wpcf7_add_shortcode('selectjob', 'custom_lptitle_shortcode_handler'); // "lptitle" is the type of the form-tag
+    wpcf7_add_form_tag('selectjob', 'custom_lptitle_shortcode_handler');
+// 	wpcf7_add_form_tag('uploadfile', 'add_shortcode_uploadFile_handler');
 }
 
 function custom_lptitle_shortcode_handler($tag) {
@@ -1124,6 +1125,11 @@ function custom_lptitle_shortcode_handler($tag) {
     return $select;
 }
 
+// // custom file field
+// function add_shortcode_uploadFile_handler($tag) {  
+//       $inputFile = '<input type="file" name="uploadfile" class="wpcf7-form-control wpcf7-file wpcf7-validates-as-required input-file" accept=".png,.jpg,.jpeg,.pdf,.doc,.docx" aria-required="true" aria-invalid="true" />';
+//     return $inputFile;
+// }
 
 
 
@@ -1184,7 +1190,7 @@ function on_submitInq( $form ) {
 	    $price = sanitize_text_field($data['price']);
 	    $country = sanitize_text_field($data['country']);
 	    $interest = sanitize_text_field($data['interest']);
-	    $attach_files = $data['attach-files'];
+	    $attach_files = $data['uploadfile'];
 	    
 	    $url = 'https://glasier.co/pms/api/add-inquiry-glasierinc';
 
@@ -1216,3 +1222,120 @@ function on_submitInq( $form ) {
 }
 
 add_action('wpcf7_mail_sent', 'on_submitInq', 10, 1);
+
+
+
+
+// menu api
+// Menu locations
+add_action( 'rest_api_init', function() {
+        register_rest_route( 'custom', '/menu/', array(
+        'methods' => 'GET',
+        'callback' => 'wp_menu_route',
+    ));
+});
+
+function wp_menu_route() {
+    $menuLocations = get_nav_menu_locations(); // Get nav locations set in theme, usually functions.php)
+    return $menuLocations;
+}
+
+// Individual menus
+add_action( 'rest_api_init', function() {
+    register_rest_route( 'custom', '/menu/(?P<id>\d+)', array(
+        'methods' => 'GET',
+        'callback' => 'wp_menu_single',
+    ));
+});
+
+function wp_menu_single($data) {
+    $menuID = $data['id']; // Get the menu from the ID
+    $primaryNav = wp_get_nav_menu_items($menuID); // Get the array of wp objects, the nav items for our queried location.
+    return $primaryNav;
+}
+
+
+
+
+
+function get_menu_restapi( WP_REST_Request $request ) {
+  // Setup
+      // prepare the returnable array
+      $menu_items_to_return_as_json = array();
+      $menu_items_to_return_as_json_item = array();
+      //... get the slug
+      $requested_menu_slug = $request->get_param('menu_slug');
+      //... and then get the required menu items from the slug
+//       $menu_items_from_slug = wp_get_nav_menu_items('MainMenu');
+      $menu_items_from_slug = wp_get_nav_menu_items($requested_menu_slug);
+  // Logic
+      // If the menu exists and is not empty
+      if (!empty($menu_items_from_slug)) :
+        //... loop though each menu item
+        foreach ($menu_items_from_slug as $menu_item) :
+          //... and add the required information to the array that will parse back the JSON
+          $menu_items_to_return_as_json[] = array(
+            'id' => $menu_item->ID,
+            'name' => $menu_item->post_name,
+            'title' => $menu_item->title,
+            'target' => $menu_item->target,
+            'attr_title' => $menu_item->attr_title,
+            'slug' => $menu_item->slug,
+            'url' => $menu_item->url,
+            'guid' => $menu_item->guid,
+            'description' => $menu_item->description,
+            'classes' => $menu_item->classes,
+            'xfn' => $menu_item->xfn,
+            'parent' => $menu_item->post_parent,
+            'menu_order' => $menu_item->menu_order,
+            'menu_item_parent' => $menu_item->menu_item_parent,
+            'count' => $menu_item->count,
+            'post_title' => $menu_item->post_title,
+            'post_date' => $menu_item->post_date,
+            'post_date_gmt' => $menu_item->post_date_gmt,
+            'post_status' => $menu_item->post_status,
+            'post_type' => $menu_item->post_type,
+            'post_password' => $menu_item->post_password,
+            'post_modified' => $menu_item->post_modified,
+            'post_modified_gmt' => $menu_item->post_modified_gmt,
+            'term_group' => $menu_item->term_group,
+            'term_taxonomy_id' => $menu_item->term_taxonomy_id,
+            'taxonomy' => $menu_item->taxonomy,
+            'description' => $menu_item->description,
+            'comment_status' => $menu_item->comment_status,
+            'comment_count' => $menu_item->comment_count,
+            'ping_status' => $menu_item->ping_status,
+            'filter' => $menu_item->filter,
+            'db_id' => $menu_item->db_id,
+            'object_id' => $menu_item->object_id,
+            'object' => $menu_item->object,
+            'type' => $menu_item->type,
+            'type_label' => $menu_item->type_label,
+          );
+        endforeach;
+      endif;
+  // Output
+      // Return the required information
+      return $menu_items_to_return_as_json;
+}
+ 
+ 
+ 
+ 
+// Run an anonymous function in to the REST API init hook
+add_action( 'rest_api_init', function () {
+   
+  // Set up the required information
+  $namespace = 'gi_nav/';
+  $endpoint = 'menus/(?P<menu_slug>\w+)';
+  $args = array(
+      // How the endpoint needs to be called
+      'methods' => 'GET',
+      // The callback function
+      'callback' => 'get_menu_restapi',
+  );
+  // Add the route 'dcc/menus/<menu_slug>' to the WP REST API
+  register_rest_route( $namespace, $endpoint, $args );
+});
+
+
